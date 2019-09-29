@@ -18,14 +18,12 @@ class Bibletext extends Component
     public $selected_start_verse = null;
     public $selected_end_verse = null;
 
-    public function mount($thetext, $key)
+    public function mount($key)
     {
-        $this->text = $thetext;
         $this->books = Book::all();
     }
-    public function setChapters()
+    public function setChapters($id)
     {
-        dd($this->text);
         $this->selected_book = $id;
         $this->chapters = Chapter::where('book_id', $id)->get();
     }
@@ -53,7 +51,14 @@ class Bibletext extends Component
     public function setEndVerse($verse)
     {
         $this->selected_end_verse = $verse;
+        $this->emit('setText', [
+            'selected_book' => $this->selected_book,
+            'selected_chapter' => $this->selected_chapter,
+            'selected_start_verse' => $this->selected_start_verse,
+            'selected_end_verse' => $this->selected_end_verse
+         ]);
     }
+
     public function render()
     {
         return view('livewire.bibletext', [

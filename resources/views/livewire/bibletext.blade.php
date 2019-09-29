@@ -2,7 +2,7 @@
     <label class="block mb-6 mr-6">
         <span class="text-gray-700">Bible Book</span>
         {{-- <select class="form-select mt-1 block w-40" wire:model="text['selected_book']" wire:mouseup="setChapters"> --}}
-        <select class="form-select mt-1 block w-40" wire:model="text.selected_book" wire:mouseup="setChapters">
+        <select class="form-select mt-1 block w-40" wire:mouseup="setChapters($event.target.value)">
             @foreach($books as $book)
             <option value="{{$book->id}}">{{$book->name}}</option>
             @endforeach

@@ -57,8 +57,9 @@
                 </label>
             </div>
             @foreach($texts as $text)
-             @livewire('bibletext', $text, $loop->index, key($loop->index))
+             @livewire('bibletext', $loop->index, key($loop->index))
             @endforeach
+            <button wire:click="addText">Add Additional Text</button>
             <label class="block mb-6">
                 <span class="text-gray-700">Description</span>
                 <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." wire:model="description"></textarea>
@@ -77,7 +78,7 @@
         </div>
         @endif
     </div>
-
+    <button wire:click="save">save</button>
 </div>
 @push('scripts')
 <script type="text/javascript">

@@ -20,7 +20,7 @@ class SermonAdd extends Component
 
     
     protected $listeners = [
-        'chapters' => 'setChapters'
+        'setText' => 'setText'
     ];
     
     
@@ -28,49 +28,20 @@ class SermonAdd extends Component
     {
         $this->tab = 'details';
         $this->texts = [
-            [ 
-                'selected_book' => null,
-                'selected_chapter' => null,
-                'selected_start_verse' => null,
-                'selected_end_verse' => null
-             ]
-            ];
+            []
+        ];
     }
-    public function setChapters($key, $id)
-    {   
-        dd($this->texts);
-        $this->selected_book = $id;
-        $this->chapters = Chapter::where('book_id', $id)->get();
-    }
-    public function setVerses($id)
+    public function addText()
     {
-        $this->selected_chapter = $id;
-        $chapter = Chapter::find($id);
-        $this->verses = [];
-        for($x = 1; $x <= $chapter->verses; $x++){
-            $this->verses[] = $x;
-        }
-        
+        $this->texts[] = [];
     }
-    public function setStartVerse($verse)
+    public function setText($text, $key)
     {
-        $this->selected_start_verse = $verse;
-        $this->selected_end_verse = $verse;
-        $chapter = Chapter::find($this->selected_chapter);
-        $this->endverses = [];
-        $startingVerse = $verse;
-
-        for ($x = $startingVerse; $x <= $chapter->verses; $x++) {
-            $this->endverses[] = $x;
-        }
-    }
-    public function setEndVerse($verse)
-    {
-        $this->selected_end_verse = $verse;
+        $this->texts[$key] = $text;
     }
     public function save()
     {
-
+        dd($this->texts);
     }
 
     public function render()
