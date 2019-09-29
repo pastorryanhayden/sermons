@@ -1,0 +1,31 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Sermon extends Model
+{
+    protected $guarded = [];
+
+    public function speaker()
+    {
+        return $this->belongsTo(Speaker::class);
+    }
+    public function church()
+    {
+        return $this->belongsTo(Church::class);
+    }
+    public function series()
+    {
+        return $this->belongsTo(Series::class);
+    }
+    public function book()
+    {
+        return $this->belongsToMany(Book::class);
+    }
+    public function chapter()
+    {
+        return $this->belongsToMany(Chapter::class);
+    }
+}
