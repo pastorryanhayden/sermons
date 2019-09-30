@@ -20,7 +20,9 @@ class SermonAdd extends Component
 
     
     protected $listeners = [
-        'setText' => 'setText'
+        'setText' => 'setText',
+        'addItem' => 'addText',
+        'removeItem' => 'removeText'
     ];
     
     
@@ -35,9 +37,16 @@ class SermonAdd extends Component
     {
         $this->texts[] = [];
     }
+    
+    public function removeText()
+    {
+        array_pop($this->texts);
+    }
+
     public function setText($text, $key)
     {
         $this->texts[$key] = $text;
+        array_pop($this->texts);
     }
     public function save()
     {

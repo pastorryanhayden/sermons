@@ -14,12 +14,14 @@ class Bibletext extends Component
     protected $endverses = null;
     public $selected_book = null;
     public $text;
+    public $itemindex;
     public $selected_chapter = null;
     public $selected_start_verse = null;
     public $selected_end_verse = null;
 
     public function mount($key)
     {
+        $this->itemindex = $key;
         $this->books = Book::all();
     }
     public function setChapters($id)

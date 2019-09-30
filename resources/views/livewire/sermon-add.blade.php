@@ -8,9 +8,9 @@
     @endslot
     @endcomponent
     <div class="sermonTabs flex mb-6">
-        <button class="w-1/3 text-left px-2 pb-2 pt-6 border-b text-lg {{$tab == 'details' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'details')">Details</button>
-        <button class="w-1/3 text-left px-2 pb-2 pt-6 border-b text-lg {{$tab == 'media' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'media')">Media</button>
-        <button class="w-1/3 text-left px-2 pb-2 pt-6 border-b text-lg {{$tab == 'text' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'text')">Text Content</button>
+        <button class="w-1/3 text-left  px-1 pb-2 pt-6 mr-1 border-b-2 text-lg inline-flex items-center {{$tab == 'details' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'details')">@component('svg.information-outline') h-4 mr-2 {{$tab == 'details' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Details</button>
+        <button class="w-1/3 text-left  px-1 pb-2 pt-6 mr-1 border-b-2 text-lg inline-flex items-center {{$tab == 'media' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'media')">@component('svg.play') h-4 mr-2 {{$tab == 'media' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Media</button>
+        <button class="w-1/3 text-left px-1 pb-2 pt-6 border-b-2 text-lg inline-flex items-center {{$tab == 'text' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'text')">@component('svg.compose') h-4 mr-2 {{$tab == 'text' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Text Content</button>
     </div>
     @if($tab == 'details')
     <div class="details" wire:transition.slide key="details">
@@ -56,10 +56,13 @@
                     </select>
                 </label>
             </div>
-            @foreach($texts as $text)
-             @livewire('bibletext', $loop->index, key($loop->index))
-            @endforeach
-            <button wire:click="addText">Add Additional Text</button>
+            <p class="mb-1">Bible Text</p>
+            <div class="texts border px-6 pt-6 mb-6">
+                @foreach($texts as $text)
+                @livewire('bibletext', $loop->index, key($loop->index))
+                @endforeach
+
+            </div>
             <label class="block mb-6">
                 <span class="text-gray-700">Description</span>
                 <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." wire:model="description"></textarea>
@@ -78,7 +81,7 @@
         </div>
         @endif
     </div>
-    <button wire:click="save">save</button>
+    <button wire:click="save" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">save</button>
 </div>
 @push('scripts')
 <script type="text/javascript">
