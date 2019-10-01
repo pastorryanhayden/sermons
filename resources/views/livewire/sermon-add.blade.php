@@ -7,10 +7,10 @@
     /sermons
     @endslot
     @endcomponent
-    <div class="sermonTabs flex mb-6">
-        <button class="w-1/3 text-left  px-1 pb-2 pt-6 mr-1 border-b-2 text-lg inline-flex items-center {{$tab == 'details' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'details')">@component('svg.information-outline') h-4 mr-2 {{$tab == 'details' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Details</button>
-        <button class="w-1/3 text-left  px-1 pb-2 pt-6 mr-1 border-b-2 text-lg inline-flex items-center {{$tab == 'media' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'media')">@component('svg.play') h-4 mr-2 {{$tab == 'media' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Media</button>
-        <button class="w-1/3 text-left px-1 pb-2 pt-6 border-b-2 text-lg inline-flex items-center {{$tab == 'text' ? 'border-blue-500' : ''}}" wire:click="$set('tab', 'text')">@component('svg.compose') h-4 mr-2 {{$tab == 'text' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Text Content</button>
+    <div class="sermonTabs flex mb-6 border mt-6 rounded-sm flex-col md:flex-row mx-auto">
+        <button class="md:w-1/3 text-center  px-1 py-4 mr-1  hover:bg-gray-200 outline-none text-lg inline-flex items-center justify-center {{$tab == 'details' ? 'border-blue-500 md:border-b-2 border-l-2 md:border-l-0' : ''}}" wire:click="$set('tab', 'details')">@component('svg.information-outline') h-4 mr-2 {{$tab == 'details' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Details</button>
+        <button class="md:w-1/3 text-center  px-1 py-4 mr-1 hover:bg-gray-200 outline-none text-lg inline-flex items-center justify-center {{$tab == 'media' ? 'border-blue-500 md:border-b-2 border-l-2 md:border-l-0' : ''}}" wire:click="$set('tab', 'media')">@component('svg.play') h-4 mr-2 {{$tab == 'media' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Media</button>
+        <button class="md:w-1/3 text-center px-1 py-4 hover:bg-gray-200 outline-none text-lg inline-flex items-center justify-center {{$tab == 'text' ? 'border-blue-500 md:border-b-2 border-l-2 md:border-l-0' : ''}}" wire:click="$set('tab', 'text')">@component('svg.compose') h-4 mr-2 {{$tab == 'text' ? 'text-blue-500' : 'text-gray-500'}} @endcomponent Text Content</button>
     </div>
     @if($tab == 'details')
     <div class="details" wire:transition.slide key="details">
@@ -56,7 +56,7 @@
                     </select>
                 </label>
             </div>
-            <p class="mb-1">Bible Text</p>
+            <p class="mb-1">Bible Text <span class="text-sm italic">(Must include at least one)</span></p>
             <div class="texts border px-6 pt-6 mb-6">
                 @foreach($texts as $text)
                 @livewire('bibletext', $loop->index, key($loop->index))
@@ -64,18 +64,20 @@
 
             </div>
             <label class="block mb-6">
-                <span class="text-gray-700">Description</span>
+                <span class="text-gray-700">Description <span class="text-sm italic">(Optional)</span></span>
                 <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." wire:model="description"></textarea>
             </label>
         </div>
         @elseif($tab == 'media')
         <div class="media" wire:transition.slide key="media">
-
+            @component('includes.note', ['color' => 'blue'])
+            Your sermon must include either an audio file (MP3) or a video url (Youtube or Vimeo).  It can include both.
+            @endcomponent
         </div>
         @elseif($tab == 'text')
         <div class="textcontent" wire:transition.slide key="text">
             <label class="block mb-6">
-                <span class="text-gray-700">Text Content</span>
+                <span class="text-gray-700 mb-1 block">Text Content <span class="text-sm italic">(Optional)</span></span>
                 <textarea id="markdown" class="form-textarea mt-1 block w-full" rows="18" placeholder="Put your manuscript or outline here." wire:model="manuscript"></textarea>
             </label>
         </div>
@@ -85,24 +87,20 @@
 </div>
 @push('scripts')
 <script type="text/javascript">
-    function ready(fn) {
-        if (document.readyState != 'loading') {
-            fn();
-        } else if (document.addEventListener) {
-            document.addEventListener('DOMContentLoaded', fn);
-        } else {
-            document.attachEvent('onreadystatechange', function() {
-                if (document.readyState != 'loading')
-                    fn();
-            });
-        }
-    }
+     document.addEventListener("livewire:load", function(event) {
+         window.livewire.afterDomUpdate(() => {
+            var simplemde = new SimpleMDE({
+            element: document.getElementById('markdown')
+              });
+        });
+     });
 
     // test
-    window.ready(function() {
-        var simplemde = new SimpleMDE({
-            element: document.getElementById('markdown')
-        });
-    });
+    // var tab = @this.get('tab');
+ 
+            
+   
+        
+   
 </script>
 @endpush

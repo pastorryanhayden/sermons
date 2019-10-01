@@ -17,7 +17,7 @@
 </head>
 
 <body class="bg-gray-100 h-screen antialiased leading-none">
-    <div id="app">
+    <div id="app" class="h-screen overflow-y-auto pl-16">
         @livewire('navbar')
         @yield('content')
     </div>

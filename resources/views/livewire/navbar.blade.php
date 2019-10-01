@@ -1,4 +1,4 @@
-<nav class="bg-gray-100 border-b py-2 text-gray-800">
+<nav class="bg-gray-100  border-b-2 py-2 text-gray-800 fixed top-0 left-0 right-0 w-full z-30">
     <div class="px-1">
         <div class="flex items-center justify-center">
             <div data-title="App Switcher" class="mr-6 relative">
