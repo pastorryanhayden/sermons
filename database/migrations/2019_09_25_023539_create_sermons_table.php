@@ -21,7 +21,7 @@ class CreateSermonsTable extends Migration
             $table->unsignedBigInteger('series_id')->nullable();
             $table->string('service')->nullable();
             $table->text('manuscript')->nullable();
-            $table->mediumText('short_description')->nullable();
+            $table->mediumText('description')->nullable();
             $table->string('mp3')->nullable();
             $table->string('slides')->nullable();
             $table->string('handout')->nullable();

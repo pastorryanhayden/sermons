@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-
-class SermonAdd extends Component
+class SermonEdit extends Component
 {
+    public $tab = 'media';
     public $title;
     public $date;
     public $service;
@@ -14,6 +14,7 @@ class SermonAdd extends Component
     public $series_id;
     public $speaker_id;
     public $description;
+    public $manuscript;
     public $texts = [];
 
     
@@ -26,9 +27,7 @@ class SermonAdd extends Component
     
     public function mount()
     {
-        $this->series_id = 1;
-        $this->service = "Sunday Morning";
-        $this->speaker_id = 1;
+        $this->tab = 'details';
         $this->texts = [
             []
         ];
@@ -48,25 +47,12 @@ class SermonAdd extends Component
         $this->texts[$key] = $text;
         array_pop($this->texts);
     }
-    public function saveSermon()
+    public function save()
     {
-        $validatedData = $this->validate([
-            'title' => 'required|string|min:3',
-            'date' => 'required|date',
-            'service' => 'required|string',
-            'feature' => 'boolean',
-            'series_id' => 'required | integer',
-            'speaker_id' => 'required | integer',
-            'texts' => 'array | required | min:1',
-            'description' => 'nullable | string'
-        ]);
-
-
-        dd($validatedData);
+        dd($this->texts);
     }
 
     public function render()
     {
-        return view('livewire.sermon-add');
+        return view('livewire.sermon-edit');
     }
-}

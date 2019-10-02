@@ -16,7 +16,11 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('sermons', 'SermonsController');
-Route::get('/prayer/1', 'HomeController@index')->name('home');
+Route::middleware(['auth'])->group(function () {
 
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::resource('sermons', 'SermonsController');
+	Route::get('/sermons/{id}/text', 'SermonsTextsController@edit');
+	Route::get('/prayer/1', 'HomeController@index')->name('home');
+
+});

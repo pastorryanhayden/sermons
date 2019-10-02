@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Series;
+use App\Speaker;
+use App\Sermon;
+use App\Http\Requests\NewSermonRequest;
 
 class SermonsController extends Controller
 {
@@ -11,6 +16,8 @@ class SermonsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
         return view('sermons.index');
@@ -23,7 +30,12 @@ class SermonsController extends Controller
      */
     public function create()
     {
-        return view('sermons.create');
+        $user = Auth::user();
+        $church = $user->church;
+        $series = Series::where('church_id', $church->id)->get();
+        $speakers = Speaker::where('church_id', $church->id)->get();
+
+        return view('sermons.create', compact('series', 'speakers'));
     }
 
     /**
@@ -32,9 +44,14 @@ class SermonsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(NewSermonRequest $request)
     {
-        //
+         $validated = $request->validated();
+         $user = Auth::user();
+         $church = $user->church;
+         $sermon = $church->sermons()->create($validated);
+         return redirect("/sermons/{$sermon->id}/text" );
+
     }
 
     /**
@@ -56,7 +73,12 @@ class SermonsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sermon = Sermon::find($id);
+        $user = Auth::user();
+        $church = $user->church;
+        $series = Series::where('church_id', $church->id)->get();
+        $speakers = Speaker::where('church_id', $church->id)->get();
+        return view('sermons.edit', compact('series', 'speakers', 'sermon'));
     }
 
     /**
@@ -66,9 +88,15 @@ class SermonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(NewSermonRequest $request, $id)
     {
-        //
+        $validated = $request->validated();
+         $user = Auth::user();
+         $church = $user->church;
+         $sermon = Sermon::find($id);
+         $sermon->update($validated);
+
+         return redirect("/sermons/{$sermon->id}/text" );
     }
 
     /**

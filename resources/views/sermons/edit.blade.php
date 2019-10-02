@@ -1,10 +1,11 @@
 @extends('layouts.sermons')
 @section('sermonsContent')
-<form class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" action="/sermons" method="POST">
+<form class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" action="/sermons/{{$sermon->id}}" method="POST">
 	@csrf
+    @method('PUT')
   @component('navigation.formheader')
     @slot('title')
-    Add A Sermon
+    Edit Sermon: {{$sermon->title}}
     @endslot
     @slot('backto')
     /sermons
@@ -15,8 +16,8 @@
         <div class="block">
             <div class="flex flex-wrap justify-between">
                 <label class="block mb-6 mr-6">
-                    <span class="text-gray-700">Date</span>
-                    <input type="date" class="form-input mt-1 block w-64" name="date">
+                    <span class="text-gray-700">Date:</span>
+                    <input type="date" class="form-input mt-1 block w-64" name="date" value="{{$sermon->date}}">
                 </label>
                 <label class="block mb-6">
                     <span class="text-gray-700">Service</span>
@@ -46,7 +47,7 @@
 			
             <label class="block mb-6">
                 <span class="text-gray-700">Sermon Title</span>
-                <input type="text" class="form-input mt-1 block w-full" placeholder="Jesus Saves" name="title">
+                <input type="text" class="form-input mt-1 block w-full" placeholder="Jesus Saves" name="title" value="{{$sermon->title}}">
             </label>
              @if($errors->has('title'))
                 @component('includes.note', ['color' => 'red'])
@@ -54,7 +55,7 @@
                 @endcomponent
             @endif
             <label class="flex items-center mb-6">
-                <input type="checkbox" class="form-checkbox h-4 w-4"  checked="checked" name="featured" >
+                <input type="checkbox" class="form-checkbox h-4 w-4" {{$sermon->featured ? 'checked="checked"' : ''}} name="featured"  >
                 <span class="ml-2">Feature This Sermon?</span>
             </label>
             <div class="flex flex-wrap justify-between">
@@ -63,7 +64,7 @@
                     <select class="form-select mt-1 block w-64" name="series_id">
                         <option disabled>Choose A Series</option>
                         @foreach($series as $singleSeries)
-                        <option value="{{$singleSeries->id}}">{{$singleSeries->title}}</option>
+                        <option value="{{$singleSeries->id}}" {{$sermon->series_id == $singleSeries->id ? 'selected' : '' }}>{{$singleSeries->title}}</option>
                         @endforeach
                     </select>
                 </label>
@@ -72,7 +73,7 @@
                     <select class="form-select mt-1 block w-64" name="speaker_id">
                         <option disabled>Choose A Speaker</option>
                         @foreach($speakers as $speaker)
-                        <option value="{{$speaker->id}}">{{$speaker->name}}</option>
+                        <option value="{{$speaker->id}}" {{$sermon->speaker_id == $speaker->id ? 'selected' : '' }}>{{$speaker->name}}</option>
                         @endforeach
                     </select>
                 </label>
@@ -90,11 +91,10 @@
             </ul>
              @endcomponent
             @endif
-			
-        
+           
             <label class="block mb-6">
                 <span class="text-gray-700">Description <span class="text-sm italic">(Optional)</span></span>
-                <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." name="description"></textarea>
+                <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." name="description">{{$sermon->description}}</textarea>
             </label>
             @if($errors->has('description'))
             @component('includes.note', ['color' => 'red'])
@@ -103,6 +103,7 @@
             @endif
         </div>
          <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Continue to Text</button>
+      
       
 </div>
 
