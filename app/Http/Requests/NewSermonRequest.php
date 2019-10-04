@@ -27,7 +27,7 @@ class NewSermonRequest extends FormRequest
             'title' => 'required|string|min:3',
             'date' => 'required|date',
             'service' => 'required|string',
-            'featured' => 'boolean | nullable',
+            'featured' => 'nullable| boolean',
             'series_id' => 'required | integer',
             'speaker_id' => 'required | integer',
             'description' => 'nullable | string'

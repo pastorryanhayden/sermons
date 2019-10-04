@@ -10,7 +10,7 @@
     /sermons
     @endslot
     @endcomponent
-    @include('sermons.inc.tabs', ['active' => 'details'])
+    @include('sermons.inc.tabs', ['active' => 'details', 'sermon' => 0])
     <div class="details" >
         <div class="block">
             <div class="flex flex-wrap justify-between">
@@ -54,7 +54,7 @@
                 @endcomponent
             @endif
             <label class="flex items-center mb-6">
-                <input type="checkbox" class="form-checkbox h-4 w-4"  checked="checked" name="featured" >
+                <input type="checkbox" class="form-checkbox h-4 w-4"  checked="checked" name="featured" value="1" >
                 <span class="ml-2">Feature This Sermon?</span>
             </label>
             <div class="flex flex-wrap justify-between">

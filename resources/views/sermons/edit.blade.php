@@ -55,7 +55,7 @@
                 @endcomponent
             @endif
             <label class="flex items-center mb-6">
-                <input type="checkbox" class="form-checkbox h-4 w-4" {{$sermon->featured ? 'checked="checked"' : ''}} name="featured"  >
+                <input type="checkbox" class="form-checkbox h-4 w-4" {{$sermon->featured ? 'checked="checked"' : ''}} name="featured"  value="1">
                 <span class="ml-2">Feature This Sermon?</span>
             </label>
             <div class="flex flex-wrap justify-between">

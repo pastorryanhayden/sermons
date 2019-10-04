@@ -3,13 +3,16 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Sermon;
 use App\Book;
 use App\Chapter;
 
 class Bibletext extends Component
 {
     protected $books;
+    protected $sermon;
     protected $chapters;
+    protected $texts;
     protected $verses = null;
     protected $endverses = null;
     public $selected_book = null;
@@ -19,9 +22,10 @@ class Bibletext extends Component
     public $selected_start_verse = null;
     public $selected_end_verse = null;
 
-    public function mount($key)
+    public function mount($id)
     {
-        $this->itemindex = $key;
+        $this->sermon = Sermon::find($id);
+        $this->texts = Sermon::find($id)->chapter()->get();
         $this->books = Book::all();
     }
     public function setChapters($id)

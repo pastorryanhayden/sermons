@@ -26,6 +26,6 @@ class Sermon extends Model
     }
     public function chapter()
     {
-        return $this->belongsToMany(Chapter::class);
+        return $this->belongsToMany(Chapter::class)->withPivot('verseStart', 'verseEnd');
     }
 }

@@ -1,8 +1,6 @@
 @extends('layouts.sermons')
 @section('sermonsContent')
-<form class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" action="/sermons/{{$sermon->id}}" method="POST">
-	@csrf
-    @method('PUT')
+<div class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" >
   @component('navigation.formheader')
     @slot('title')
     Edit Sermon: {{$sermon->title}}
@@ -12,6 +10,118 @@
     @endslot
     @endcomponent
     @include('sermons.inc.tabs', ['active' => 'text'])
+    @component('includes.note', ['color' => 'blue'])
+    💡 Each sermon should be associated with at least one Bible text.  We'll use this text (or these texts) to organize your sermons by Bible passage.
+    @endcomponent
+    @if($texts->count() > 0)
+    <ul class="rounded max-w-sm mx-auto bg-white mb-12 p-4 border border-gray-200 shadow">
+        <h2 class="font-bold mb-2">Associated Texts:</h2>
+    @foreach($texts as $text)
+    <li class="py-2 flex justify-between items-center"><span>{{$text->book->name}} {{$text->number}}:{{$text->pivot->verseStart}}{{$text->pivot->verseStart != $text->pivot->verseEnd ? '-' . $text->pivot->verseEnd : '' }}</span> <form action="/sermons/{{$sermon->id}}/text/{{$text->id}}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit">@component('svg.close')text-red-500 hover:text-red-800 h-4 @endcomponent</button>
+    </form></li>
 
-</form>
+    @endforeach
+    </ul>
+    @endif
+    <div>
+    
+    <form  action="/sermons/{{$sermon->id}}/text" method="POST">
+        <div class="flex flex-wrap border px-4 pt-4">
+        @csrf
+    <label class="block mb-4 mr-2">
+        <span class="text-gray-700">Book</span>
+        {{-- <select class="form-select mt-1 block w-40" wire:model="text['selected_book']" wire:mouseup="setChapters"> --}}
+        <select id="book"   class="form-select mt-1 block w-40" name="book" onblur="updateBook()">
+            @foreach($books as $book)
+            @if($selected_book)
+            <option value="{{$book->id}}" {{$selected_book->id == $book->id ? 'selected' : ''}}>{{$book->name}}</option>
+            @else
+            <option value="{{$book->id}}">{{$book->name}}</option>
+            @endif
+            @endforeach
+        </select>
+    </label>
+    @if($chapters)
+    <label class="block mb-4 mr-2 ">
+        <span class="text-gray-700">Chapter</span>
+        <select class="form-select mt-1 block w-20"  name="selected_chapter" id="selected_chapter" onblur="updateChapter()">
+            @foreach($chapters as $chapter)
+            @if($selected_chapter)
+            <option value="{{$chapter->id}}" {{$selected_chapter->id == $chapter->id ? 'selected' : ''}}>{{$chapter->number}}</option>
+            @else 
+            <option value="{{$chapter->id}}">{{$chapter->number}}</option>
+            @endif
+            @endforeach
+        </select>
+    </label>
+    @endif
+    @if($verses)
+    <label class="block mb-4 mr-2 ">
+        <span class="text-gray-700">Start</span>
+        <select class="form-select mt-1 block w-20"  name="start_verse" onblur="updateStartVerse()" id="start">
+            @foreach($verses as $verse)
+            @if($selected_start_verse)
+            <option {{$selected_start_verse == $verse ? 'selected' : ''}}>{{$verse}}</option>
+            @else
+            <option>{{$verse}}</option>
+            @endif
+            @endforeach
+        </select>
+    </label>
+    @endif
+    @if($selected_start_verse && $endverses)
+    <label class="block mb-4 mr-2 ">
+        <span class="text-gray-700">End</span>
+        <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onblur="updateEndVerse()">
+            @foreach($endverses as $verse)
+            <option>{{$verse}}</option>
+            @endforeach
+        </select>
+    </label>
+    @endif
+    </div>
+    @if($selected_start_verse && $endverses && $chapters )
+    <button class="mt-6  rounded text-center items-center uppercase tracking-wide font-bold bg-green-500 py-2 px-4 hover:bg-green-700 text-white">Add Text</button>
+    @endif
+   
+    </form>
+    @if($texts->count() > 0)
+    <a href="/sermons/{{$sermon->id}}/media" class="mt-6 block rounded w-full text-center items-center uppercase tracking-wide font-bold bg-blue-500 py-2 hover:bg-blue-700 text-white">Continue to Media</a>
+    @endif
+</div>
+<script>
+
+    function updateBook(){
+     var book = document.getElementById('book');
+     window.location.search = `&book=${book.value}`;
+    };
+    @if($selected_book)
+     function updateChapter(){
+        var book = {{$selected_book->id}};
+        var chapter = document.getElementById('selected_chapter');
+        window.location.search = `&book=${book}&selectedchapter=${chapter.value}`;
+    };
+    @endif
+    @if($selected_book && $selected_chapter)
+    function updateStartVerse(){
+        var book = {{$selected_book->id}};
+        var chapter = {{$selected_chapter->id}};
+        var start = document.getElementById('start');
+        window.location.search = `&book=${book}&selectedchapter=${chapter}&start=${start.value}`;
+    };
+    @endif 
+    @if($selected_book && $selected_chapter && $selected_start_verse)
+    function updateEndVerse(){
+        var book = {{$selected_book->id}};
+        var chapter = {{$selected_chapter->id}};
+        var start = {{$selected_start_verse}};
+        var end = document.getElementById('endverse');
+        window.location.search = `&book=${book}&selectedchapter=${chapter}&start=${start}&end=${end.value}`;
+    }
+    @endif
+
+</script>
 @endsection
