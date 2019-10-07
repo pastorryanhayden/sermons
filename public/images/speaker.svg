@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="250" height="250" viewBox="0 0 250 250">
+  <defs>
+    <clipPath id="clip-speaker">
+      <rect width="250" height="250"/>
+    </clipPath>
+  </defs>
+  <g id="speaker" clip-path="url(#clip-speaker)">
+    <rect width="250" height="250" fill="#fff"/>
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="250" height="250" fill="#a0aec0"/>
+    <path id="Union_2" data-name="Union 2" d="M-160.493,101.5c0-56.609-22.024-101.48,64.5-102.5s64.5,45.891,64.5,102.5S-60.371,204-95.994,204-160.493,158.109-160.493,101.5Zm17-149.5a47,47,0,0,1,47-47,47,47,0,0,1,47,47,47,47,0,0,1-47,47A47,47,0,0,1-143.493-48Z" transform="translate(221.494 141)" fill="#fff"/>
+    <path id="Union_1" data-name="Union 1" d="M-162.364,0H-163l.132-.792L-163-1h.167l12.38-74.283L-163-95h28l-12.548,19.717L-135.167-1H-135l-.132.208L-135,0h-.636L-149,21Z" transform="translate(273 235)" fill="#a0aec0"/>
+  </g>
+</svg>

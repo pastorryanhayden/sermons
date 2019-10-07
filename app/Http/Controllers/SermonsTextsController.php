@@ -10,7 +10,7 @@ class SermonsTextsController extends Controller
 {
     public function edit(Request $request, $id)
     {
-    	$sermon = Sermon::find($id);
+    	$sermon = Sermon::findOrFail($id);
     	$texts = $sermon->chapter()->get();
     	$books = Book::all();
     	$selected_book = $request->input('book') ? Book::find($request->input('book')) : null;

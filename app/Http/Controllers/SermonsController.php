@@ -28,14 +28,26 @@ class SermonsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $user = Auth::user();
         $church = $user->church;
+        if($church->speakers->count() < 1)
+        {
+            return redirect('/speakers');
+        }
+        elseif($church->series->count() < 1)
+        {
+            return redirect('/series');
+        }else{
+        $showSpeakers = $request->input('newSpeaker') == true ? true : false;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
 
-        return view('sermons.create', compact('series', 'speakers'));
+        return view('sermons.create', compact('series', 'speakers', 'showSpeakers'));
+
+        }
+       
     }
 
     /**
@@ -73,7 +85,7 @@ class SermonsController extends Controller
      */
     public function edit($id)
     {
-        $sermon = Sermon::find($id);
+        $sermon = Sermon::findOrFail($id);
         $user = Auth::user();
         $church = $user->church;
         $series = Series::where('church_id', $church->id)->get();

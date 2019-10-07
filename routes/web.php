@@ -23,6 +23,11 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/sermons/{id}/text', 'SermonsTextsController@edit');
 	Route::post('/sermons/{id}/text', 'SermonsTextsController@store');
 	Route::delete('/sermons/{id}/text/{text}', 'SermonsTextsController@destroy');
+	Route::get('/sermons/{id}/media', 'SermonsMediaController@edit');
 	Route::get('/prayer/1', 'HomeController@index')->name('home');
+	Route::resource('requestcategories', 'RequestCategoriesController');
+	Route::resource('speakers', 'SpeakersController');
+
+
 
 });

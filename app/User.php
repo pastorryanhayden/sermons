@@ -33,11 +33,20 @@ class User extends Authenticatable
      *
      * @var array
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
     public function church()
     {
         return $this->belongsTo(Church::class);
+    }
+    public function request()
+    {
+        return $this->belongsToMany(Request::class);
+    }
+    public function requestCategories()
+    {
+        return $this->belongsToMany(RequestCategory::class);
     }
 }

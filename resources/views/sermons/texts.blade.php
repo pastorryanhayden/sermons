@@ -89,7 +89,7 @@
    
     </form>
     @if($texts->count() > 0)
-    <a href="/sermons/{{$sermon->id}}/media" class="mt-6 block rounded w-full text-center items-center uppercase tracking-wide font-bold bg-blue-500 py-2 hover:bg-blue-700 text-white">Continue to Media</a>
+    <a href="/sermons/{{$sermon->id}}/media" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Continue to Media</a>
     @endif
 </div>
 <script>

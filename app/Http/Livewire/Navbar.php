@@ -22,6 +22,14 @@ class Navbar extends Component
         {
             $this->space = 'sermons';
         }
+        elseif(strpos($uri, 'speakers') !== false)
+        {
+            $this->space = 'sermons';
+        }
+        elseif(strpos($uri, 'series') !== false)
+        {
+            $this->space = 'sermons';
+        }
         elseif(strpos($uri, 'prayer') !== false)
         {
             $this->space = 'prayer';

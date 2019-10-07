@@ -19,5 +19,20 @@ class Church extends Model
     {
     	return $this->hasMany(Sermon::class);
     }
-
+    public function speakers()
+    {
+        return $this->hasMany(Speaker::class);
+    }
+    public function series()
+    {
+        return $this->hasMany(Series::class);
+    }
+    public function requestCategories()
+    {
+        return $this->hasMany(RequestCategory::class);
+    }
+    public function request()
+    {
+        return $this->hasMany(Request::class);
+    }
 }

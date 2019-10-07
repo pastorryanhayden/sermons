@@ -67,7 +67,8 @@
                         @endforeach
                     </select>
                 </label>
-                <label class="block mb-6">
+                <div>
+                    <label class="block mb-2">
                     <span class="text-gray-700">Speaker</span>
                     <select class="form-select mt-1 block w-64" name="speaker_id">
                         <option disabled>Choose A Speaker</option>
@@ -75,7 +76,20 @@
                         <option value="{{$speaker->id}}">{{$speaker->name}}</option>
                         @endforeach
                     </select>
-                </label>
+                    </label>
+                    <button type="button" onclick="addSpeaker()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Speaker</button>
+                    @if($showSpeakers)
+                    <div class="w-64 border p-4 relative mt-6">
+                        <button type="button" onclick="removeSpeaker()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
+                        <label class="block mb-4">
+                          <span class="text-gray-700">Speaker Name</span>
+                          <input class="form-input mt-1" placeholder="John Doe" name="newSpeakerName">
+                        </label>
+                        <p class="text-sm italic">If your speaker isn't in the list, add one here and then you can add more details under the speaker section.</p>
+                    </div>
+                    @endif
+                </div>
+                
             </div>
              
            @if($errors->has('series_id') || $errors->has('speaker_id'))
@@ -107,4 +121,20 @@
 </div>
 
 </form>
+@push('scripts')
+<script>
+    addSpeaker = () => {
+        console.log('add speaker');
+        const query = new URLSearchParams(window.location.search);
+        query.set("newSpeaker", "true");
+        window.location.search = query;
+    }
+    removeSpeaker = () => {
+        console.log('remove speaker');
+        const query = new URLSearchParams(window.location.search);
+        query.delete("newSpeaker");
+        window.location.search = query;
+    }
+</script>
+@endpush
 @endsection
