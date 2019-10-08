@@ -74,7 +74,7 @@
                         <button type="button" onclick="removeSeries()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
                         <label class="block mb-4">
                           <span class="text-gray-700">Series Name</span>
-                          <input class="form-input mt-1" placeholder="John Doe" name="newSpeakerName">
+                          <input class="form-input mt-1" placeholder="Awesome Series" name="newSeriesName">
                         </label>
                         <p class="text-sm italic">If your series isn't in the list, add one here and then you can add more details under the series section.</p>
                     </div>

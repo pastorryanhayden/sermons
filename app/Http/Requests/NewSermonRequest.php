@@ -30,6 +30,8 @@ class NewSermonRequest extends FormRequest
             'featured' => 'nullable| boolean',
             'series_id' => 'required | integer',
             'speaker_id' => 'required | integer',
+            'newSpeakerName' => 'nullable | string',
+            'newSeriesName' => 'nullable | string', 
             'description' => 'nullable | string'
         ];
     }

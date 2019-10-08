@@ -40,6 +40,7 @@ class SermonsController extends Controller
         {
             return redirect('/series');
         }else{
+
         $showSpeakers = $request->input('newSpeaker') == true ? true : false;
         $showSeries = $request->input('newSeries') == true ? true : false;
         $series = Series::where('church_id', $church->id)->get();
@@ -61,8 +62,35 @@ class SermonsController extends Controller
     {
          $validated = $request->validated();
          $user = Auth::user();
+         $series = null;
+         $speaker = null;
          $church = $user->church;
-         $sermon = $church->sermons()->create($validated);
+         if($request->input('newSeriesName'))
+         {
+            $series = new Series;
+            $series->church_id = $church->id;
+            $series->title = $request->input('newSeriesName');
+            $series->save();
+         }
+         if($request->input('newSpeakerName'))
+         {
+            $speaker = new Speaker;
+            $speaker->church_id = $church->id;
+            $speaker->name = $request->input('newSpeakerName');
+            $speaker->save();
+         }
+         $series_id = $series ? $series->id : $request->input('series_id');
+         $speaker_id = $speaker ? $speaker->id : $request->input('speaker_id');
+         
+         $sermon = $church->sermons()->create([
+            'title' => $request->input('title'),
+            'featured' => $request->input('featured'),
+            'date' => $request->input('date'),
+            'service' => $request->input('service'),
+            'series_id' => $series_id,
+            'speaker_id' => $speaker_id,
+            'description' => $request->input('description'),
+         ]);
          return redirect("/sermons/{$sermon->id}/text" );
 
     }
@@ -84,14 +112,16 @@ class SermonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $sermon = Sermon::findOrFail($id);
         $user = Auth::user();
         $church = $user->church;
+        $showSpeakers = $request->input('newSpeaker') == true ? true : false;
+        $showSeries = $request->input('newSeries') == true ? true : false;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
-        return view('sermons.edit', compact('series', 'speakers', 'sermon'));
+        return view('sermons.edit', compact('series', 'speakers', 'sermon',  'showSpeakers', 'showSeries'));
     }
 
     /**
@@ -106,8 +136,34 @@ class SermonsController extends Controller
         $validated = $request->validated();
          $user = Auth::user();
          $church = $user->church;
+         $series = null;
+         $speaker = null;
+         if($request->input('newSeriesName'))
+         {
+            $series = new Series;
+            $series->church_id = $church->id;
+            $series->title = $request->input('newSeriesName');
+            $series->save();
+         }
+         if($request->input('newSpeakerName'))
+         {
+            $speaker = new Speaker;
+            $speaker->church_id = $church->id;
+            $speaker->name = $request->input('newSpeakerName');
+            $speaker->save();
+         }
+         $series_id = $series ? $series->id : $request->input('series_id');
+         $speaker_id = $speaker ? $speaker->id : $request->input('speaker_id');
          $sermon = Sermon::find($id);
-         $sermon->update($validated);
+         $sermon->update([
+            'title' => $request->input('title'),
+            'featured' => $request->input('featured'),
+            'date' => $request->input('date'),
+            'service' => $request->input('service'),
+            'series_id' => $series_id,
+            'speaker_id' => $speaker_id,
+            'description' => $request->input('description'),
+         ]);
 
          return redirect("/sermons/{$sermon->id}/text" );
     }

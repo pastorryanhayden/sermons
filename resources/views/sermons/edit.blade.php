@@ -59,24 +59,51 @@
                 <span class="ml-2">Feature This Sermon?</span>
             </label>
             <div class="flex flex-wrap justify-between">
-                <label class="block mb-6 mr-6">
+                <div class="w-64 mb-6">
+                <label class="block mb-2 mr-6">
                     <span class="text-gray-700">Series</span>
                     <select class="form-select mt-1 block w-64" name="series_id">
                         <option disabled>Choose A Series</option>
                         @foreach($series as $singleSeries)
-                        <option value="{{$singleSeries->id}}" {{$sermon->series_id == $singleSeries->id ? 'selected' : '' }}>{{$singleSeries->title}}</option>
+                        <option value="{{$singleSeries->id}}" {{$singleSeries->id == $sermon->series_id ? 'selected' : '' }}>{{$singleSeries->title}}</option>
                         @endforeach
                     </select>
                 </label>
-                <label class="block mb-6">
+                <button type="button" onclick="addSeries()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Series</button>
+                    @if($showSeries)
+                    <div class="w-64 border p-4 relative mt-6">
+                        <button type="button" onclick="removeSeries()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
+                        <label class="block mb-4">
+                          <span class="text-gray-700">Series Name</span>
+                          <input class="form-input mt-1" placeholder="Awesome Series" name="newSeriesName">
+                        </label>
+                        <p class="text-sm italic">If your series isn't in the list, add one here and then you can add more details under the series section.</p>
+                    </div>
+                    @endif
+                </div>
+                <div class="w-64">
+                    <label class="block mb-2">
                     <span class="text-gray-700">Speaker</span>
                     <select class="form-select mt-1 block w-64" name="speaker_id">
                         <option disabled>Choose A Speaker</option>
                         @foreach($speakers as $speaker)
-                        <option value="{{$speaker->id}}" {{$sermon->speaker_id == $speaker->id ? 'selected' : '' }}>{{$speaker->name}}</option>
+                        <option value="{{$speaker->id}}" {{$speaker->id == $sermon->speaker_id ? 'selected' : '' }}>{{$speaker->name}}</option>
                         @endforeach
                     </select>
-                </label>
+                    </label>
+                    <button type="button" onclick="addSpeaker()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Speaker</button>
+                    @if($showSpeakers)
+                    <div class="w-64 border p-4 relative mt-6">
+                        <button type="button" onclick="removeSpeaker()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
+                        <label class="block mb-4">
+                          <span class="text-gray-700">Speaker Name</span>
+                          <input class="form-input mt-1" placeholder="John Doe" name="newSpeakerName">
+                        </label>
+                        <p class="text-sm italic">If your speaker isn't in the list, add one here and then you can add more details under the speaker section.</p>
+                    </div>
+                    @endif
+                </div>
+                
             </div>
              
            @if($errors->has('series_id') || $errors->has('speaker_id'))
@@ -108,4 +135,32 @@
 </div>
 
 </form>
+@push('scripts')
+<script>
+    addSpeaker = () => {
+        console.log('add speaker');
+        const query = new URLSearchParams(window.location.search);
+        query.set("newSpeaker", "true");
+        window.location.search = query;
+    }
+    removeSpeaker = () => {
+        console.log('remove speaker');
+        const query = new URLSearchParams(window.location.search);
+        query.delete("newSpeaker");
+        window.location.search = query;
+    }
+    addSeries = () => {
+        console.log('add series');
+        const query = new URLSearchParams(window.location.search);
+        query.set("newSeries", "true");
+        window.location.search = query;
+    }
+    removeSeries = () => {
+        console.log('remove series');
+        const query = new URLSearchParams(window.location.search);
+        query.delete("newSeries");
+        window.location.search = query;
+    }
+</script>
+@endpush
 @endsection
