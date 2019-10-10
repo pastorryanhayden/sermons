@@ -24,6 +24,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/sermons/{id}/text', 'SermonsTextsController@store');
 	Route::delete('/sermons/{id}/text/{text}', 'SermonsTextsController@destroy');
 	Route::get('/sermons/{id}/media', 'SermonsMediaController@edit');
+	Route::post('/sermons/{id}/media', 'SermonsMediaController@store');
+	Route::get('/sermons/{id}/content', 'SermonsContentController@edit');
+	Route::post('/sermons/{id}/content', 'SermonsContentController@store');
 	Route::get('/prayer/1', 'HomeController@index')->name('home');
 	Route::resource('requestcategories', 'RequestCategoriesController');
 	Route::resource('speakers', 'SpeakersController');

@@ -9,9 +9,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" data-turbolinks-track="true">
+    
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js" data-turbolinks-track="true"></script>
     @livewireAssets
      <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" data-turbolinks-track="true"></script>

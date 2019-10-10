@@ -41,12 +41,10 @@ class SermonsController extends Controller
             return redirect('/series');
         }else{
 
-        $showSpeakers = $request->input('newSpeaker') == true ? true : false;
-        $showSeries = $request->input('newSeries') == true ? true : false;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
 
-        return view('sermons.create', compact('series', 'speakers', 'showSpeakers', 'showSeries'));
+        return view('sermons.create', compact('series', 'speakers'));
 
         }
        
@@ -117,11 +115,9 @@ class SermonsController extends Controller
         $sermon = Sermon::findOrFail($id);
         $user = Auth::user();
         $church = $user->church;
-        $showSpeakers = $request->input('newSpeaker') == true ? true : false;
-        $showSeries = $request->input('newSeries') == true ? true : false;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
-        return view('sermons.edit', compact('series', 'speakers', 'sermon',  'showSpeakers', 'showSeries'));
+        return view('sermons.edit', compact('series', 'speakers', 'sermon'));
     }
 
     /**

@@ -15,9 +15,40 @@ class SermonsMediaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+       
+        $sermon = Sermon::findOrFail($id);
+        // Validate the request
+        if($request->mp3 || $request->video_url)
+        
+        {
+             $validatedData = $request->validate([
+                'mp3' => 'nullable | file | max:30000 | mp3_ogg_extension',
+                'video_url' => 'nullable| url',
+            ]);
+        } else {
+            return back()->with('error','You must either use include an MP3 or a Vimeo or Youtube URL.');
+        }
+        $name = $sermon->date . '-' . $sermon->title;       
+        $name = $this->slugify($name) . '.mp3';
+        // Store the file & Persist to the DB
+        if($request->mp3)
+        {
+            $sermon->update([
+                'mp3' => $request->mp3->storeAs('sermons', $name, 'public')
+            ]);
+        }
+        if($request->video_url)
+        {
+            $sermon->update([
+                'video_url' => $request->video_url,
+            ]);
+        }
+      
+        
+        // Redirect to the next section
+         return redirect("/sermons/{$id}/content");
     }
 
     /**
@@ -26,7 +57,7 @@ class SermonsMediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
         $sermon = Sermon::findOrFail($id);
         return view('sermons.media', compact('sermon'));
@@ -42,4 +73,32 @@ class SermonsMediaController extends Controller
     {
         //
     }
+
+public static function slugify($text)
+{
+  // replace non letter or digits by -
+  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+
+  // transliterate
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
+
+  // trim
+  $text = trim($text, '-');
+
+  // remove duplicate -
+  $text = preg_replace('~-+~', '-', $text);
+
+  // lowercase
+  $text = strtolower($text);
+
+  if (empty($text)) {
+    return 'n-a';
+  }
+
+  return $text;
 }
+
+}    

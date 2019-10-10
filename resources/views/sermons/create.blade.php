@@ -69,8 +69,8 @@
                     </select>
                 </label>
                 <button type="button" onclick="addSeries()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Series</button>
-                    @if($showSeries)
-                    <div class="w-64 border p-4 relative mt-6">
+                 
+                    <div class="addSeries w-64 border p-4 relative mt-6 hidden">
                         <button type="button" onclick="removeSeries()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
                         <label class="block mb-4">
                           <span class="text-gray-700">Series Name</span>
@@ -78,7 +78,7 @@
                         </label>
                         <p class="text-sm italic">If your series isn't in the list, add one here and then you can add more details under the series section.</p>
                     </div>
-                    @endif
+                 
                 </div>
                 <div class="w-64">
                     <label class="block mb-2">
@@ -91,8 +91,7 @@
                     </select>
                     </label>
                     <button type="button" onclick="addSpeaker()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Speaker</button>
-                    @if($showSpeakers)
-                    <div class="w-64 border p-4 relative mt-6">
+                    <div class="addSpeaker hidden w-64 border p-4 relative mt-6">
                         <button type="button" onclick="removeSpeaker()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
                         <label class="block mb-4">
                           <span class="text-gray-700">Speaker Name</span>
@@ -100,7 +99,6 @@
                         </label>
                         <p class="text-sm italic">If your speaker isn't in the list, add one here and then you can add more details under the speaker section.</p>
                     </div>
-                    @endif
                 </div>
                 
             </div>
@@ -138,27 +136,23 @@
 <script>
     addSpeaker = () => {
         console.log('add speaker');
-        const query = new URLSearchParams(window.location.search);
-        query.set("newSpeaker", "true");
-        window.location.search = query;
+        var box = document.querySelector('.addSpeaker');
+        box.classList.toggle('hidden');
     }
     removeSpeaker = () => {
         console.log('remove speaker');
-        const query = new URLSearchParams(window.location.search);
-        query.delete("newSpeaker");
-        window.location.search = query;
+         var box = document.querySelector('.addSpeaker');
+        box.classList.add('hidden');
     }
     addSeries = () => {
         console.log('add series');
-        const query = new URLSearchParams(window.location.search);
-        query.set("newSeries", "true");
-        window.location.search = query;
+        var box = document.querySelector('.addSeries');
+        box.classList.toggle('hidden');
     }
     removeSeries = () => {
         console.log('remove series');
-        const query = new URLSearchParams(window.location.search);
-        query.delete("newSeries");
-        window.location.search = query;
+        var box = document.querySelector('.addSeries');
+        box.classList.add('hidden');
     }
 </script>
 @endpush
