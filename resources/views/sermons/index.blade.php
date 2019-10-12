@@ -6,7 +6,8 @@
 <a href="/sermons/create" class="font-bold inline-flex text-lg items-center text-green-500 hover:text-green-700">@component('svg.add-solid') h-4 mr-2 @endcomponent Add Sermon</a>
 </div>
 
-@if($speakers->count() > 0)
+@if($sermons->count() > 0)
+  @include('sermons.inc.filter')
   <ul>
   @foreach($sermons as $sermon)
 	@include('sermons.inc.singlesermon')
