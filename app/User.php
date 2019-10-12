@@ -41,12 +41,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Church::class);
     }
-    public function request()
-    {
-        return $this->belongsToMany(Request::class);
-    }
-    public function requestCategories()
-    {
-        return $this->belongsToMany(RequestCategory::class);
-    }
+  
 }

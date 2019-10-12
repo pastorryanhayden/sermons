@@ -20,7 +20,12 @@ class SermonsController extends Controller
 
     public function index()
     {
-        return view('sermons.index');
+        $user = Auth::user();
+        $church = $user->church;
+        $series = Series::where('church_id', $church->id)->get();
+        $speakers = Speaker::where('church_id', $church->id)->get();
+        $sermons = Sermon::where('church_id', $church->id)->latest('date')->simplePaginate(15);
+        return view('sermons.index', compact('series', 'speakers', 'sermons'));
     }
 
     /**
@@ -32,22 +37,10 @@ class SermonsController extends Controller
     {
         $user = Auth::user();
         $church = $user->church;
-        if($church->speakers->count() < 1)
-        {
-            return redirect('/speakers');
-        }
-        elseif($church->series->count() < 1)
-        {
-            return redirect('/series');
-        }else{
-
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
 
         return view('sermons.create', compact('series', 'speakers'));
-
-        }
-       
     }
 
     /**
@@ -63,34 +56,31 @@ class SermonsController extends Controller
          $series = null;
          $speaker = null;
          $church = $user->church;
-         if($request->input('newSeriesName'))
-         {
+        if ($request->input('newSeriesName')) {
             $series = new Series;
             $series->church_id = $church->id;
             $series->title = $request->input('newSeriesName');
             $series->save();
-         }
-         if($request->input('newSpeakerName'))
-         {
+        }
+        if ($request->input('newSpeakerName')) {
             $speaker = new Speaker;
             $speaker->church_id = $church->id;
             $speaker->name = $request->input('newSpeakerName');
             $speaker->save();
-         }
+        }
          $series_id = $series ? $series->id : $request->input('series_id');
          $speaker_id = $speaker ? $speaker->id : $request->input('speaker_id');
-         
+         $featured = $request->input('featured') == null ? false : $request->input('featured');
          $sermon = $church->sermons()->create([
             'title' => $request->input('title'),
-            'featured' => $request->input('featured'),
+            'featured' => $featured,
             'date' => $request->input('date'),
             'service' => $request->input('service'),
             'series_id' => $series_id,
             'speaker_id' => $speaker_id,
             'description' => $request->input('description'),
          ]);
-         return redirect("/sermons/{$sermon->id}/text" );
-
+         return redirect("/sermons/{$sermon->id}/text");
     }
 
     /**
@@ -134,20 +124,18 @@ class SermonsController extends Controller
          $church = $user->church;
          $series = null;
          $speaker = null;
-         if($request->input('newSeriesName'))
-         {
+        if ($request->input('newSeriesName')) {
             $series = new Series;
             $series->church_id = $church->id;
             $series->title = $request->input('newSeriesName');
             $series->save();
-         }
-         if($request->input('newSpeakerName'))
-         {
+        }
+        if ($request->input('newSpeakerName')) {
             $speaker = new Speaker;
             $speaker->church_id = $church->id;
             $speaker->name = $request->input('newSpeakerName');
             $speaker->save();
-         }
+        }
          $series_id = $series ? $series->id : $request->input('series_id');
          $speaker_id = $speaker ? $speaker->id : $request->input('speaker_id');
          $sermon = Sermon::find($id);
@@ -161,7 +149,7 @@ class SermonsController extends Controller
             'description' => $request->input('description'),
          ]);
 
-         return redirect("/sermons/{$sermon->id}/text" );
+         return redirect("/sermons/{$sermon->id}/text");
     }
 
     /**

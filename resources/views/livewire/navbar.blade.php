@@ -2,35 +2,10 @@
     <div class="px-1">
         <div class="flex items-center justify-center">
             <div data-title="App Switcher" class="mr-6 relative">
-                <button wire:click.prefetch="toggleSwitcher" class="inline-flex items-center">
-                    @if($space == 'sermons')
+                <button  class="inline-flex items-center"> 
                     @component('svg.sermons') text-blue-500 h-12 -ml-4 -mr-2 @endcomponent
                     <span class="text-lg uppercase tracking-wide inline-flex items-end -ml-2">Sermons @component('svg.chevron-down') w-3 text-gray-400 @endcomponent</span>
-                    @elseif($space == 'prayer')
-                    @component('svg.prayer') text-blue-500 h-12 -ml-4 -mr-2 @endcomponent
-                    <span class="text-lg uppercase tracking-wide inline-flex items-end -ml-2">Prayer @component('svg.chevron-down') w-3 text-gray-400 @endcomponent</span>
-                    @else
-                    <img src="/images/tools-mark.png" class="h-8 mr-2" />
-                    <span class="text-lg uppercase tracking-wide inline-flex items-end">Church Tools @component('svg.chevron-down') w-3 text-gray-400 @endcomponent</span>
-                    @endif
                 </button>
-                @if($switcherOpen)
-                <ul class="absolute top-0 left-0 mt-12 bg-white shadow w-48" wire:mouseleave="toggleSwitcher">
-                    @if($space != 'home')
-                    <li class="p-2 hover:bg-gray-100"><a href="/home" class="inline-flex items-center">
-                            <img src="/images/tools-mark.png" class="h-8 mr-2 ml-6" />
-                            <span class="">Home</span>
-                        </a></li>
-                    @endif
-                    @if($space != 'sermons')
-                    <li class="p-2 hover:bg-gray-100"><a href="/sermons" class="inline-flex items-center"> @component('svg.sermons') text-blue-500 h-12 -mr-2
-                            @endcomponent <span class="-ml-3">Sermons</span></a></li>
-                    @endif
-                    @if($space != 'prayer')
-                    <li class="p-2 hover:bg-gray-100"><a href="/prayer" class="inline-flex items-center"> @component('svg.prayer') text-blue-500 h-12 -mr-2 @endcomponent <span class="-ml-3">Prayer</span></a></li>
-                    @endif
-                </ul>
-                @endif
             </div>
             <div data-title="Login/Account Settings" class="flex justify-end flex-grow flex-1 text-right relative">
                 @guest

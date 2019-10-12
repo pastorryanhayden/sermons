@@ -14,7 +14,7 @@ class AddFeaturedToSermonsTable extends Migration
     public function up()
     {
         Schema::table('sermons', function (Blueprint $table) {
-            $table->boolean('featured')->default(0);
+            $table->boolean('featured')->default(0)->nullable();
         });
     }
 

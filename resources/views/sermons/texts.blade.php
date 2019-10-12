@@ -17,7 +17,7 @@
     <ul class="rounded max-w-sm mx-auto bg-white mb-12 p-4 border border-gray-200 shadow">
         <h2 class="font-bold mb-2">Associated Texts:</h2>
     @foreach($texts as $text)
-    <li class="py-2 flex justify-between items-center"><span>{{$text->book->name}} {{$text->number}}:{{$text->pivot->verseStart}}{{$text->pivot->verseStart != $text->pivot->verseEnd ? '-' . $text->pivot->verseEnd : '' }}</span> <form action="/sermons/{{$sermon->id}}/text/{{$text->id}}" method="post">
+    <li class="py-2 flex justify-between items-center"><span>{{$text->book->name}} {{$text->number}}:{{$text->pivot->verseStart}}{{$text->pivot->verseStart != $text->pivot->verseEnd && $text->pivot->verseEnd !== null ? '-' . $text->pivot->verseEnd : '' }}</span> <form action="/sermons/{{$sermon->id}}/text/{{$text->id}}" method="post">
         @csrf
         @method('delete')
         <button type="submit">@component('svg.close')text-red-500 hover:text-red-800 h-4 @endcomponent</button>

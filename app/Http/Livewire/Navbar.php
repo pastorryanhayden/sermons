@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class Navbar extends Component
 {
-    public $switcherOpen;
+    
     public $settingsOpen;
     public $space;
 
@@ -17,34 +17,11 @@ class Navbar extends Component
         $this->settingsOpen = false;
 
         // Set the "space" for the navbar by checking the existence of keywords in the Route
-        $uri = Route::current()->uri;
-        if(strpos($uri, 'sermons') !==false)
-        {
-            $this->space = 'sermons';
-        }
-        elseif(strpos($uri, 'speakers') !== false)
-        {
-            $this->space = 'sermons';
-        }
-        elseif(strpos($uri, 'series') !== false)
-        {
-            $this->space = 'sermons';
-        }
-        elseif(strpos($uri, 'prayer') !== false)
-        {
-            $this->space = 'prayer';
-        }
-        else 
-        {
-            $this->space = 'home';
-        }
+       
+        $this->space = 'sermons';
     }
  
-    // Toggle the applicaiton switcher
-    public function toggleSwitcher()
-    {
-        $this->switcherOpen = !$this->switcherOpen;
-    }
+    
     public function toggleSettings()
     {
         $this->settingsOpen = !$this->settingsOpen;

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRequestUserTable extends Migration
+class AddFeaturedToSeriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateRequestUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('request_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('request_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
+        Schema::table('series', function (Blueprint $table) {
+            $table->boolean('featured')->default(false);
         });
     }
 
@@ -28,6 +25,8 @@ class CreateRequestUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('request_user');
+        Schema::table('series', function (Blueprint $table) {
+            //
+        });
     }
 }

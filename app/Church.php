@@ -27,12 +27,4 @@ class Church extends Model
     {
         return $this->hasMany(Series::class);
     }
-    public function requestCategories()
-    {
-        return $this->hasMany(RequestCategory::class);
-    }
-    public function request()
-    {
-        return $this->hasMany(Request::class);
-    }
 }

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="250" height="250" viewBox="0 0 250 250">
+  <defs>
+    <clipPath id="clip-series">
+      <rect width="250" height="250"/>
+    </clipPath>
+  </defs>
+  <g id="series" clip-path="url(#clip-series)">
+    <rect width="250" height="250" fill="#fff"/>
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="250" height="250" fill="#a0aec0"/>
+    <g id="np_pulpit_97637_000000" transform="translate(32.2 34.604)">
+      <path id="Path_2" data-name="Path 2" d="M121.541,32.2H31.1V164.62h90.206L121.3,32.2ZM97.306,92.418H82.191v42.227H70.2V92.418H55.081V80.423H70.2V65.308H82.191V80.423H97.306Z" transform="translate(15.811 36.106)" fill="#fff"/>
+      <path id="Path_3" data-name="Path 3" d="M158.7,41.194H95.125V34.241c0-.722-.722-15.837,12.716-20.635a7.39,7.39,0,0,0,4.8,2.155,4.5,4.5,0,0,0,5.276-4.076,4.5,4.5,0,0,0-4.076-5.276c-2.4-.244-6.241,1.921-6.953,4.32C91.049,16.483,92.014,34.241,92.014,34.475v6.953L25.8,41.438c-3.355,0-6,8.64-6,11.995a5.944,5.944,0,0,0,6,6h6.241l-.009,149.936a6.154,6.154,0,0,0,6,6.241H146.935c3.355,0,5.52-2.877,5.52-6.241l.009-150.18h6.475a5.944,5.944,0,0,0,6-6c-.244-3.355-2.877-11.995-6.241-11.995ZM146.225,209.609H38.027V59.186h108.2Z" transform="translate(0)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

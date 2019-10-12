@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateChurchRequestTable extends Migration
+class AddBodyToSeriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateChurchRequestTable extends Migration
      */
     public function up()
     {
-        Schema::create('church_request', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('church_id');
-            $table->unsignedBigInteger('request_id');
-            $table->timestamps();
+        Schema::table('series', function (Blueprint $table) {
+            $table->mediumText('body')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateChurchRequestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('church_request');
+        Schema::table('series', function (Blueprint $table) {
+            //
+        });
     }
 }
