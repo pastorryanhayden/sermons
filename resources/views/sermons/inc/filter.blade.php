@@ -1,8 +1,8 @@
-<form class="filter mb-6 block" action="/sermons" method="get" >
-	<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> Filter &amp; Sort @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
-	<div class="flex hidden filters">
-    <div class="block">
-      <span class="text-gray-700">Series</span>
+<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> Filter &amp; Sort @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
+<form class="filter mb-6 block filters hidden" action="/sermons" method="get" >
+	<div class="flex mb-6">
+    <div class="block mr-2">
+      <span class="text-gray-700">By Series</span>
       @if($series->count() < 5)
       <div class="mt-2">
         <div>
@@ -29,8 +29,46 @@
       </select>
     	@endif
     </div>
-
+    <div class="block mr-2">
+      <span class="text-gray-700">By Speaker</span>
+      @if($speakers->count() < 5)
+      <div class="mt-2">
+        <div>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio" checked value="all" name="selectedspeaker">
+            <span class="ml-2">All</span>
+          </label>
+        </div>
+      @foreach($speakers as $single)
+        <div>
+          <label class="inline-flex items-center">
+            <input type="radio" class="form-radio" value="{{$single->id}}" name="selectedspeaker">
+            <span class="ml-2">{{$single->name}}</span>
+          </label>
+        </div>
+        @endforeach
+      </div>
+        @else
+        <select class="form-select mt-1 block w-full" name="selectedspeaker">
+        <option value="all" selected>All</option>
+        @foreach($speakers as $single)
+        <option value="{{$single->id}}">{{$single->name}}</option>
+        @endforeach
+      </select>
+      @endif
+    </div>
+    <div class="block">
+      <span class="text-gray-700">By Text</span>
+        <select class="form-select mt-1 block w-full" name="selectedtext">
+        <option value="all" selected>All</option>
+        @foreach($books as $book)
+        <option value="{{$book->id}}">{{$book->name}}</option>
+        @endforeach
+      </select>
+    </div>
 </div>
+<button type="submit" class="bg-blue-500 py-2 px-4 text-white rounded">Filter</button>
+
 </form>
 @push('scripts')
 <script>

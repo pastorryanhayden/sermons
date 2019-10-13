@@ -7,10 +7,22 @@ use Illuminate\Support\Facades\Auth;
 use App\Series;
 use App\Speaker;
 use App\Sermon;
+use App\Book;
 use App\Http\Requests\NewSermonRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class SermonsController extends Controller
 {
+    protected $churchid;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware(function ($request, $next) {
+            $this->churchid = Auth::user()->church->id;
+            return $next($request);
+        });
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,14 +30,31 @@ class SermonsController extends Controller
      */
 
 
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $church = $user->church;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
-        $sermons = Sermon::where('church_id', $church->id)->latest('date')->simplePaginate(15);
-        return view('sermons.index', compact('series', 'speakers', 'sermons'));
+        $books = Book::whereHas('sermons', function (Builder $query) {
+            $query->where('church_id', '=', $this->churchid);
+        })->get();
+        $filters = [['church_id', '=', $church->id]];
+        if ($request->selectedseries && $request->selectedseries != 'all') {
+            $filters[] = ['series_id', '=', $request->selectedseries ];
+        }
+        if ($request->selectedspeaker && $request->selectedspeaker != 'all') {
+            $filters[] = ['speaker_id', '=', $request->selectedspeaker ];
+        }
+
+        
+        $sermons = Sermon::where($filters)->latest('date')->simplePaginate(15);
+        if ($request->selectedtext && $request->selectedtext !== 'all') {
+            $sermons = Sermon::whereHas('book', function (Builder $query) use ($request) {
+                    $query->where('book_id', '=', $request->selectedtext);
+            })->where($filters)->simplePaginate(15);
+        }
+        return view('sermons.index', compact('series', 'speakers', 'sermons', 'books'));
     }
 
     /**
