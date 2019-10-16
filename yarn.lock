@@ -3497,6 +3497,10 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
 
+mediaplayer@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/mediaplayer/-/mediaplayer-2.0.1.tgz#ed6109a6c64f60bc096300e94ec3468811865ad1"
+
 mem@^4.0.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/mem/-/mem-4.3.0.tgz#461af497bc4ae09608cdb2e60eefb69bff744178"
@@ -5379,6 +5383,12 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+tailwindcss-plugins@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/tailwindcss-plugins/-/tailwindcss-plugins-0.3.0.tgz#20ec0192a0681c4e2efbb6e5654b767bea388e94"
+  dependencies:
+    lodash "^4.17.11"
 
 tailwindcss@^1.0:
   version "1.1.2"

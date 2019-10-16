@@ -39,22 +39,26 @@ class SermonsController extends Controller
         $books = Book::whereHas('sermons', function (Builder $query) {
             $query->where('church_id', '=', $this->churchid);
         })->get();
+        $selectedseries = $request->selectedseries;
+        $selectedspeaker = $request->selectedspeaker;
+        $selectedtext = $request->selectedtext;
+
         $filters = [['church_id', '=', $church->id]];
-        if ($request->selectedseries && $request->selectedseries != 'all') {
-            $filters[] = ['series_id', '=', $request->selectedseries ];
+        if ($selectedseries && $selectedseries != 'all') {
+            $filters[] = ['series_id', '=', $selectedseries ];
         }
-        if ($request->selectedspeaker && $request->selectedspeaker != 'all') {
-            $filters[] = ['speaker_id', '=', $request->selectedspeaker ];
+        if ($selectedspeaker && $selectedspeaker != 'all') {
+            $filters[] = ['speaker_id', '=', $selectedspeaker ];
         }
 
         
-        $sermons = Sermon::where($filters)->latest('date')->simplePaginate(15);
-        if ($request->selectedtext && $request->selectedtext !== 'all') {
-            $sermons = Sermon::whereHas('book', function (Builder $query) use ($request) {
-                    $query->where('book_id', '=', $request->selectedtext);
-            })->where($filters)->simplePaginate(15);
+        $sermons = Sermon::where($filters)->latest('date')->paginate(15);
+        if ($selectedtext && $selectedtext !== 'all') {
+            $sermons = Sermon::whereHas('book', function (Builder $query) use ($selectedtext) {
+                    $query->where('book_id', '=', $selectedtext);
+            })->where($filters)->paginate(15);
         }
-        return view('sermons.index', compact('series', 'speakers', 'sermons', 'books'));
+        return view('sermons.index', compact('church', 'series', 'speakers', 'sermons', 'books', 'selectedtext', 'selectedspeaker', 'selectedseries'));
     }
 
     /**

@@ -1,4 +1,4 @@
-<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> Filter &amp; Sort @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
+<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> Filter  @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
 <form class="filter mb-6 block filters hidden" action="/sermons" method="get" >
 	<div class="flex mb-6">
     <div class="block mr-2">
@@ -58,7 +58,7 @@
       @endif
     </div>
     <div class="block">
-      <span class="text-gray-700">By Text</span>
+      <span class="text-gray-700">By Bible Book</span>
         <select class="form-select mt-1 block w-full" name="selectedtext">
         <option value="all" selected>All</option>
         @foreach($books as $book)

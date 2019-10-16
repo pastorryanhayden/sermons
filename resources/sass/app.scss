@@ -47,6 +47,38 @@
  .sidebar {
      min-height: calc(100vh - 84px);
  }
+
+.sermonmanu {
+	p, h1, h2, h3, h4, h5, ul, ol, blockquote, img {
+		@apply mb-4;
+	}
+	h1, h2, h3, h4, h5 {
+		@apply font-bold leading-none;
+	}
+	h1 {
+		@apply text-4xl;
+	}
+	h2 {
+		@apply text-3xl;
+	}
+	h3 {
+		@apply text-2xl;
+	}
+	h4 {
+		@apply text-xl;
+	}
+	h5 {
+		@apply text-lg;
+	}
+	hr {
+		@apply mb-12;
+	}
+	blockquote {
+		@apply border-l pl-12 leading-normal italic my-8;
+	}
+
+}
+ 
 @tailwind utilities;
 
 /**

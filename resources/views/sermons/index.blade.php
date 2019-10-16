@@ -8,7 +8,7 @@
 
 @if($sermons->count() > 0)
   @include('sermons.inc.filter')
-  <ul>
+  <ul class="mb-6">
   @foreach($sermons as $sermon)
 	@include('sermons.inc.singlesermon')
   @endforeach
@@ -17,7 +17,12 @@
 
 @else
 @component('includes.note', ['color' => 'blue'])
-Looks like your church doesn't have any sermons yet. @endcomponent
+@if($selectedtext != 'all' || $selectedseries != 'all' || $selectedspeaker != 'all')
+No sermons matched that query.  Try changing the filtering parameters.
+@else
+Looks like your church doesn't have any sermons yet.
+@endif
+ @endcomponent
 @endif
 </div>
 @endsection

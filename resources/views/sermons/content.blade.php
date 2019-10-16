@@ -17,7 +17,7 @@
     
     <label class="block mb-6">
     <span class="text-gray-700 mb-1 block">Text Content</span>
-    <textarea class="form-textarea mt-1 block w-full" id="manuscript" placeholder="Enter some long form content." name="manuscript"></textarea>
+    <textarea class="form-textarea mt-1 block w-full" id="manuscript" placeholder="Enter some long form content." name="manuscript">{{$sermon->manuscript}}</textarea>
     
   </label>
     @if($errors->has('manuscript'))
