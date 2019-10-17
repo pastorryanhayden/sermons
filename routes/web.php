@@ -17,6 +17,8 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/churches/{church}/', 'PublicSermonsController@home');
 Route::get('/churches/{church}/sermons/{sermon}', 'PublicSermonsController@show');
+Route::get('/churches/{church}/speakers', 'PublicSpeakersController@index');
+Route::get('/churches/{church}/speakers/{speaker}', 'PublicSpeakersController@show');
 Route::get('/churches/{church}/sermons/{sermon}/player', 'PublicSermonsController@player');
 Route::middleware(['auth'])->group(function () {
 
