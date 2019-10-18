@@ -20,6 +20,8 @@ Route::get('/churches/{church}/sermons/{sermon}', 'PublicSermonsController@show'
 Route::get('/churches/{church}/speakers', 'PublicSpeakersController@index');
 Route::get('/churches/{church}/speakers/{speaker}', 'PublicSpeakersController@show');
 Route::get('/churches/{church}/sermons/{sermon}/player', 'PublicSermonsController@player');
+Route::get('/churches/{church}/series', 'PublicSeriesController@index');
+Route::get('/churches/{church}/series/{series}', 'PublicSeriesController@show');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'SermonsController@index')->name('home');
@@ -34,4 +36,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prayer/1', 'HomeController@index')->name('home');
     Route::resource('requestcategories', 'RequestCategoriesController');
     Route::resource('speakers', 'SpeakersController');
+    Route::resource('series', 'SeriesController');
 });

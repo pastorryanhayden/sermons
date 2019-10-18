@@ -1,5 +1,11 @@
 module.exports = {
   theme: {
+    nset: {
+      '0': 0,
+      '75': '75px',
+      auto: 'auto',
+      '1/2': '50%',
+    },
     extend: {}
   },
   variants: {

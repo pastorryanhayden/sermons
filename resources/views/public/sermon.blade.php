@@ -9,7 +9,7 @@
 	<div class="flex mb-1">
             <p class="inline-flex items-center text-gray-700 mr-4">@component('svg.calendar') h-4 text-gray-400 mr-1 @endcomponent {{ \Carbon\Carbon::parse($sermon->date)->format('m/d/Y')}}</p>
             <a href="/churches/{{ $church->id }}/speakers/{{ $sermon->speaker->id }}" class="inline-flex items-center text-gray-700 mr-4"><img class="h-4 mr-1 rounded-full" src="{{$sermon->speaker->thumbnail ? $sermon->speaker->thumbnail : '/images/speaker.svg'}}" alt=""> {{$sermon->speaker->name}}</a>
-            <p class="inline-flex items-center text-gray-700 mr-4"><img class="h-4 mr-1 rounded-full" src="{{$sermon->series->photo ? $sermon->series->photo  : '/images/series.svg'}}" alt=""> {{$sermon->series->title}}</p>
+            <p class="inline-flex items-center text-gray-700 mr-4"><img class="h-4 w-4 object-cover mr-1 rounded-full" src="{{$sermon->series->photo ? $sermon->series->photo  : '/images/series.svg'}}" alt=""> {{$sermon->series->title}}</p>
         </div>
 	</section>
 	@if($video_type == 'vimeo')
@@ -37,7 +37,7 @@
 	@endif
 	</main>
 	<aside class="w-full md:w-1/4 border-b md:border-b-0 md:border-l self-stretch order-first md:order-1">
-		<div class="container md:sticky md:top-0">
+		<div class="container md:sticky top-0">
 		@if($sermon->mp3)
 		<a href="/churches/{{ $church->id }}/sermons/{{ $sermon->id }}/player" target="_blank" class="flex flex-col w-full justify-center items-center p-4 text-center border-b hover:bg-gray-200">
 			@component('svg.play')
