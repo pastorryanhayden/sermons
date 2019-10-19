@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Church;
 use App\Book;
 use App\Chapter;
+use App\Speaker;
+use App\Series;
 use App\Sermon;
 
 class PublicSermonsController extends Controller
@@ -93,7 +95,43 @@ class PublicSermonsController extends Controller
         }
         return view('public.sermons.scripture', compact('church', 'sermons', 'books', 'selectedbook', 'chapters', 'selectedchapter'));
     }
+    public function indexSpeakers(Church $church, Request $request)
+    {
+       
+        $sermons = $church->sermons()->latest('date')->paginate(10);
+        $selectedspeaker = $request->speaker;
+        $selectedtype = $request->type;
+        $speakers = $church->speakers()->get();
+        $speakertypes = [];
+        foreach ($speakers as $speaker) {
+            ;
+            $speakertypes[] = $speaker->position;
+        }
+        $speakertypes = collect($speakertypes);
+        $speakertypes = $speakertypes->unique();
+        if ($selectedtype && $selectedtype != 'All') {
+            $speakers = $church->speakers()->where('position', $selectedtype)->get();
+        }
+        if ($selectedspeaker && $selectedspeaker != "All") {
+            $speaker = Speaker::find($selectedspeaker);
+            $sermons = $speaker->sermons()->latest('date')->paginate(10);
+        }
+        return view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype'));
+    }
 
+    public function indexSeries(Church $church, Request $request)
+    {
+           
+            $sermons = $church->sermons()->latest('date')->paginate(10);
+            $selectedseries = $request->theseries;
+            $series = $church->series()->get();
+
+        if ($selectedseries && $selectedseries != "All") {
+            $theseries = Series::find($selectedseries);
+            $sermons = $theseries->sermons()->latest('date')->paginate(10);
+        }
+            return view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries'));
+    }
     /**
      * Display the specified resource.
      *
