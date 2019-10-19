@@ -16,6 +16,10 @@ Route::get('/', function () {
 });
 Auth::routes();
 Route::get('/churches/{church}/', 'PublicSermonsController@home');
+Route::get('/churches/{church}/sermons', 'PublicSermonsController@index');
+Route::get('/churches/{church}/sermons-scripture', 'PublicSermonsController@indexScripture');
+Route::get('/churches/{church}/sermons-series', 'PublicSermonsController@indexSeries');
+Route::get('/churches/{church}/sermons-speakers', 'PublicSermonsController@indexSpeakers');
 Route::get('/churches/{church}/sermons/{sermon}', 'PublicSermonsController@show');
 Route::get('/churches/{church}/speakers', 'PublicSpeakersController@index');
 Route::get('/churches/{church}/speakers/{speaker}', 'PublicSpeakersController@show');
