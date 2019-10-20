@@ -15,17 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
-Route::get('/churches/{church}/', 'PublicSermonsController@home');
-Route::get('/churches/{church}/sermons', 'PublicSermonsController@index');
-Route::get('/churches/{church}/sermons-scripture', 'PublicSermonsController@indexScripture');
-Route::get('/churches/{church}/sermons-series', 'PublicSermonsController@indexSeries');
-Route::get('/churches/{church}/sermons-speakers', 'PublicSermonsController@indexSpeakers');
-Route::get('/churches/{church}/sermons/{sermon}', 'PublicSermonsController@show');
-Route::get('/churches/{church}/speakers', 'PublicSpeakersController@index');
-Route::get('/churches/{church}/speakers/{speaker}', 'PublicSpeakersController@show');
-Route::get('/churches/{church}/sermons/{sermon}/player', 'PublicSermonsController@player');
-Route::get('/churches/{church}/series', 'PublicSeriesController@index');
-Route::get('/churches/{church}/series/{series}', 'PublicSeriesController@show');
+Route::get('/churches/{church}/{type}', 'PublicSermonsController@home');
+Route::get('/churches/{church}/{type}/search', 'PublicSearchController@search');
+Route::get('/churches/{church}/{type}/sermons', 'PublicSermonsController@index');
+Route::get('/churches/{church}/{type}/sermons-scripture', 'PublicSermonsController@indexScripture');
+Route::get('/churches/{church}/{type}/sermons-series', 'PublicSermonsController@indexSeries');
+Route::get('/churches/{church}/{type}/sermons-speakers', 'PublicSermonsController@indexSpeakers');
+Route::get('/churches/{church}/{type}/sermons/{sermon}', 'PublicSermonsController@show');
+Route::get('/churches/{church}/{type}/speakers', 'PublicSpeakersController@index');
+Route::get('/churches/{church}/{type}/speakers/{speaker}', 'PublicSpeakersController@show');
+Route::get('/churches/{church}/{type}/sermons/{sermon}/player', 'PublicSermonsController@player');
+Route::get('/churches/{church}/{type}/series', 'PublicSeriesController@index');
+Route::get('/churches/{church}/{type}/series/{series}', 'PublicSeriesController@show');
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'SermonsController@index')->name('home');

@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Laravel\Scout\Searchable;
 
 class Church extends Model
 {
+    use Searchable;
     protected $guarded = [];
     public function admin()
     {

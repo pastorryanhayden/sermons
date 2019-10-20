@@ -22,18 +22,19 @@ class PublicSermonsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function home(Church $church)
+    public function home(Church $church, $type)
     {
-
+        $pageType = $type == 'embed' ? 'embed' : 'normal';
         $recents = $church->sermons()->latest('date')->limit(4)->get();
         $featureds = $church->sermons()->latest('date')->where('featured', 1)->limit(4)->get();
         $currentSeries = null;
         $currentSeries = $church->currentSeries();
 
-        return view('public.home', compact('church', 'recents', 'featureds', 'currentSeries'));
+        return view('public.home', compact('church', 'recents', 'featureds', 'currentSeries', 'pageType'));
     }
-    public function index(Church $church, Request $request)
+    public function index(Church $church, $type, Request $request)
     {
+        $pageType = $type == 'embed' ? 'embed' : 'normal';
         // Get a list of years
         $datesermons = $church->sermons()->get();
         $years = [];
@@ -68,11 +69,11 @@ class PublicSermonsController extends Controller
         if ($selectedmonth && $selectedmonth != "All") {
             $sermons = $church->sermons()->whereYear('date', '=', date($selectedyear))->whereMonth('date', '=', date($selectedmonth))->latest('date')->paginate(10);
         }
-        return view('public.sermons.date', compact('church', 'sermons', 'years', 'selectedyear', 'months', 'selectedmonth'));
+        return view('public.sermons.date', compact('church', 'sermons', 'years', 'selectedyear', 'months', 'selectedmonth', 'pageType'));
     }
-    public function indexScripture(Church $church, Request $request)
+    public function indexScripture(Church $church, $type, Request $request)
     {
-       
+        $pageType = $type == 'embed' ? 'embed' : 'normal';
         $sermons = $church->sermons()->latest('date')->paginate(10);
         $books = Book::whereHas('sermons', function (Builder $query) use ($church) {
             $query->where('church_id', '=', $church->id);
@@ -93,11 +94,11 @@ class PublicSermonsController extends Controller
                     $query->where('chapter_id', '=', $selectedchapter);
              })->paginate(10);
         }
-        return view('public.sermons.scripture', compact('church', 'sermons', 'books', 'selectedbook', 'chapters', 'selectedchapter'));
+        return view('public.sermons.scripture', compact('church', 'sermons', 'books', 'selectedbook', 'chapters', 'selectedchapter', 'pageType'));
     }
-    public function indexSpeakers(Church $church, Request $request)
+    public function indexSpeakers(Church $church, $type, Request $request)
     {
-       
+        $pageType = $type == 'embed' ? 'embed' : 'normal';
         $sermons = $church->sermons()->latest('date')->paginate(10);
         $selectedspeaker = $request->speaker;
         $selectedtype = $request->type;
@@ -116,12 +117,12 @@ class PublicSermonsController extends Controller
             $speaker = Speaker::find($selectedspeaker);
             $sermons = $speaker->sermons()->latest('date')->paginate(10);
         }
-        return view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype'));
+        return view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype', 'pageType'));
     }
 
-    public function indexSeries(Church $church, Request $request)
+    public function indexSeries(Church $church, $type, Request $request)
     {
-           
+            $pageType = $type == 'embed' ? 'embed' : 'normal';
             $sermons = $church->sermons()->latest('date')->paginate(10);
             $selectedseries = $request->theseries;
             $series = $church->series()->get();
@@ -130,7 +131,7 @@ class PublicSermonsController extends Controller
             $theseries = Series::find($selectedseries);
             $sermons = $theseries->sermons()->latest('date')->paginate(10);
         }
-            return view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries'));
+            return view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries', 'pageType'));
     }
     /**
      * Display the specified resource.
@@ -138,8 +139,9 @@ class PublicSermonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Church $church, Sermon $sermon)
+    public function show(Church $church, $type, Sermon $sermon)
     {
+        $pageType = $type == 'embed' ? 'embed' : 'normal';
         $video_id = null;
         $video_type = null;
         if ($sermon->video_url) {
@@ -158,10 +160,10 @@ class PublicSermonsController extends Controller
         }
         $series = $sermon->series()->first();
         $relatedSermons = $series->sermons()->where('id', '!=', $sermon->id)->latest('date')->limit(4)->get();
-        return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons'));
+        return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'));
     }
 
-    public function player(Church $church, Sermon $sermon)
+    public function player(Church $church, $type, Sermon $sermon)
     {
         return view('public.player', compact('church', 'sermon'));
     }

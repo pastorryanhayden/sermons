@@ -1,4 +1,4 @@
-<form action="/churches/{{ $church->id }}/sermons-speakers" method="get" class="py-12 max-w-3xl mx-auto border-b mb-12" id="filterForm">
+<form action="/churches/{{ $church->id }}/{{ $pageType }}/sermons-speakers" method="get" class="py-12 max-w-3xl mx-auto border-b mb-12" id="filterForm">
 	<div class="flex justify-center w-full max-w-lg mx-auto">
 		<label class="block mt-4 w-1/2 mr-4">
 		  <span class="text-gray-700">Speaker Type</span>

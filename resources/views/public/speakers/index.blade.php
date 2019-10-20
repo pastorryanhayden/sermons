@@ -9,7 +9,7 @@
 	
 	<div class="speaker-list text-center">
 		@foreach($speakers as $speaker)
-		<a href="/churches/{{ $church->id }}/speakers/{{ $speaker->id }}" class="inline-flex flex-col items-center justify-start p-6 w-40">
+		<a href="/churches/{{ $church->id }}/{{ $pageType }}/speakers/{{ $speaker->id }}" class="inline-flex flex-col items-center justify-start p-6 w-40">
 			<img src="{{$speaker->thumbnail ? $speaker->thumbnail : '/images/speaker.svg'}}" alt="" class="h-24 w-24 mb-4 rounded-full block object-cover">
 			<h3 class="font-bold text-center">{{ $speaker->name }}</h3>
 			<p class="text-sm italic text-center">{{ $speaker->position }}</p>

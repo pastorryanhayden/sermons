@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "algolia/algoliasearch-client-php": "^2.4",
         "fideloper/proxy": "^4.0",
         "graham-campbell/markdown": "^11.1",
         "laravel/framework": "^6.0",
+        "laravel/scout": "^7.2",
         "laravel/telescope": "^2.1",
         "laravel/tinker": "^1.0",
         "livewire/livewire": "^0.3.10"
