@@ -3,109 +3,121 @@
 @section('content')
     <div class="container mx-auto">
         <div class="flex flex-wrap justify-center">
-            <div class="w-full max-w-2xl">
-                <div class="flex flex-col break-words bg-white border border-2 rounded shadow-md">
+            <div class="w-full max-w-lg mt-24">
+                <div class="flex flex-col break-words ">
 
-                    <div class="font-semibold bg-gray-200 text-gray-700 py-3 px-6 mb-0">
-                        {{ __('Register') }}
+                    <div class="font-bold text-2xl py-3 text-center mb-6">
+                        {{ __('Register Your Church For ChurchTools') }}
                     </div>
 
-                    <form class="w-full p-6 flex flex-wrap justify-center" method="POST" action="{{ route('register') }}">
+                    <form class="w-full" method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="w-64 mr-6 border-r pr-6 mb-12">
-                        <h2 class="text-lg font-bold mb-6">Tell Us About Yourself</h2>
+                        <div class="max-w-lg flex flex-col items-center mx-auto mb-12 border rounded p-6">
+                        <h2 class="text-lg font-bold mb-6 text-center w-full">{{ __('Tell Us About Yourself') }}</h2>
                             <div class="flex flex-wrap mb-6">
                                 <label class="block w-full">
                                     <span class="text-gray-700">{{ __('Name') }}:</span>
-                                    <input class="form-input mt-1 block w-full" placeholder="Jane Doe" id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input class="form-input mt-1 block w-64" placeholder="Jane Doe" id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
                                 </label>
-                                @if ($errors->has('name'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                            </div>
+                              @if ($errors->has('name'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('name') }}
                                     </p>
-                                @endif
-                            </div>
+                                    @endcomponent
+                              @endif
 
                             <div class="flex flex-wrap mb-6">
                             <label class="block w-full">
                                     <span class="text-gray-700">  {{ __('E-Mail Address') }}:</span>
-                                    <input class="form-input mt-1 block w-full" placeholder="Jane Doe" id="email" type="text" name="email" value="{{ old('email') }}" required>
+                                    <input class="form-input mt-1 block w-64" placeholder="Jane Doe" id="email" type="text" name="email" value="{{ old('email') }}" required>
                             </label>
-                                @if ($errors->has('email'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                            </div>
+                              @if ($errors->has('email'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('email') }}
                                     </p>
-                                @endif
+                                    @endcomponent
+                              @endif
+
+                            <div class="flex flex-wrap">
+                                <label class="block w-48 mr-6 sm:mb-6 md:mb-0">
+                                        <span class="text-gray-700"> {{ __('Password') }}:</span>
+                                        <input class="form-input mt-1 block w-48" id="password" type="password"  name="password" value="{{ old('password') }}" required>
+                                </label>
+                                <label class="block w-48">
+                                        <span class="text-gray-700"> {{ __('Confirm Password') }}:</span>
+                                        <input class="form-input mt-1 block w-48" id="password-confirm" type="password"  name="password_confirmation"  required>
+                                </label>
                             </div>
 
-                            <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> {{ __('Password') }}:</span>
-                                        <input class="form-input mt-1 block w-full" id="password" type="password"  name="password" value="{{ old('password') }}" required>
-                                </label>
-                                @if ($errors->has('password'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                              @if ($errors->has('password'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('password') }}
                                     </p>
-                                @endif
-                            </div>
-
-                            <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> {{ __('Confirm Password') }}:</span>
-                                        <input class="form-input mt-1 block w-full" id="password-confirm" type="password"  name="password_confirmation"  required>
-                                </label>
-                            </div>
+                                    @endcomponent
+                              @endif
                         </div>
-                        <div class="w-64 pr-6 mb-12">
-                            <h2 class="text-lg font-bold mb-6">Tell Us About Your Church</h2>
+                        <div class="max-w-lg mb-12 flex flex-col items-center mx-auto mb-12 border rounded p-6">
+                            <h2 class="text-lg font-bold mb-6">{{ __('Tell Us About Your Church') }}</h2>
                             <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> Church Name:</span>
+                                <label class="block w-64">
+                                        <span class="text-gray-700"> {{ __('Church Name') }}:</span>
                                         <input class="form-input mt-1 block w-full" id="church-name" type="text"  name="church_name" placeholder="Generic Church Name" required>
                                 </label>
-                                @if ($errors->has('church_name'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                            </div>
+                              @if ($errors->has('church_name'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('church_name') }}
                                     </p>
-                                @endif
-                            </div>
+                                    @endcomponent
+                              @endif
                             <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> URL:</span>
+                                <label class="block w-64">
+                                        <span class="text-gray-700"> {{ __('Church URL') }}:</span>
                                         <input class="form-input mt-1 block w-full" id="church-url" type="text"  name="church_url"  required placeholder="genericchurch.org">
                                 </label>
-                                @if ($errors->has('church_url'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                            </div>
+                             @if ($errors->has('church_url'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('church_url') }}
                                     </p>
-                                @endif
-                            </div>
-                            <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> Church Phone:</span>
+                                    @endcomponent
+                              @endif
+
+                                <label class="block w-64 mb-6">
+                                        <span class="text-gray-700"> {{ __('Church Phone') }}:</span>
                                         <input class="form-input mt-1 block w-full" id="church-phone" type="tel"  name="church_phone"  required placeholder="(000) 000-0000">
                                 </label>
-                                @if ($errors->has('church_phone'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+
+            
+                            @if ($errors->has('church_phone'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('church_phone') }}
                                     </p>
-                                @endif
-                            </div>
-                            <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> Church Email:</span>
+                                    @endcomponent
+                            @endif
+                            <label class="block w-64 mb-6">
+                                        <span class="text-gray-700"> {{ __('Church Email') }}:</span>
                                         <input class="form-input mt-1 block w-full" id="church-email" type="tel"  name="church_email"  required placeholder="info@genericchurch.org">
                                 </label>
-                                @if ($errors->has('church_email'))
-                                    <p class="text-red-500 text-xs italic mt-4">
+                             @if ($errors->has('church_email'))
+                                    @component('note', ['color' => 'red'])
+                                    <p>
                                         {{ $errors->first('church_email') }}
                                     </p>
-                                @endif
-                            </div>
+                                    @endcomponent
+                            @endif
+                          
                             <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                        <span class="text-gray-700"> Address:</span>
+                                <label class="block w-64">
+                                        <span class="text-gray-700"> {{ __('Church Address') }}:</span>
                                         <input class="form-input mt-1 block w-full" id="address1" type="text"  name="address1"  required placeholder="1 Main St">
                                         <input class="form-input mt-1 block w-full" id="address2" type="text"  name="address2" placeholder="Apt 1" > 
                                         <div class="flex mt-1">

@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('/terms', 'RegisterChurchController@terms');
+Route::post('/terms', 'RegisterChurchController@register');
 Route::get('/churches/{church}/{type}', 'PublicSermonsController@home');
 Route::get('/churches/{church}/{type}/search', 'PublicSearchController@search');
 Route::get('/churches/{church}/{type}/sermons', 'PublicSermonsController@index');

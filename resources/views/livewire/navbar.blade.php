@@ -11,7 +11,7 @@
                 @guest
                 <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
                 @if (Route::has('register'))
-                <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="{{ route('register') }}">{{ __('Register') }}</a>
+                <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="/terms">{{ __('Register') }}</a>
                 @endif
                 @else
                 <button wire:click.prefetch="toggleSettings" class="flex justify-end items-end"><span class="rounded-full border bg-gray-100 text-gray-800 h-8 w-8 inline-flex items-center justify-center text-center p-4">{{ $userinitials }}</span>@component('svg.chevron-down') h-3 mb-1 text-gray-400 @endcomponent </button>
