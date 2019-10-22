@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Sermon;
 
 class SermonsMediaController extends Controller
@@ -20,27 +21,27 @@ class SermonsMediaController extends Controller
        
         $sermon = Sermon::findOrFail($id);
         // Validate the request
-        if($request->mp3 || $request->video_url)
-        
-        {
+        if ($request->mp3 || $request->video_url) {
              $validatedData = $request->validate([
                 'mp3' => 'nullable | file | max:30000 | mp3_ogg_extension',
                 'video_url' => 'nullable| url',
-            ]);
+             ]);
         } else {
-            return back()->with('error','You must either use include an MP3 or a Vimeo or Youtube URL.');
+            return back()->with('error', 'You must either use include an MP3 or a Vimeo or Youtube URL.');
         }
-        $name = $sermon->date . '-' . $sermon->title;       
+        $name = $sermon->date . '-' . $sermon->title;
         $name = $this->slugify($name) . '.mp3';
+
         // Store the file & Persist to the DB
-        if($request->mp3)
-        {
+        if ($request->mp3) {
+            $disk = Storage::disk('wasabi');
+            
             $sermon->update([
-                'mp3' => $request->mp3->storeAs('sermons', $name, 'public')
+                'mp3' => $request->mp3->storeAs('sermons', $name, 'wasabi')
             ]);
+            $disk->setVisibility($sermon->mp3, 'public');
         }
-        if($request->video_url)
-        {
+        if ($request->video_url) {
             $sermon->update([
                 'video_url' => $request->video_url,
             ]);
@@ -74,31 +75,30 @@ class SermonsMediaController extends Controller
         //
     }
 
-public static function slugify($text)
-{
-  // replace non letter or digits by -
-  $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+    public static function slugify($text)
+    {
+      // replace non letter or digits by -
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
 
-  // transliterate
-  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+      // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 
-  // remove unwanted characters
-  $text = preg_replace('~[^-\w]+~', '', $text);
+      // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
 
-  // trim
-  $text = trim($text, '-');
+      // trim
+        $text = trim($text, '-');
 
-  // remove duplicate -
-  $text = preg_replace('~-+~', '-', $text);
+      // remove duplicate -
+        $text = preg_replace('~-+~', '-', $text);
 
-  // lowercase
-  $text = strtolower($text);
+      // lowercase
+        $text = strtolower($text);
 
-  if (empty($text)) {
-    return 'n-a';
-  }
+        if (empty($text)) {
+            return 'n-a';
+        }
 
-  return $text;
+        return $text;
+    }
 }
-
-}    

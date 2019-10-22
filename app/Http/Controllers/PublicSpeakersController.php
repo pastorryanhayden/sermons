@@ -18,7 +18,9 @@ class PublicSpeakersController extends Controller
     public function show(Church $church, $type, Speaker $speaker)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
-        $sermons = $speaker->sermons()->latest('date')->paginate(15);
+        $sermons = $speaker->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->paginate(15);
         return view('public.speakers.single', compact('church', 'speaker', 'sermons', 'pageType'));
     }
 }

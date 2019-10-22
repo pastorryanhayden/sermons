@@ -8,12 +8,17 @@
 
 @if($sermons->count() > 0)
   @include('sermons.inc.filter')
+  @component('includes.note', ['color' => 'blue'])
+  Pink cards indicate an unfinished sermon.
+  @endcomponent
   <ul class="mb-6">
   @foreach($sermons as $sermon)
 	@include('sermons.inc.singlesermon')
   @endforeach
   </ul>
+  <div class="pagination py-6">
   {{ $sermons->links() }}
+  </div>
 
 @else
 @component('includes.note', ['color' => 'blue'])

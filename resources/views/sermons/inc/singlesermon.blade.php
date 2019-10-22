@@ -1,4 +1,4 @@
-<li class="bg-white w-full lg:h-20 flex-wrap p-4 flex mb-2 lg:mb-0 lg:border-b border-gray-200 shadow lg:shadow-none rounded lg:rounded-none items-center tracking-normal">
+<li class="w-full lg:h-20 flex-wrap p-4 flex mb-2 lg:mb-0 lg:border-b border-gray-200 shadow lg:shadow-none rounded lg:rounded-none items-center tracking-normal  {{ $sermon->complete() ? 'bg-white' : 'bg-red-100' }}">
 	<section class="main flex mb-4 lg:mb-0 lg:mr-6 w-full lg:w-auto flex-grow items-center">
 		<img src="{{$sermon->series->photo ? $sermon->series->photo : '/images/series.svg'}}" alt="" class="h-10 rounded-full w-10 mr-4">
 		<div class="title flex flex-col justify-center lg:w-64">

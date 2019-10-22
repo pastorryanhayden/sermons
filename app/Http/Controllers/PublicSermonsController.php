@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Storage;
 use App\Church;
 use App\Book;
 use App\Chapter;
@@ -25,8 +26,12 @@ class PublicSermonsController extends Controller
     public function home(Church $church, $type)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
-        $recents = $church->sermons()->latest('date')->limit(4)->get();
-        $featureds = $church->sermons()->latest('date')->where('featured', 1)->limit(4)->get();
+        $recents = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->limit(4)->get();
+        $featureds = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->where('featured', 1)->limit(4)->get();
         $currentSeries = null;
         $currentSeries = $church->currentSeries();
 
@@ -36,7 +41,9 @@ class PublicSermonsController extends Controller
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         // Get a list of years
-        $datesermons = $church->sermons()->get();
+        $datesermons = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->get();
         $years = [];
 
         foreach ($datesermons as $sermon) {
@@ -49,12 +56,18 @@ class PublicSermonsController extends Controller
         $selectedyear = $request->year;
         $selectedmonth = $request->month;
         $months = [];
-        $sermons = $church->sermons()->latest('date')->paginate(10);
+        $sermons = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->paginate(10);
         if ($selectedyear && $selectedyear != "All") {
-            $sermons = $church->sermons()->whereYear('date', '=', date($selectedyear))->latest('date')->paginate(10);
+            $sermons = $church->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->whereYear('date', '=', date($selectedyear))->latest('date')->paginate(10);
             // Get all of the months where there are sermons
           
-            $datesermons = $church->sermons()->whereYear('date', '=', date($selectedyear))->latest('date')->get();
+            $datesermons = $church->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->whereYear('date', '=', date($selectedyear))->latest('date')->get();
             foreach ($datesermons as $sermon) {
                 $split = explode("-", $sermon->date);
                 $month = [
@@ -67,14 +80,18 @@ class PublicSermonsController extends Controller
             $months = $months->unique()->sortBy('number');
         }
         if ($selectedmonth && $selectedmonth != "All") {
-            $sermons = $church->sermons()->whereYear('date', '=', date($selectedyear))->whereMonth('date', '=', date($selectedmonth))->latest('date')->paginate(10);
+            $sermons = $church->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->whereYear('date', '=', date($selectedyear))->whereMonth('date', '=', date($selectedmonth))->latest('date')->paginate(10);
         }
         return view('public.sermons.date', compact('church', 'sermons', 'years', 'selectedyear', 'months', 'selectedmonth', 'pageType'));
     }
     public function indexScripture(Church $church, $type, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
-        $sermons = $church->sermons()->latest('date')->paginate(10);
+        $sermons = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->paginate(10);
         $books = Book::whereHas('sermons', function (Builder $query) use ($church) {
             $query->where('church_id', '=', $church->id);
         })->get();
@@ -99,7 +116,9 @@ class PublicSermonsController extends Controller
     public function indexSpeakers(Church $church, $type, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
-        $sermons = $church->sermons()->latest('date')->paginate(10);
+        $sermons = $church->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->latest('date')->paginate(10);
         $selectedspeaker = $request->speaker;
         $selectedtype = $request->type;
         $speakers = $church->speakers()->get();
@@ -115,7 +134,9 @@ class PublicSermonsController extends Controller
         }
         if ($selectedspeaker && $selectedspeaker != "All") {
             $speaker = Speaker::find($selectedspeaker);
-            $sermons = $speaker->sermons()->latest('date')->paginate(10);
+            $sermons = $speaker->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->latest('date')->paginate(10);
         }
         return view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype', 'pageType'));
     }
@@ -123,13 +144,17 @@ class PublicSermonsController extends Controller
     public function indexSeries(Church $church, $type, Request $request)
     {
             $pageType = $type == 'embed' ? 'embed' : 'normal';
-            $sermons = $church->sermons()->latest('date')->paginate(10);
+            $sermons = $church->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->latest('date')->paginate(10);
             $selectedseries = $request->theseries;
             $series = $church->series()->get();
 
         if ($selectedseries && $selectedseries != "All") {
             $theseries = Series::find($selectedseries);
-            $sermons = $theseries->sermons()->latest('date')->paginate(10);
+            $sermons = $theseries->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->latest('date')->paginate(10);
         }
             return view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries', 'pageType'));
     }
@@ -158,8 +183,14 @@ class PublicSermonsController extends Controller
                 $video_id = $path;
             }
         }
+        if ($sermon->mp3 && !Str::contains($sermon->mp3, 'http')) {
+            $disk = Storage::disk('wasabi');
+            $sermon->mp3 = $disk->url($sermon->mp3);
+        }
         $series = $sermon->series()->first();
-        $relatedSermons = $series->sermons()->where('id', '!=', $sermon->id)->latest('date')->limit(4)->get();
+        $relatedSermons = $series->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->where('id', '!=', $sermon->id)->latest('date')->limit(4)->get();
         return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'));
     }
 

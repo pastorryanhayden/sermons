@@ -17,7 +17,9 @@ class PublicSeriesController extends Controller
     public function show(Church $church, $type, Series $series)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
-        $sermons = $series->sermons()->oldest('date')->paginate(15);
+        $sermons = $series->sermons()->where(function ($query) {
+            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+        })->oldest('date')->paginate(15);
         return view('public.series.single', compact('series', 'church', 'sermons', 'pageType'));
     }
 }

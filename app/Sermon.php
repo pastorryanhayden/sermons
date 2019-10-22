@@ -28,4 +28,12 @@ class Sermon extends Model
     {
         return $this->belongsToMany(Chapter::class)->withPivot('verseStart', 'verseEnd');
     }
+    public function complete()
+    {
+        if ($this->mp3 || $this->video_url) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
