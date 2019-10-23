@@ -12,7 +12,7 @@
         @if($recents->count() > 0)
         <div class="recent-sermons mb-6">
             <h2 class="text-2xl font-bold mb-6">Recent Sermons <a href="#" class="text-sm font-normal underline">View All Sermons</a></h2>
-            @foreach($recents as $sermon)
+            @foreach($recents as $singlesermon)
             @include('public.inc.singlesermon',  ['hideseries' => false])
             @endforeach
         </div>
@@ -20,7 +20,7 @@
         @if($featureds->count() > 0)
         <div class="recent-sermons">
             <h2 class="text-2xl font-bold mb-6">Featured Sermons <a href="#" class="text-sm font-normal underline">View All Sermons</a></h2>
-            @foreach($featureds as $sermon)
+            @foreach($featureds as $singlesermon)
             @include('public.inc.singlesermon',  ['hideseries' => false])
             @endforeach
         </div>
