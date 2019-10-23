@@ -30,16 +30,17 @@
 	</div>
 	<div class="more-from-series p-4 block md:hidden">
 		<h3 class="font-bold text-lg py-4">More From This Series:</h3>
-		@foreach($relatedSermons as $sermon)
+		@foreach($relatedSermons as $singlesermon)
 		@include('public.inc.singlesermon', ['hideseries' => true])
 		@endforeach
+
 		</div>
 	@endif
 	</main>
 	<aside class="w-full md:w-1/4 border-b md:border-b-0 md:border-l self-stretch order-first md:order-1">
 		<div class="container md:sticky top-0">
 		@if($sermon->mp3)
-		<a href="/churches/{{ $church->id }}/{{ $pageType }}/sermons/{{ $sermon->id }}/player" target="_blank" class="flex flex-col w-full justify-center items-center p-4 text-center border-b hover:bg-gray-200">
+		<a href="/sermon/{{ $sermon->id }}/player" target="_blank" class="flex flex-col w-full justify-center items-center p-4 text-center border-b hover:bg-gray-200">
 			@component('svg.play')
 				h-8 text-gray-700 mb-2
 			@endcomponent
@@ -70,7 +71,7 @@
 		@endif
 		<div class="more-from-series p-4 hidden md:block">
 		<h3 class="font-bold text-lg py-4">More From This Series:</h3>
-		@foreach($relatedSermons as $sermon)
+		@foreach($relatedSermons as $singlesermon)
 		@include('public.inc.singlesermon', ['hideseries' => true])
 		@endforeach
 		</div>

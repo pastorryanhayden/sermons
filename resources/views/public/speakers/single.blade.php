@@ -18,7 +18,7 @@
     @endif
     @if($sermons->count() > 0)
     <div class="p-4">
-    @foreach($sermons as $sermon)
+    @foreach($sermons as $singlesermon)
 	 @include('public.inc.singlesermon',  ['hideseries' => false])
 	@endforeach
 	</div>

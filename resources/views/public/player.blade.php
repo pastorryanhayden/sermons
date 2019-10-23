@@ -1,4 +1,4 @@
-@extends('layouts.public')
+@extends('layouts.player')
 @section('content')
 <main>
 <section class="sermon-header w-full pt-12 pb-6 px-6">
@@ -10,6 +10,6 @@
         </div>
 	</section>
 	<audio controls="controls" class="w-full max-w-xl mb-4 mx-4"><source src="{{ $sermon->mp3 }}"  type="audio/mp3" /></audio>
-	<a class="text-gray-600 underline mx-4" href="/churches/{{ $church->id }}">Listen to more sermons from {{ $church->name }}</a>
+	<a class="text-gray-600 underline mx-4" href="/churches/{{ $sermon->church->id }}">Listen to more sermons from {{ $sermon->church->name }}</a>
 </main>
 @endsection

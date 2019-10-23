@@ -163,8 +163,8 @@ class PublicSermonsController extends Controller
         return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'));
     }
 
-    public function player(Church $church, $type, Sermon $sermon)
+    public function player(Sermon $sermon)
     {
-        return view('public.player', compact('church', 'sermon'));
+        return view('public.player', compact('sermon'));
     }
 }
