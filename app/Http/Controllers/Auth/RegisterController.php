@@ -94,6 +94,10 @@ class RegisterController extends Controller
 
         $church->admin_id = $user->id;
         $church->save();
+        $church->podcast()->create([
+            'podcast_title' => "{$church->name} Preaching Podcast",
+            'podcast_description' => "Bible Sermons from {$church->name} in {$church->city}, {$church->state}."
+        ]);
         return $user;
     }
 }

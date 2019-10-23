@@ -30,6 +30,10 @@ class Church extends Model
     {
         return $this->hasMany(Series::class);
     }
+    public function podcast()
+    {
+        return $this->hasOne(ChurchPodcast::class);
+    }
     public function currentSeries()
     {
         $recent =  date("Y-m-d", strtotime(" -2 months"));

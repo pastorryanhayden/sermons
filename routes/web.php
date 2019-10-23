@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::feeds();
 Route::get('/terms', 'RegisterChurchController@terms');
 Route::post('/terms', 'RegisterChurchController@register');
+Route::get('/podcastfeed/{church}', 'PodcastController@show');
 Route::get('/churches/{church}/{type}', 'PublicSermonsController@home');
 Route::get('/churches/{church}/{type}/search', 'PublicSearchController@search');
 Route::get('/churches/{church}/{type}/sermons', 'PublicSermonsController@index');
