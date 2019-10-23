@@ -3,7 +3,7 @@
 @include('public.inc.nav')
 <section class="header  bg-gray-200">
 	<div class="p-12 text-center">
-	<h1 class="font-bold text-4xl">Sermons</h1>
+	<h1 class="font-bold text-4xl">{{ __("Sermons") }}</h1>
 	</div>
 	@include('public.sermons.inc.tabs', ['selected' => 'scripture'])
 </section>

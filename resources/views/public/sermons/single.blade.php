@@ -44,13 +44,13 @@
 			@component('svg.play')
 				h-8 text-gray-700 mb-2
 			@endcomponent
-			Play Audio
+			{{ __("Play Audio") }}
 		</a>
 		<a href="{{ $sermon->mp3 }}" class="flex flex-col w-full justify-center items-center p-4 text-center border-b hover:bg-gray-200" download>
 			@component('svg.download')
 				h-8 text-gray-700 mb-2
 			@endcomponent
-			Download MP3
+			{{ __("Download MP3") }}
 		</a>
 		@endif
 		@if($sermon->handout)
@@ -58,7 +58,7 @@
 			@component('svg.printer')
 				h-8 text-gray-700 mb-2
 			@endcomponent
-			Download Handout
+			{{ __("Download Handout") }}
 		</a>
 		@endif
 		@if($sermon->slides)
@@ -66,11 +66,11 @@
 			@component('svg.photo')
 				h-8 text-gray-700 mb-2
 			@endcomponent
-			Download Slides
+			{{ __("Download Slides") }}
 		</a>
 		@endif
 		<div class="more-from-series p-4 hidden md:block">
-		<h3 class="font-bold text-lg py-4">More From This Series:</h3>
+		<h3 class="font-bold text-lg py-4">{{ __("More From This Series:") }}</h3>
 		@foreach($relatedSermons as $singlesermon)
 		@include('public.inc.singlesermon', ['hideseries' => true])
 		@endforeach

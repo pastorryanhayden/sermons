@@ -14,12 +14,12 @@
 
 <div class="flex items-center mt-6">
 <label class="block  mb-6 mr-4 w-2/3">
-  <span class="text-gray-700">Name</span>
+  <span class="text-gray-700">{{ __("Name") }}</span>
   <input class="form-input mt-1 block w-full" placeholder="John Doe" name="name" value="{{$speaker->name}}">
 </label>
 
 <label class="block mb-6 flex-grow">
-  <span class="text-gray-700">Position</span>
+  <span class="text-gray-700">{{ __("Position") }}</span>
   <select class="form-select mt-1 block w-full" name="position">
     @foreach($positions as $position)
     <option {{$position == $speaker->position ? 'selected' : ''}} >{{$position}}</option>
@@ -41,7 +41,7 @@
 @endif
 
 <label class="block mb-6">
-  <span class="text-gray-700 inline-flex items-end">Bio <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
+  <span class="text-gray-700 inline-flex items-end">{{ __("Bio") }} <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
   <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter some long form content." name="bio">{{ $speaker->bio }}</textarea>
 </label>
  @if($errors->has('bio'))
@@ -52,7 +52,7 @@
 
 <label class="block mb-6">
 <a href="#" onclick="ShowUploadcare()">
-	Upload A Thumbnail
+	{{ __("Upload A Thumbnail") }}
 </a>
 <input
   type="hidden"
@@ -66,7 +66,7 @@
     <span>{{ $errors->first('thumbnail') }}</span>
     @endcomponent
 @endif
- <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Save Speaker</button>
+ <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Save Speaker") }}</button>
 
 <script>
 function ShowUploadcare(){

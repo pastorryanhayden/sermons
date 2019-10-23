@@ -4,7 +4,7 @@
 @csrf
 @component('navigation.formheader')
     @slot('title')
-    Add A Series
+    {{ __("Add A Series") }}
     @endslot
     @slot('backto')
     /series
@@ -13,7 +13,7 @@
 
 
 <label class="block  mb-6 mr-4 w-2/3">
-  <span class="text-gray-700">Title</span>
+  <span class="text-gray-700">{{ __("Title") }}</span>
   <input class="form-input mt-1 block w-full" placeholder="Awesome Series" name="title" value="{{ $series->title }}">
 </label>
 
@@ -27,7 +27,7 @@
 @endif
 
 <label class="block mb-6">
-  <span class="text-gray-700 inline-flex items-end">Description <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
+  <span class="text-gray-700 inline-flex items-end">{{ __("Description") }} <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
   <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter a description." name="description">{{ $series->description }}</textarea>
 </label>
  @if($errors->has('description'))
@@ -38,7 +38,7 @@
 
 <label class="block mb-6">
 <a href="#" onclick="ShowUploadcare()">
-  Upload A Series Image
+  {{ __("Upload A Series Image") }}
 </a>
 <input
   type="hidden"
@@ -54,7 +54,7 @@
     @endcomponent
 @endif
 <label class="block mb-6">
-  <span class="text-gray-700 inline-flex items-end">Body <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
+  <span class="text-gray-700 inline-flex items-end">{{ __("Body") }} <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
   <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter a some longer text." name="body"> {{ $series->body }}</textarea>
 </label>
  @if($errors->has('body'))
@@ -63,7 +63,7 @@
     @endcomponent
 @endif
 
- <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Save Series</button>
+ <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Save Series") }}</button>
 
 <script>
 function ShowUploadcare(){

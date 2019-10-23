@@ -1,14 +1,14 @@
-<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> Filter  @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
+<h2 class="font-bold text-gray-600 mb-4 text-lg flex items-center cursor-pointer" onclick="showfilter()"><span> @component('svg.chevron-right') h-6 mr-2 text-gray-700 filteropen @endcomponent @component('svg.chevron-down') h-6 mr-2 text-gray-700 hidden filterclosed @endcomponent </span> {{ __('Filter') }}  @component('svg.filter') h-4 ml-2 text-gray-300 @endcomponent </h2>
 <form class="filter mb-6 block filters hidden" action="/sermons" method="get" >
 	<div class="flex mb-6">
     <div class="block mr-2">
-      <span class="text-gray-700">By Series</span>
+      <span class="text-gray-700">{{ __('By') }} {{ __('Series') }}</span>
       @if($series->count() < 5)
       <div class="mt-2">
         <div>
           <label class="inline-flex items-center">
             <input type="radio" class="form-radio" checked value="all" name="selectedseries">
-            <span class="ml-2">All</span>
+            <span class="ml-2">{{ __('All') }}</span>
           </label>
         </div>
     	@foreach($series as $single)
@@ -22,7 +22,7 @@
       </div>
       	@else
       	<select class="form-select mt-1 block w-full" name="selectedseries">
-        <option value="all" selected>All</option>
+        <option value="all" selected>{{ __('All') }}</option>
         @foreach($series as $single)
         <option value="{{$single->id}}">{{$single->title}}</option>
         @endforeach
@@ -30,7 +30,7 @@
     	@endif
     </div>
     <div class="block mr-2">
-      <span class="text-gray-700">By Speaker</span>
+      <span class="text-gray-700">{{ __('By') }} {{ __('Speaker') }}</span>
       @if($speakers->count() < 5)
       <div class="mt-2">
         <div>
@@ -50,7 +50,7 @@
       </div>
         @else
         <select class="form-select mt-1 block w-full" name="selectedspeaker">
-        <option value="all" selected>All</option>
+        <option value="all" selected>{{ __('All') }}</option>
         @foreach($speakers as $single)
         <option value="{{$single->id}}">{{$single->name}}</option>
         @endforeach
@@ -58,7 +58,7 @@
       @endif
     </div>
     <div class="block">
-      <span class="text-gray-700">By Bible Book</span>
+      <span class="text-gray-700">{{ __('By') }} {{ __('Bible Book') }}</span>
         <select class="form-select mt-1 block w-full" name="selectedtext">
         <option value="all" selected>All</option>
         @foreach($books as $book)
@@ -67,7 +67,7 @@
       </select>
     </div>
 </div>
-<button type="submit" class="bg-blue-500 py-2 px-4 text-white rounded">Filter</button>
+<button type="submit" class="bg-blue-500 py-2 px-4 text-white rounded">{{ __('Filter') }}</button>
 
 </form>
 @push('scripts')

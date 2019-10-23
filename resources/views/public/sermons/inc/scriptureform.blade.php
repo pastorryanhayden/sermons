@@ -10,17 +10,17 @@
 		  </select>
 		</label>
 		<label class="block mt-4 w-1/2">
-		  <span class="text-gray-700">Chapter</span>
+		  <span class="text-gray-700">{{ __("Chapter") }}</span>
 		  @if($selectedbook && $chapters)
 		  <select class="form-select mt-1 block w-full" onchange="submit()" onmouseup="submit()" name="chapter">
-		    <option value="All">All</option>
+		    <option value="All">{{ __("All") }}</option>
 		    @foreach($chapters as $chapter)
 		    <option value="{{ $chapter->id }}" {{ $chapter->id == $selectedchapter ? 'selected' : '' }}>{{ $chapter->number }}</option>
 		    @endforeach
 		  </select>
 		  @else
 		    <select class="form-select mt-1 block w-full">
-		    	<option selected>Select Book First</option>
+		    	<option selected>{{ __("Select Book First") }}</option>
 		    </select>
 		  @endif
 		</label>

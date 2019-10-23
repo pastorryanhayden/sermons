@@ -3,7 +3,7 @@
 <div class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" >
   @component('navigation.formheader')
     @slot('title')
-    Edit Sermon: {{$sermon->title}}
+    {{ __("Edit Sermon") }}: {{$sermon->title}}
     @endslot
     @slot('backto')
     /sermons
@@ -11,11 +11,11 @@
     @endcomponent
     @include('sermons.inc.tabs', ['active' => 'text'])
     @component('includes.note', ['color' => 'blue'])
-    💡 Each sermon should be associated with at least one Bible text.  We'll use this text (or these texts) to organize your sermons by Bible passage.
+    {{ __("💡 Each sermon should be associated with at least one Bible text.  We'll use this text (or these texts) to organize your sermons by Bible passage.") }}
     @endcomponent
     @if($texts->count() > 0)
     <ul class="rounded max-w-sm mx-auto bg-white mb-12 p-4 border border-gray-200 shadow">
-        <h2 class="font-bold mb-2">Associated Texts:</h2>
+        <h2 class="font-bold mb-2">{{ __("Associated Texts") }}:</h2>
     @foreach($texts as $text)
     <li class="py-2 flex justify-between items-center"><span>{{$text->book->name}} {{$text->number}}:{{$text->pivot->verseStart}}{{$text->pivot->verseStart != $text->pivot->verseEnd && $text->pivot->verseEnd !== null ? '-' . $text->pivot->verseEnd : '' }}</span> <form action="/sermons/{{$sermon->id}}/text/{{$text->id}}" method="post">
         @csrf
@@ -32,7 +32,7 @@
         <div class="flex flex-wrap border px-4 pt-4">
         @csrf
     <label class="block mb-4 mr-2">
-        <span class="text-gray-700">Book</span>
+        <span class="text-gray-700">{{ __("Book") }}</span>
         {{-- <select class="form-select mt-1 block w-40" wire:model="text['selected_book']" wire:mouseup="setChapters"> --}}
         <select id="book"   class="form-select mt-1 block w-40" name="book" onblur="updateBook()">
             @foreach($books as $book)
@@ -46,7 +46,7 @@
     </label>
     @if($chapters)
     <label class="block mb-4 mr-2 ">
-        <span class="text-gray-700">Chapter</span>
+        <span class="text-gray-700">{{ __("Chapter") }}</span>
         <select class="form-select mt-1 block w-20"  name="selected_chapter" id="selected_chapter" onblur="updateChapter()">
             @foreach($chapters as $chapter)
             @if($selected_chapter)
@@ -60,7 +60,7 @@
     @endif
     @if($verses)
     <label class="block mb-4 mr-2 ">
-        <span class="text-gray-700">Start</span>
+        <span class="text-gray-700">{{ __("Start") }}</span>
         <select class="form-select mt-1 block w-20"  name="start_verse" onblur="updateStartVerse()" id="start">
             @foreach($verses as $verse)
             @if($selected_start_verse)
@@ -74,7 +74,7 @@
     @endif
     @if($selected_start_verse && $endverses)
     <label class="block mb-4 mr-2 ">
-        <span class="text-gray-700">End</span>
+        <span class="text-gray-700">{{ __("End") }}</span>
         <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onblur="updateEndVerse()">
             @foreach($endverses as $verse)
             <option>{{$verse}}</option>
@@ -84,12 +84,12 @@
     @endif
     </div>
     @if($selected_start_verse && $endverses && $chapters )
-    <button class="mt-6  rounded text-center items-center uppercase tracking-wide font-bold bg-green-500 py-2 px-4 hover:bg-green-700 text-white">Add Text</button>
+    <button class="mt-6  rounded text-center items-center uppercase tracking-wide font-bold bg-green-500 py-2 px-4 hover:bg-green-700 text-white">{{ __("Add Text") }}</button>
     @endif
    
     </form>
     @if($texts->count() > 0)
-    <a href="/sermons/{{$sermon->id}}/media" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Continue to Media</a>
+    <a href="/sermons/{{$sermon->id}}/media" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Continue to Media") }}</a>
     @endif
 </div>
 <script>

@@ -5,7 +5,7 @@
     @method('PUT')
   @component('navigation.formheader')
     @slot('title')
-    Edit Sermon: {{$sermon->title}}
+    {{ __('Edit Sermon') }}: {{$sermon->title}}
     @endslot
     @slot('backto')
     /sermons
@@ -16,17 +16,17 @@
         <div class="block">
             <div class="flex flex-wrap justify-between">
                 <label class="block mb-6 mr-6">
-                    <span class="text-gray-700">Date:</span>
+                    <span class="text-gray-700">{{ __('Date') }}:</span>
                     <input type="date" class="form-input mt-1 block w-64" name="date" value="{{$sermon->date}}">
                 </label>
                 <label class="block mb-6">
-                    <span class="text-gray-700">Service</span>
+                    <span class="text-gray-700">{{ __('Service') }}</span>
                     <select class="form-select mt-1 block w-64" name="service">
-                        <option disabled>Choose A Service</option>
-                        <option value="Sunday Morning">Sunday Morning</option>
-                        <option value="Sunday Evening">Sunday Evening</option>
-                        <option value="Midweek">Midweek</option>
-                        <option value="Other">Other</option>
+                        <option disabled>{{ __('Choose A Service') }}</option>
+                        <option value="Sunday Morning">{{ __('Sunday Morning') }}</option>
+                        <option value="Sunday Evening">{{ __('Sunday Evening') }}</option>
+                        <option value="Midweek">{{ __('Midweek') }}</option>
+                        <option value="Other">{{ __('Other') }}</option>
                     </select>
                 </label>
             </div>
@@ -46,7 +46,7 @@
 
 			
             <label class="block mb-6">
-                <span class="text-gray-700">Sermon Title</span>
+                <span class="text-gray-700">{{ __('Sermon Title') }}</span>
                 <input type="text" class="form-input mt-1 block w-full" placeholder="Jesus Saves" name="title" value="{{$sermon->title}}">
             </label>
              @if($errors->has('title'))
@@ -56,12 +56,12 @@
             @endif
             <label class="flex items-center mb-6">
                 <input type="checkbox" class="form-checkbox h-4 w-4" {{$sermon->featured ? 'checked="checked"' : ''}} name="featured"  value="1">
-                <span class="ml-2">Feature This Sermon?</span>
+                <span class="ml-2">{{ __('Feature This Sermon') }}?</span>
             </label>
             <div class="flex flex-wrap justify-between">
                 <div class="w-64 mb-6">
                 <label class="block mb-2 mr-6">
-                    <span class="text-gray-700">Series</span>
+                    <span class="text-gray-700">{{ __('Series') }}</span>
                     <select class="form-select mt-1 block w-64" name="series_id">
                         <option disabled>Choose A Series</option>
                         @foreach($series as $singleSeries)
@@ -69,34 +69,34 @@
                         @endforeach
                     </select>
                 </label>
-                <button type="button" onclick="addSeries()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Series</button>
+                <button type="button" onclick="addSeries()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent {{ __('Add Series') }}</button>
                     <div class="addSeries hidden w-64 border p-4 relative mt-6">
                         <button type="button" onclick="removeSeries()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
                         <label class="block mb-4">
-                          <span class="text-gray-700">Series Name</span>
+                          <span class="text-gray-700">{{ __('Series Name') }}</span>
                           <input class="form-input mt-1" placeholder="Awesome Series" name="newSeriesName">
                         </label>
-                        <p class="text-sm italic">If your series isn't in the list, add one here and then you can add more details under the series section.</p>
+                        <p class="text-sm italic">{{ __("If your series isn't in the list, add one here and then you can add more details under the series section.") }}</p>
                     </div>
                 </div>
                 <div class="w-64">
                     <label class="block mb-2">
-                    <span class="text-gray-700">Speaker</span>
+                    <span class="text-gray-700">{{ __("Speaker") }}</span>
                     <select class="form-select mt-1 block w-64" name="speaker_id">
-                        <option disabled>Choose A Speaker</option>
+                        <option disabled>{{ __("Choose A Speaker") }}</option>
                         @foreach($speakers as $speaker)
                         <option value="{{$speaker->id}}" {{$speaker->id == $sermon->speaker_id ? 'selected' : '' }}>{{$speaker->name}}</option>
                         @endforeach
                     </select>
                     </label>
-                    <button type="button" onclick="addSpeaker()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent Add Speaker</button>
+                    <button type="button" onclick="addSpeaker()" class="italic flex justify-end items-center text-gray-500 font-bold text-sm text-right w-full">@component('svg.add-solid') h-4 mr-1 text-green-500 @endcomponent {{ __("Add Speaker") }}</button>
                     <div class="addSpeaker hidden w-64 border p-4 relative mt-6">
                         <button type="button" onclick="removeSpeaker()" class="absolute top-0 right-0 w-4 h-4 bg-red-500 text-white -mt-1 -mr-1 rounded text-sm flex items-center justify-center hover:bg-red-700">@component('svg.close')h-3 @endcomponent</button>
                         <label class="block mb-4">
-                          <span class="text-gray-700">Speaker Name</span>
+                          <span class="text-gray-700">{{ __("Speaker Name") }}</span>
                           <input class="form-input mt-1" placeholder="John Doe" name="newSpeakerName">
                         </label>
-                        <p class="text-sm italic">If your speaker isn't in the list, add one here and then you can add more details under the speaker section.</p>
+                        <p class="text-sm italic">{{ __("If your speaker isn't in the list, add one here and then you can add more details under the speaker section.") }}</p>
                     </div>
                 </div>
                 
@@ -116,7 +116,7 @@
             @endif
            
             <label class="block mb-6">
-                <span class="text-gray-700">Description <span class="text-sm italic">(Optional)</span></span>
+                <span class="text-gray-700">{{ __("Description") }} <span class="text-sm italic">({{ __("Optional") }})</span></span>
                 <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Write a short description of the sermon." name="description">{{$sermon->description}}</textarea>
             </label>
             @if($errors->has('description'))
@@ -125,7 +125,7 @@
             @endcomponent
             @endif
         </div>
-         <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">Continue to Text</button>
+         <button type="submit" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Continue to Text") }}</button>
       
       
 </div>

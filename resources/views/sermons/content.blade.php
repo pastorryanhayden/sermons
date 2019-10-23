@@ -3,7 +3,7 @@
 <form class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0" action="/sermons/{{$sermon->id}}/content" method="post" enctype="multipart/form-data">
   @component('navigation.formheader')
     @slot('title')
-    Edit Sermon: {{$sermon->title}}
+    {{ __('Edit') }} {{ __('Sermon') }}: {{$sermon->title}}
     @endslot
     @slot('backto')
     /sermons
@@ -11,12 +11,12 @@
     @endcomponent
     @include('sermons.inc.tabs', ['active' => 'content'])
     @component('includes.note', ['color' => 'blue'])
-    💡 Everything on this page is optional.  Feel free to save it with no content.
+    {{ __('💡 Everything on this page is optional.  Feel free to save it with no content.') }}
     @endcomponent
     @csrf
     
     <label class="block mb-6">
-    <span class="text-gray-700 mb-1 block">Text Content</span>
+    <span class="text-gray-700 mb-1 block">{{ __('Text Content') }}</span>
     <textarea class="form-textarea mt-1 block w-full" id="manuscript" placeholder="Enter some long form content." name="manuscript">{{$sermon->manuscript}}</textarea>
     
   </label>
@@ -27,7 +27,7 @@
     @endif
     <div class="p-2 border border-dashed mb-6">
     <label class="block mb-6">
-      <span class="text-gray-700">Handout</span>
+      <span class="text-gray-700">{{ __('Handout') }}</span>
       <input class="form-input mt-1 block w-full" name="handout" type="file" accept=".pdf, .doc" value={{$sermon->handout ? $sermon->handout : old('handout')}}>
       @if($sermon->handout)<p class="text-xs mt-1">Currently: <span class="italic">{{$sermon->handout}}</span></p>@endif
     </label>
@@ -37,7 +37,7 @@
         @endcomponent
     @endif
     <label class="block mb-6">
-      <span class="text-gray-700">Slides</span>
+      <span class="text-gray-700">{{ __('Slides') }}</span>
       <input class="form-input mt-1 block w-full" name="slides" type="file" accept=".pdf, .pptx, .ppt" value={{$sermon->slides ? $sermon->slides : old('slides')}}>
        @if($sermon->slides)<p class="text-xs mt-1">Currently: <span class="italic">{{$sermon->slides}}</span></p>@endif
     </label>
