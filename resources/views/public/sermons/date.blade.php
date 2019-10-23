@@ -9,7 +9,7 @@
 </section>
 @include('public.sermons.inc.dateform')
 <section class="sermons max-w-3xl mx-auto">
-	 @foreach($sermons as $sermon)
+	 @foreach($sermons as $singlesermon)
             @include('public.inc.single-list')
      @endforeach		
 </section>
