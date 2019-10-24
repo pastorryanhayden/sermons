@@ -13,7 +13,7 @@
             @include('public.inc.single-list')
      @endforeach		
 </section>
-<div class="pagination mt-6">
+<div class="pagination my-6">
 	{{ $sermons->links() }}
 </div>		
 @endsection
