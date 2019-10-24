@@ -1,8 +1,8 @@
 @extends('layouts.speakers')
 @section('sermonsContent')
-<div class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
-<div class="flex justify-between mb-6 items-center">
- <h1 class="text-xl font-bold text-blue-500 flex-grow">{{ __("Speakers") }}</h1>   
+<div class="w-full max-w-4xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
+<div class="flex justify-between mb-12 items-baseline">
+ <h1 class="text-3xl font-bold text-blue-500 flex-grow">{{ __("Speakers") }}</h1>   
 <a href="/speakers/create" class="font-bold inline-flex text-lg items-center text-green-500 hover:text-green-700">@component('svg.add-solid') h-4 mr-2 @endcomponent {{ __("Add Speaker") }}</a>
 </div>
 
@@ -31,8 +31,9 @@
     </li>
     @endforeach
 </ul>
+<div class="py-6">
 {{ $speakers->links() }}
-
+</div>
 @else
 @component('includes.note', ['color' => 'blue'])
 {{ __("Looks like your church doesn't have any speakers yet. Before you can add a sermon, you must have at least one speaker added. ") }} <a class="underline" href="/speakers/create">{{ __("You can create one here.") }}</a>

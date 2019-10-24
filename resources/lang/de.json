@@ -130,16 +130,6 @@
 	"By Date":"By Date",
 	"By Scripture":"By Scripture",
 	"By Speaker":"By Speaker",
-	"By Series":"By Series",
-	"Church Info": "Church Info",
-	"User Info": "User Info",
-	"Style":"Style",
-	"Podcast":"Podcast",
-	"Users":"Users",
-	"Notifications":"Notifications",
-	"Free As In Grace": "Free As In Grace",
-	"Your church's podcast feed can be found here:": "Your church's podcast feed can be found here:",
-	"This is the URL you will submit to iTunes (or other podcast libraries) to create your podcast.  It will automatically add your sermons (that have an MP3 file) as they are added to your sermon library.  Below you can change your feed settings.": "This is the URL you will submit to iTunes (or other podcast libraries) to create your podcast.  It will automatically add your sermons (that have an MP3 file) as they are added to your sermon library.  Below you can change your feed settings.",
-	"Podcast Title": "Podcast Title",
-	"Podcast Description": "Podcast Description"
+	"By Series":"By Series"
+
 }

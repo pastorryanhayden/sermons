@@ -19,7 +19,7 @@ class SeriesController extends Controller
         $user = Auth::user();
         $church = $user->church;
         $seriess = $church->series()->paginate(15);
-        return view('sermons.series.index', compact('seriess', 'church'));
+        return view('sermons.series.index', compact('seriess', 'church', 'user'));
     }
 
     /**
@@ -63,7 +63,9 @@ class SeriesController extends Controller
     public function edit($id)
     {
         $series = Series::find($id);
-         return view('sermons.series.edit', compact('series'));
+            $user = Auth::user();
+        $church = $user->church;
+         return view('sermons.series.edit', compact('series', 'user'));
     }
 
     /**

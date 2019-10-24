@@ -45,4 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('requestcategories', 'RequestCategoriesController');
     Route::resource('speakers', 'SpeakersController');
     Route::resource('series', 'SeriesController');
+    Route::get('/settings', 'SettingsController@church');
+    Route::put('/settings', 'SettingsController@churchchange');
+    Route::get('/settings/user', 'SettingsController@user');
+    Route::put('/settings/user', 'SettingsController@userchange');
+    Route::get('/settings/podcast', 'SettingsController@podcast');
+    Route::put('/settings/podcast', 'SettingsController@podcastchange');
+    Route::delete('/settings/podcast/removimage', 'SettingsController@removePodcastImage');
 });

@@ -61,7 +61,9 @@ class SermonsMediaController extends Controller
     public function edit(Request $request, $id)
     {
         $sermon = Sermon::findOrFail($id);
-        return view('sermons.media', compact('sermon'));
+            $user = Auth::user();
+        $church = $user->church;
+        return view('sermons.media', compact('sermon', 'user'));
     }
 
     /**

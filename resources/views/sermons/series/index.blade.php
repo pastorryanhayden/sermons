@@ -1,8 +1,8 @@
 @extends('layouts.series')
 @section('sermonsContent')
-<div class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
-<div class="flex justify-between mb-12 items-center">
- <h1 class="text-xl font-bold text-blue-500 flex-grow">{{ __("Series") }}</h1>   
+<div class="w-full max-w-4xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
+<div class="flex justify-between mb-12 items-baseline">
+ <h1 class="text-3xl font-bold text-blue-500 flex-grow">{{ __("Series") }}</h1>   
 <a href="/series/create" class="font-bold inline-flex text-lg items-center text-green-500 hover:text-green-700">@component('svg.add-solid') h-4 mr-2 @endcomponent {{ __("Add Series") }}</a>
 </div>
 

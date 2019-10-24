@@ -21,7 +21,7 @@
                                 </label>
                             </div>
                               @if ($errors->has('name'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('name') }}
                                     </p>
@@ -35,7 +35,7 @@
                             </label>
                             </div>
                               @if ($errors->has('email'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('email') }}
                                     </p>
@@ -54,7 +54,7 @@
                             </div>
 
                               @if ($errors->has('password'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('password') }}
                                     </p>
@@ -70,7 +70,7 @@
                                 </label>
                             </div>
                               @if ($errors->has('church_name'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('church_name') }}
                                     </p>
@@ -83,7 +83,7 @@
                                 </label>
                             </div>
                              @if ($errors->has('church_url'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('church_url') }}
                                     </p>
@@ -97,7 +97,7 @@
 
             
                             @if ($errors->has('church_phone'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('church_phone') }}
                                     </p>
@@ -108,7 +108,7 @@
                                         <input class="form-input mt-1 block w-full" id="church-email" type="tel"  name="church_email"  required placeholder="info@genericchurch.org">
                                 </label>
                              @if ($errors->has('church_email'))
-                                    @component('note', ['color' => 'red'])
+                                    @component('includes.note', ['color' => 'red'])
                                     <p>
                                         {{ $errors->first('church_email') }}
                                     </p>

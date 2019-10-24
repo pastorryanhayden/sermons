@@ -41,5 +41,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Church::class);
     }
-  
+    public function initials()
+    {
+        $username = $this->name;
+        $usernamearray = explode(" ", $username);
+        $firstInitial = substr($usernamearray[0], 0, 1);
+        $lastInitial = $usernamearray[1] ? substr($usernamearray[1], 0, 1) : '';
+        return "{$firstInitial}{$lastInitial}";
+    }
 }

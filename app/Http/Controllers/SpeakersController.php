@@ -32,8 +32,8 @@ class SpeakersController extends Controller
     {
         $user = Auth::user();
         $church = $user->church;
-        $speakers = $church->speakers()->simplePaginate(15);
-        return view('sermons.speakers.index', compact('speakers'));
+        $speakers = $church->speakers()->paginate(15);
+        return view('sermons.speakers.index', compact('speakers', 'user'));
     }
 
     /**
@@ -44,7 +44,9 @@ class SpeakersController extends Controller
     public function create()
     {
         $positions = $this->positions;
-        return view('sermons.speakers.create', compact('positions'));
+        $user = Auth::user();
+        $church = $user->church;
+        return view('sermons.speakers.create', compact('positions', 'user'));
     }
 
     /**
@@ -60,14 +62,12 @@ class SpeakersController extends Controller
         'bio' => 'nullable',
         'thumbnail' => 'url | nullable',
         'position' => 'string | required '
-        ]);
+         ]);
 
         $user = Auth::user();
         $church = $user->church;
         $speaker = $church->speakers()->create($validatedData);
         return redirect('/speakers');
-
-
     }
 
     /**
@@ -91,8 +91,10 @@ class SpeakersController extends Controller
     public function edit($id)
     {
         $speaker = Speaker::findOrFail($id);
+            $user = Auth::user();
+        $church = $user->church;
         $positions = $this->positions;
-         return view('sermons.speakers.edit', compact('speaker', 'positions'));
+         return view('sermons.speakers.edit', compact('speaker', 'positions', 'user'));
     }
 
     /**
@@ -113,7 +115,6 @@ class SpeakersController extends Controller
         $speaker = Speaker::findOrFail($id);
         $speaker->update($validatedData);
         return redirect('/speakers');
-
     }
 
     /**

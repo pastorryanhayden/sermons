@@ -7,11 +7,10 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>ChurchTools.co - {{ __("Free As In Grace") }}</title>
     <!-- Styles -->
     
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
-    @livewireAssets
      <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" data-turbolinks-track="true"></script>
     @stack('scripts')
@@ -20,7 +19,7 @@
 
 <body class="bg-gray-100 h-screen antialiased leading-none">
     <div id="app" class="h-screen overflow-y-auto pl-16">
-        @livewire('navbar')
+        @include('navigation.navbar')
         @yield('content')
     </div>
 

@@ -58,7 +58,7 @@ class SermonsController extends Controller
                     $query->where('book_id', '=', $selectedtext);
             })->where($filters)->paginate(15);
         }
-        return view('sermons.index', compact('church', 'series', 'speakers', 'sermons', 'books', 'selectedtext', 'selectedspeaker', 'selectedseries'));
+        return view('sermons.index', compact('church', 'user', 'series', 'speakers', 'sermons', 'books', 'selectedtext', 'selectedspeaker', 'selectedseries'));
     }
 
     /**
@@ -73,7 +73,7 @@ class SermonsController extends Controller
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
 
-        return view('sermons.create', compact('series', 'speakers'));
+        return view('sermons.create', compact('series', 'speakers', 'user'));
     }
 
     /**
@@ -140,7 +140,7 @@ class SermonsController extends Controller
         $church = $user->church;
         $series = Series::where('church_id', $church->id)->get();
         $speakers = Speaker::where('church_id', $church->id)->get();
-        return view('sermons.edit', compact('series', 'speakers', 'sermon'));
+        return view('sermons.edit', compact('series', 'speakers', 'sermon', 'user'));
     }
 
     /**
