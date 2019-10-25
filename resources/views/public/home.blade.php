@@ -1,10 +1,10 @@
 @extends('layouts.public')
 @section('content')
 @include('public.inc.nav')
-<section class="hero w-full flex items-center justify-center bg-cover bg-no-repeat bg-center py-32" style="background-image: url('https://firebasestorage.googleapis.com/v0/b/church-tools-5e044.appspot.com/o/bible-baptist-church-mattoon%2Fsites%2Fwelcome%2FGUR7zHqIRF2OJ7SGvfJwBg.jpg?alt=media&token=638d171c-a0fd-46b5-a496-d98f5a621e5a')">
+<section class="hero w-full flex items-center justify-center bg-cover bg-no-repeat bg-center py-32" style="background-image: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.5)), url('{{ $church->settings->header_photo ? $church->settings->header_photo : '/images/default_header.jpg' }}')">
     <div class="hero-text text-center text-white">
-        <h1 class="font-bold text-4xl">{{ __("Sermons") }}</h1>
-        <p>{{ __("The preaching ministry of") }} {{ $church->name }}.</p>
+        <h1 class="font-bold text-4xl mb-2">{{ $church->settings->title }}</h1>
+        <p class="text-xl">{{ $church->settings->subtitle }}</p>
     </div>
 </section>
 <main class="max-w-5xl mx-auto flex flex-wrap">

@@ -10,6 +10,7 @@ class Church extends Model
 {
     use Searchable;
     protected $guarded = [];
+    protected $connection = 'userbase';
     public function admin()
     {
         return $this->belongsTo('App\User', 'admin_id');
@@ -33,6 +34,10 @@ class Church extends Model
     public function podcast()
     {
         return $this->hasOne(ChurchPodcast::class);
+    }
+    public function settings()
+    {
+        return $this->hasOne(Setting::class);
     }
     public function currentSeries()
     {

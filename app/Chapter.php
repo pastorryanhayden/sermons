@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Chapter extends Model
 {
     protected $guarded = [];
+    protected $connection = 'mysql';
 
     public function sermons()
     {
@@ -16,5 +17,4 @@ class Chapter extends Model
     {
         return $this->belongsTo(Book::class);
     }
-
 }

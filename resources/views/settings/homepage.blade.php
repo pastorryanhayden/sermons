@@ -6,63 +6,61 @@
 </div>
 <div class="content flex p-6 flex-wrap md:flex-no-wrap md:p-0">
 <aside class="w-full pb-8 border-b mb-8  md:border-b-0 md:w-auto md:flex-shrink-0 md:border-r md:pr-8">
-@include('settings.inc.nav', ['active' => 'podcast'])
+@include('settings.inc.nav', ['active' => 'homepage'])
 </aside>
 <main class="flex-grow md:px-8">
 	@component('includes.note', ['color' => 'blue'])
-		{{ __("Your church's podcast feed can be found here:") }} <br>
-		<strong>{{ env('APP_URL') }}/podcastfeed/{{ $church->id }}</strong> <br>
-		{{ __("This is the URL you will submit to iTunes (or other podcast libraries) to create your podcast.  It will automatically add your sermons (that have an MP3 file) as they are added to your sermon library.  Below you can change your feed settings.") }}
+		{{ __("When you link to the sermons page (rather than embed it) your home page will have a header section with a photo, title, and subtitle.  This is where you can edit that.") }} <br>
 	@endcomponent
-	 <form action="/settings/podcast" method="POST" class="max-w-lg mx-auto">
+	 <form action="/settings/homepage" method="POST" class="max-w-lg mx-auto">
 	 	@csrf 
 	 	@method('put')
 	 	<label class="block mb-6">
-		  <span class="text-gray-700">{{ __("Podcast Title") }}</span>
-		  <input class="form-input mt-1 block w-full" placeholder="John Doe" name="podcast_title" value="{{ $church->podcast->podcast_title }}">
+		  <span class="text-gray-700">{{ __("Title") }}</span>
+		  <input class="form-input mt-1 block w-full" placeholder="Sermons" name="title" value="{{ $church->settings->title }}">
 		</label>
-		 @if ($errors->has('podcast_title'))
+		 @if ($errors->has('title'))
 	            @component('includes.note', ['color' => 'red'])
 	            <p>
-	                {{ $errors->first('podcast_title') }}
+	                {{ $errors->first('title') }}
 	            </p>
 	            @endcomponent
 	      @endif
 	      <label class="block mb-6">
-		  <span class="text-gray-700">{{ __("Podcast Description") }}</span>
-		  <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter a some longer text." name="podcast_description"> {{ $church->podcast->podcast_description }}</textarea>
-
+		  <span class="text-gray-700">{{ __("Subtitle") }}</span>
+		  <input class="form-input mt-1 block w-full" placeholder="Sermons" name="subtitle" value="{{ $church->settings->subtitle }}">
 		</label>
-		 @if ($errors->has('podcast_description'))
+		 @if ($errors->has('subtitle'))
 	            @component('includes.note', ['color' => 'red'])
 	            <p>
-	                {{ $errors->first('podcast_description') }}
+	                {{ $errors->first('subtitle') }}
 	            </p>
 	            @endcomponent
 	      @endif
-		@if($church->podcast->photo_url)
+	     
+		@if($church->settings->header_photo)
 		 <label class="block mb-6">
-		  <span class="text-gray-700">{{ __("Podcast Photo") }}</span>
-		  <img src="{{ $church->podcast->photo_url }}" alt="" class="object-cover h-48 w-48 mb-4">
+		  <span class="text-gray-700">{{ __("Header Photo") }}</span>
+		  <img src="{{ $church->settings->header_photo }}" alt="" class="object-cover h-32 w-64 mb-4">
 		  <button form="removeImage" type="submit" class="flex items-center bg-red-100 text-red-700 border py-2 px-4 rounded hover:bg-red-200 border-red-700">@component('svg.trash') h-4   mr-2 @endcomponent Remove Image </button>
 		</label>
 		@else
 	      <label class="block mb-6">
-	      	<span class="text-gray-700">{{ __("Podcast Photo") }}</span>
+	      	<span class="text-gray-700">{{ __("Header Photo") }}</span>
 			<a href="#" onclick="ShowUploadcare()" class="flex items-center justify-center border w-48 mt-1 mb-6 p-8 bg-gray-200 text-gray-700 border-gray-500 rounded">
 			 @component('svg.photo') h-8 @endcomponent
 			</a>
 			<input
 			  type="hidden"
 			  role="uploadcare-uploader"
-			  data-crop="4:4"
-			  name="photo_url" 
+			  data-crop="16:9"
+			  name="header_photo" 
 			  />
 			</label>
 			@endif
-			 @if($errors->has('photo_url'))
+			 @if($errors->has('header_photo'))
 			    @component('includes.note', ['color' => 'red'])
-			    <span>{{ $errors->first('photo_url') }}</span>
+			    <span>{{ $errors->first('header_photo') }}</span>
 			    @endcomponent
 			@endif
 		
@@ -71,7 +69,7 @@
 </main>
 </div>	
 </div>
-<form id="removeImage" action="/settings/podcast/removeimage" method="POST">
+<form id="removeImage" action="/settings/homepage/removeimage" method="POST">
 	@csrf 
 	@method('DELETE')
 </form>

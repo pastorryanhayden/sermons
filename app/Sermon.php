@@ -9,6 +9,7 @@ use Carbon\Carbon;
 class Sermon extends Model
 {
     protected $guarded = [];
+    protected $connection = 'mysql';
     use Searchable;
     
     public function speaker()

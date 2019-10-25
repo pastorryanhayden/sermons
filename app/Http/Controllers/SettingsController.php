@@ -33,6 +33,26 @@ class SettingsController extends Controller
         $church->update($validatedData);
         return redirect('/settings');
     }
+    public function homepage()
+    {
+        $user = Auth::user();
+        $church = $user->church;
+        return view('settings.homepage', compact('church', 'user'));
+    }
+
+    public function homepagechange(Request $request)
+    {
+        $user = Auth::user();
+        $church = $user->church;
+        $validatedData = $request->validate([
+            'title' => 'required | min:6',
+            'subtitle' => 'required | min:6',
+            'header_photo' => 'nullable | url',
+        ]);
+        $church->settings()->update($validatedData);
+        return redirect('/settings/homepage');
+    }
+
     public function user()
     {
         $user = Auth::user();
@@ -91,5 +111,13 @@ class SettingsController extends Controller
         $church->podcast->photo_url = null;
         $church->podcast->save();
         return redirect('/settings/podcast');
+    }
+    public function removeHomePageImage()
+    {
+        $user = Auth::user();
+        $church = $user->church;
+        $church->settings->header_photo = null;
+        $church->settings->save();
+        return redirect('/settings/homepage');
     }
 }

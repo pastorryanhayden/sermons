@@ -24,15 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+         
         //Added by B.Singh
-        Validator::extend('mp3_ogg_extension', function($attribute, $value, $parameters, $validator) {
+        Validator::extend('mp3_ogg_extension', function ($attribute, $value, $parameters, $validator) {
              
-            if(!empty($value->getClientOriginalExtension()) && ($value->getClientOriginalExtension() == 'mp3' || $value->getClientOriginalExtension() == 'ogg')){
+            if (!empty($value->getClientOriginalExtension()) && ($value->getClientOriginalExtension() == 'mp3' || $value->getClientOriginalExtension() == 'ogg')) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-             
         });
     }
 }

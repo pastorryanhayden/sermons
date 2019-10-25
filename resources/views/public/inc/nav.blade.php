@@ -7,12 +7,12 @@
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/series">{{ __("Series") }}</a></li>
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/speakers">{{ __("Speakers") }}</a></li>
 		</ul>
-		<form action="/churches/{{$church->id}}/{{ $pageType }}/search" method="get" class="mt-4 md:mt-0" id="searchForm">
+		{{-- <form action="/churches/{{$church->id}}/{{ $pageType }}/search" method="get" class="mt-4 md:mt-0" id="searchForm">
 			<div class="flex items-center">
 			@component('svg.search') h-4 text-gray-500 mr-2 @endcomponent 	
 			<input type="text" class="h-6 bg-gray-200 border-b" placeholder="{{ __("Search and press enter") }}" name="Search">
 			</div>
-		</form>
+		</form> --}}
 	</div>
 </nav>
 @else
@@ -24,13 +24,13 @@
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/sermons">{{ __("Sermons") }}</a></li>
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/series">{{ __("Series") }}</a></li>
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/speakers">{{ __("Speakers") }}</a></li>
-			<li class="cursor-pointer flex items-center"><a href="#" id="formclick">@component('svg.search') h-4 @endcomponent</a>
+			{{-- <li class="cursor-pointer flex items-center"><a href="#" id="formclick">@component('svg.search') h-4 @endcomponent</a>
 			<form action="/churches/{{$church->id}}/{{ $pageType }}/search" method="get" class="hidden" id="searchForm">
 			<div class="flex items-center">
 			<input type="text" class="h-6 bg-gray-200 border-b" placeholder="{{ __("Search and press enter") }}" name="Search">
 			</div>
 			</form>
-			</li>
+			</li> --}}
 		</ul>
 	</div>
 </nav>

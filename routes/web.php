@@ -28,6 +28,7 @@ Route::get('/churches/{church}/{type}/sermons/{sermon}', 'PublicSermonsControlle
 Route::get('/churches/{church}/{type}/speakers', 'PublicSpeakersController@index');
 Route::get('/churches/{church}/{type}/speakers/{speaker}', 'PublicSpeakersController@show');
 Route::get('/sermon/{sermon}/player', 'PublicSermonsController@player');
+Route::get('/sermon/{church}/latest', 'PublicSermonsController@latest');
 Route::get('/churches/{church}/{type}/series', 'PublicSeriesController@index');
 Route::get('/churches/{church}/{type}/series/{series}', 'PublicSeriesController@show');
 Route::middleware(['auth'])->group(function () {
@@ -47,9 +48,15 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('series', 'SeriesController');
     Route::get('/settings', 'SettingsController@church');
     Route::put('/settings', 'SettingsController@churchchange');
+    Route::get('/settings/homepage', 'SettingsController@homepage');
+    Route::put('/settings/homepage', 'SettingsController@homepagechange');
     Route::get('/settings/user', 'SettingsController@user');
     Route::put('/settings/user', 'SettingsController@userchange');
     Route::get('/settings/podcast', 'SettingsController@podcast');
     Route::put('/settings/podcast', 'SettingsController@podcastchange');
-    Route::delete('/settings/podcast/removimage', 'SettingsController@removePodcastImage');
+    Route::get('/embeds', 'EmbedsController@index');
+    Route::get('/embeds/widgets', 'EmbedsController@widgets');
+    Route::get('/embeds/full', 'EmbedsController@full');
+    Route::delete('/settings/podcast/removeimage', 'SettingsController@removePodcastImage');
+    Route::delete('/settings/homepage/removeimage', 'SettingsController@removeHomePageImage');
 });

@@ -13,7 +13,7 @@ class CreateChurchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('churches', function (Blueprint $table) {
+        Schema::connection('userbase')->create('churches', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('admin_id')->nullable();
             $table->string('name');
