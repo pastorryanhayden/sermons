@@ -3,14 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;
+// use Laravel\Scout\Searchable;
 use Carbon\Carbon;
 
 class Sermon extends Model
 {
     protected $guarded = [];
     protected $connection = 'mysql';
-    use Searchable;
+    // use Searchable;
     
     public function speaker()
     {
