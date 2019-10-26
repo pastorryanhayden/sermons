@@ -8,10 +8,11 @@ use App\Series;
 
 class PublicSeriesController extends Controller
 {
-    public function index(Church $church, $type)
+    public function index(Church $church, $type, , Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $seriess = $church->series()->paginate(15);
+         $referer = $request->headers->get('referer');
         return response()->view('public.series.index', compact('seriess', 'church', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     public function show(Church $church, $type, Series $series, Request $request)
