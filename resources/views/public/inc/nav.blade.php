@@ -18,7 +18,7 @@
 @else
 <nav class="bg-gray-200 w-full p-4 ">
 	<div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center">
-		<a href="#" class="text-lg font-bold">{{ $church->name }}</a>
+		<a href="{{ $church->url }}" class="text-lg font-bold">{{ $church->name }}</a>
 		<ul class="flex text-lg items-center">
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}">{{ __("Featured") }}</a></li>
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/sermons">{{ __("Sermons") }}</a></li>
