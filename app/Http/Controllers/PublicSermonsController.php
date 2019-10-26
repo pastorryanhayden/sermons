@@ -85,7 +85,8 @@ class PublicSermonsController extends Controller
                 $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
             })->whereYear('date', '=', date($selectedyear))->whereMonth('date', '=', date($selectedmonth))->latest('date')->paginate(10);
         }
-        return view('public.sermons.date', compact('church', 'sermons', 'years', 'selectedyear', 'months', 'selectedmonth', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.sermons.date', compact('church', 'sermons', 'years', 'selectedyear', 'months', 'selectedmonth', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     public function indexScripture(Church $church, $type, Request $request)
     {
@@ -112,7 +113,8 @@ class PublicSermonsController extends Controller
                     $query->where('chapter_id', '=', $selectedchapter);
              })->paginate(10);
         }
-        return view('public.sermons.scripture', compact('church', 'sermons', 'books', 'selectedbook', 'chapters', 'selectedchapter', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.sermons.scripture', compact('church', 'sermons', 'books', 'selectedbook', 'chapters', 'selectedchapter', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     public function indexSpeakers(Church $church, $type, Request $request)
     {
@@ -139,7 +141,8 @@ class PublicSermonsController extends Controller
                 $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
             })->latest('date')->paginate(10);
         }
-        return view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.sermons.speakers', compact('church', 'sermons', 'speakers', 'selectedspeaker', 'speakertypes', 'selectedtype', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
 
     public function indexSeries(Church $church, $type, Request $request)
@@ -157,7 +160,8 @@ class PublicSermonsController extends Controller
                 $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
             })->latest('date')->paginate(10);
         }
-            return view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries', 'pageType'));
+        $referer = $request->headers->get('referer');
+            return response()->view('public.sermons.series', compact('church', 'sermons', 'series', 'selectedseries', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     /**
      * Display the specified resource.
@@ -165,12 +169,12 @@ class PublicSermonsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Church $church, $type, Sermon $sermon)
+    public function show(Request $request, Church $church, $type, Sermon $sermon)
     {
         //Increment the sermon views
         $sermon->views = $sermon->views + 1;
         $sermon->save();
-
+        $referer = $request->headers->get('referer');
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $video_id = null;
         $video_type = null;
@@ -196,7 +200,7 @@ class PublicSermonsController extends Controller
         $relatedSermons = $series->sermons()->where(function ($query) {
             $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
         })->where('id', '!=', $sermon->id)->latest('date')->limit(4)->get();
-        return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'));
+        return response()->view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
 
     public function player(Request $request, Sermon $sermon)

@@ -8,19 +8,21 @@ use App\Speaker;
 
 class PublicSpeakersController extends Controller
 {
-    public function index(Church $church, $type)
+    public function index(Church $church, $type, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $speakers = $church->speakers()->paginate(15);
         $pastor = $church->speakers()->where('position', 'Pastor')->get();
-        return view('public.speakers.index', compact('church', 'speakers', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.speakers.index', compact('church', 'speakers', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
-    public function show(Church $church, $type, Speaker $speaker)
+    public function show(Church $church, $type, Speaker $speaker, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $sermons = $speaker->sermons()->where(function ($query) {
             $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
         })->latest('date')->paginate(15);
-        return view('public.speakers.single', compact('church', 'speaker', 'sermons', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.speakers.single', compact('church', 'speaker', 'sermons', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
 }

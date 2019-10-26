@@ -12,14 +12,15 @@ class PublicSeriesController extends Controller
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $seriess = $church->series()->paginate(15);
-        return view('public.series.index', compact('seriess', 'church', 'pageType'));
+        return response()->view('public.series.index', compact('seriess', 'church', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
-    public function show(Church $church, $type, Series $series)
+    public function show(Church $church, $type, Series $series, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $sermons = $series->sermons()->where(function ($query) {
             $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
         })->oldest('date')->paginate(15);
-        return view('public.series.single', compact('series', 'church', 'sermons', 'pageType'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.series.single', compact('series', 'church', 'sermons', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
 }
