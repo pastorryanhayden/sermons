@@ -40,7 +40,7 @@
 		  </label>	 		
         </form>
         <p class="mb-6">{{ __('ChurchTools reserves the right to delete content that we find objectionable for any reasons, including (but not limited to) not adhering to the the statements above.') }}</p>  
-        <button type="submit" form="terms" class="submitButton mb-6 w-full block hidden py-2 text-center uppercase tracking-wide bg-blue-500 text-white rounded shadow">{{ __('Proceed to Registration') }</button>
+        <button type="submit" form="terms" class="submitButton mb-6 w-full block hidden py-2 text-center uppercase tracking-wide bg-blue-500 text-white rounded shadow">{{ __('Proceed to Registration') }}</button>
   </div>
  
 
