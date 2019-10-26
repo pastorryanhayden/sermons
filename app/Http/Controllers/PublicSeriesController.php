@@ -8,7 +8,7 @@ use App\Series;
 
 class PublicSeriesController extends Controller
 {
-    public function index(Church $church, $type, , Request $request)
+    public function index(Church $church, $type, Request $request)
     {
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $seriess = $church->series()->paginate(15);
