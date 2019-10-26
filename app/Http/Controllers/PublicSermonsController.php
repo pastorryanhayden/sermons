@@ -23,8 +23,9 @@ class PublicSermonsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function home(Church $church, $type)
+    public function home(Request $request, Church $church, $type)
     {
+         $referer = $request->headers->get('referer');
         $pageType = $type == 'embed' ? 'embed' : 'normal';
         $recents = $church->sermons()->where(function ($query) {
             $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
@@ -35,7 +36,7 @@ class PublicSermonsController extends Controller
         $currentSeries = null;
         $currentSeries = $church->currentSeries();
 
-        return view('public.home', compact('church', 'recents', 'featureds', 'currentSeries', 'pageType'));
+        return response()->view('public.home', compact('church', 'recents', 'featureds', 'currentSeries', 'pageType'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     public function index(Church $church, $type, Request $request)
     {
@@ -198,12 +199,16 @@ class PublicSermonsController extends Controller
         return view('public.sermons.single', compact('church', 'sermon', 'video_type', 'video_id', 'relatedSermons', 'pageType'));
     }
 
-    public function player(Sermon $sermon)
+    public function player(Request $request, Sermon $sermon)
     {
-        return view('public.player', compact('sermon'));
+        $referer = $request->headers->get('referer');
+        return response()->view('public.player', compact('sermon'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
-    public function latest(Church $church)
+
+    public function latest(Request $request, Church $church)
     {
+
+        $referer = $request->headers->get('referer');
         $sermon = $church->sermons()->where(function ($query) {
             $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
         })->latest('date')->first();
@@ -229,6 +234,6 @@ class PublicSermonsController extends Controller
         }
         $series = $sermon->series()->first();
      
-        return view('public.latest', compact('sermon'));
+        return response()->view('public.latest', compact('sermon'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
 }
