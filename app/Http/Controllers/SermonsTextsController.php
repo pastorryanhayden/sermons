@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Sermon;
 use App\Book;
+use Illuminate\Support\Facades\Auth;
 
 class SermonsTextsController extends Controller
 {
