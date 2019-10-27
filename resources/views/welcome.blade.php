@@ -13,7 +13,8 @@
   <!-- Font Awesome if you need it
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
   -->
-  <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css">
+{{--   <link rel="stylesheet" href="https://unpkg.com/tailwindcss/dist/tailwind.min.css"> --}}
+  <link rel="stylesheet" href="/css/app.css">
   <!--Replace with your tailwind.css once created-->
 
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
@@ -85,9 +86,11 @@
             
         </div>
         <!--Right Col-->
-        <!-- <div class="w-full md:w-3/5 py-6 text-center">
-            <img class="w-full md:w-4/5 z-50" src="hero.png">
-        </div> -->
+        <div class="hidden md:flex w-full md:w-3/5 py-6 text-center  justify-center">
+           <a href="#video">
+            <img class="z-50" src="/images/play.svg">
+            </a>
+        </div>
         
     </div>
 
@@ -110,6 +113,9 @@
 
 </div>
 
+<section id="video" class="video bg-white py-8 flex items-center justify-center">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/ugUz0V3Ze0M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</section>
 
 
 <section class="bg-white border-b py-8">
@@ -146,7 +152,7 @@
           <div class="flex flex-wrap">
             <div class="w-5/6 sm:w-1/2 p-6 mt-6">
                 <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">Made by a pastor - for pastors.</h3>
-                <p class="text-gray-600 mb-8">My name is Ryan Hayden and I'm the guy who made this software.  For 8 years I've been blessed to be the pastor at <a href="https://biblebaptistmattoon.org" target="blank">Bible Baptist Church in Mattoon, IL</a>.  Since I started preaching, I admired the features on websites like gty.org and desiringgod.org and I wanted to make it so any church could have those features.  You can view my sermon library here.</p>
+                <p class="text-gray-600 mb-8">My name is Ryan Hayden and I'm the guy who made this software.  For 8 years I've been blessed to be the pastor at <a class="underline" href="https://biblebaptistmattoon.org" target="blank">Bible Baptist Church in Mattoon, IL</a>.  Since I started preaching, I admired the features on websites like gty.org and desiringgod.org and I wanted to make it so any church could have those features.  <a class="underline" href="https://sermons.churchtools.co/churches/1/normal">You can view my sermon library here.</a></p>
             </div>
             <div class="w-full sm:w-1/2 p-6 mt-6">
                 <img src="/images/ryan-hayden.png" alt="" class="rounded-full h-64 w-64 object-cover mx-auto">
