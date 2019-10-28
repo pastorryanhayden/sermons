@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Church;
+use App\Mail\ChurchSignUp;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -102,6 +104,7 @@ class RegisterController extends Controller
             'podcast_title' => "{$church->name} Preaching Podcast",
             'podcast_description' => "Bible Sermons from {$church->name} in {$church->city}, {$church->state}."
         ]);
+         Mail::to($user->email)->send(new ChurchSignUp());
         return $user;
     }
 }
