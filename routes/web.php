@@ -43,7 +43,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sermons/{id}/content', 'SermonsContentController@edit');
     Route::post('/sermons/{id}/content', 'SermonsContentController@store');
     Route::get('/prayer/1', 'HomeController@index')->name('home');
-    Route::resource('requestcategories', 'RequestCategoriesController');
     Route::resource('speakers', 'SpeakersController');
     Route::resource('series', 'SeriesController');
     Route::get('/settings', 'SettingsController@church');

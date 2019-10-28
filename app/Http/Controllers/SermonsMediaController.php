@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Jobs\UploadSermonJob;
 use App\Sermon;
 
 class SermonsMediaController extends Controller
@@ -22,26 +23,26 @@ class SermonsMediaController extends Controller
        
         $sermon = Sermon::findOrFail($id);
         // Validate the request
-        if ($request->mp3 || $request->video_url) {
+        if ($sermon->mp3 || $request->video_url) {
              $validatedData = $request->validate([
-                'mp3' => 'nullable | file | max:60000 | mp3_ogg_extension',
                 'video_url' => 'nullable| url',
              ]);
         } else {
-            return back()->with('error', 'You must either use include an MP3 or a Vimeo or Youtube URL.');
+            return back()->with('error', 'You must either include an MP3 or a Vimeo or Youtube URL.');
         }
         $name = $sermon->date . '-' . $sermon->title;
         $name = $this->slugify($name) . '.mp3';
 
         // Store the file & Persist to the DB
-        if ($request->mp3) {
-            $disk = Storage::disk('wasabi');
+        // if ($request->mp3) {
+        //     $disk = Storage::disk('wasabi');
             
-            $sermon->update([
-                'mp3' => $request->mp3->storeAs('sermons', $name, 'wasabi')
-            ]);
-            $disk->setVisibility($sermon->mp3, 'public');
-        }
+        //     $sermon->update([
+        //         'mp3' => $request->mp3->storeAs('sermons', $name, 'wasabi')
+        //     ]);
+        //     $disk->setVisibility($sermon->mp3, 'public');
+        //     // UploadSermonJob::dispatch($sermon, $request->mp3, $name);
+        // }
         if ($request->video_url) {
             $sermon->update([
                 'video_url' => $request->video_url,
