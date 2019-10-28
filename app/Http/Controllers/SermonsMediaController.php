@@ -24,7 +24,7 @@ class SermonsMediaController extends Controller
         // Validate the request
         if ($request->mp3 || $request->video_url) {
              $validatedData = $request->validate([
-                'mp3' => 'nullable | file | max:30000 | mp3_ogg_extension',
+                'mp3' => 'nullable | file | max:60000 | mp3_ogg_extension',
                 'video_url' => 'nullable| url',
              ]);
         } else {
