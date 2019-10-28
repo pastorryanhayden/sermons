@@ -72,7 +72,7 @@ return [
         ],
 
         // 'users' => [
-        //     'driver' => 'database',
+        //     'driver' => 'userbase',
         //     'table' => 'users',
         // ],
     ],
