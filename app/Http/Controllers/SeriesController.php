@@ -29,7 +29,9 @@ class SeriesController extends Controller
      */
     public function create()
     {
-        return view('sermons.series.create');
+        $user = Auth::user();
+        $church = $user->church;
+        return view('sermons.series.create', compact('church', 'user'));
     }
 
     /**
