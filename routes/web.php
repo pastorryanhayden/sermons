@@ -29,6 +29,7 @@ Route::get('/churches/{church}/{type}/speakers', 'PublicSpeakersController@index
 Route::get('/churches/{church}/{type}/speakers/{speaker}', 'PublicSpeakersController@show');
 Route::get('/sermon/{sermon}/player', 'PublicSermonsController@player');
 Route::get('/sermon/{church}/latest', 'PublicSermonsController@latest');
+Route::get('/sermon/{church}/currentseries', 'PublicSermonsController@currentSeries');
 Route::get('/churches/{church}/{type}/series', 'PublicSeriesController@index');
 Route::get('/churches/{church}/{type}/series/{series}', 'PublicSeriesController@show');
 Route::middleware(['auth'])->group(function () {

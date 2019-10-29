@@ -32,3 +32,27 @@
 @endif
 </div>
 @endsection
+@push('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+  var removeSermon = (id) =>
+  {
+    var form = document.querySelector(`#sermon-${id}`);
+    console.log('remove sermon', id)
+    // Ask for confirmation
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this sermon!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        form.submit();
+      } 
+    });
+    
+  }
+  </script>
+@endpush

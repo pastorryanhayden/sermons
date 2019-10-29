@@ -193,6 +193,7 @@ class SermonsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Sermon::destroy($id);
+        return redirect('/sermons');
     }
 }

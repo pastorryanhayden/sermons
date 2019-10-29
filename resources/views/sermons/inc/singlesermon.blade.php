@@ -13,14 +13,14 @@
 		<p class="inline-flex items-center text-gray-700 text-sm">@component('svg.calendar') h-4 text-gray-400 mr-2 @endcomponent {{ \Carbon\Carbon::parse($sermon->date)->format('m/d/Y')}}</p>
 	</section>
 	<section class="speaker flex items-center  mb-4 md:mb-0 sm:mr-2 lg:mr-6 w-full sm:w-32">
-		<a href="/churches/{{ $church->id }}/speakers/{{ $sermon->speaker->id }}" class="inline-flex items-center text-gray-700 text-sm"><img class="h-4 mr-2 rounded-full" src="{{$sermon->speaker->thumbnail ? $sermon->speaker->thumbnail : '/images/speaker.svg'}}" alt=""> {{$sermon->speaker->name}}</a>
+	<a href="/churches/{{ $church->id }}/speakers/{{ $sermon->speaker->id }}" class="inline-flex items-center text-gray-700 text-sm"><img class="h-4 mr-2 rounded-full" src="{{$sermon->speaker->thumbnail ? $sermon->speaker->thumbnail : '/images/speaker.svg'}}" alt=""> {{$sermon->speaker->name}}</a>
 	</section>
 	<section class="actions flex items-center md:justify-end lg:justify-center lg:w-24 flex-grow">
-		 <form action="/sermons/{{$sermon->id}}" method="POST" class="mr-3">
-                    @csrf 
-                    @method('delete')
-                    <button class="bg-gray-200 text-gray-500 hover:bg-red-700 hover:text-white  inline-flex items-center justify-center h-8 w-8 rounded-full">@component('svg.trash') h-4 @endcomponent </button>
-          </form>
+                <form action="/sermons/{{ $sermon->id }}" method="POST" id="sermon-{{ $sermon->id }}">
+                	@csrf 
+                	@method('DELETE')
+                </form>
+                <button class="bg-gray-200 text-gray-500 hover:bg-red-700 hover:text-white  inline-flex items-center justify-center h-8 w-8 rounded-full" onclick="removeSermon({{ $sermon->id }})">@component('svg.trash') h-4 @endcomponent </button>
                 <a href="/sermons/{{$sermon->id}}/edit" class="bg-gray-200 text-gray-500 hover:bg-blue-700 hover:text-white inline-flex items-center justify-center h-8 w-8 rounded-full">@component('svg.edit-pencil') h-4 @endcomponent</a>
 	</section>
 	</section>

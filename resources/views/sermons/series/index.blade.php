@@ -20,11 +20,11 @@
                   @endif
             <div class="flex-grow"></div>
             <div class="flex justify-end w-full">
-                <form action="/series/{{$series->id}}" method="POST" class="mr-6">
+                <form action="/series/{{$series->id}}" id="series-{{ $series->id }}" method="POST" >
                     @csrf 
                     @method('delete')
-                    <button class="text-gray-500 font-bold hover:text-gray-700">{{ __("Delete") }}</button>
                 </form>
+                 <button class="text-gray-500 font-bold hover:text-gray-700 mr-6" onclick="removeSeries({{ $series->id }})" >{{ __("Delete") }}</button>
                 <a href="/series/{{$series->id}}/edit" class="text-gray-500 font-bold hover:text-gray-700">{{ __("Edit") }}</a>
             </div>
         </div>
@@ -40,3 +40,27 @@
 @endif
 </div>
 @endsection
+@push('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+  var removeSeries = (id) =>
+  {
+    var form = document.querySelector(`#series-${id}`);
+    console.log('remove series', id)
+    // Ask for confirmation
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this series!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        form.submit();
+      } 
+    });
+    
+  }
+  </script>
+@endpush

@@ -240,4 +240,9 @@ class PublicSermonsController extends Controller
      
         return response()->view('public.latest', compact('sermon'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
+    public function currentSeries(Request $request, Church $church)
+    {
+        $currentSeries = $church->currentSeries();
+         return response()->view('public.series', compact('church', 'currentSeries'));
+    }
 }

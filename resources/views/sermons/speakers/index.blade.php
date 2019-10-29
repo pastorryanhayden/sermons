@@ -20,11 +20,11 @@
                   @endif
             <div class="flex-grow"></div>
             <div class="flex justify-end w-full">
-                <form action="/speakers/{{$speaker->id}}" method="POST" class="mr-6">
+                <form action="/speakers/{{$speaker->id}}" method="POST" id="speaker-{{ $speaker->id }}">
                     @csrf 
                     @method('delete')
-                    <button class="text-gray-500 font-bold hover:text-gray-700">{{ __("Delete") }}</button>
                 </form>
+                  <button class="text-gray-500 font-bold hover:text-gray-700 mr-6" onclick="removeSpeaker({{ $speaker->id }})">{{ __("Delete") }}</button>
                 <a href="/speakers/{{$speaker->id}}/edit" class="text-gray-500 font-bold hover:text-gray-700">{{ __("Edit") }}</a>
             </div>
         </div>
@@ -41,3 +41,27 @@
 @endif
 </div>
 @endsection
+@push('scripts')
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+  var removeSpeaker = (id) =>
+  {
+    var form = document.querySelector(`#speaker-${id}`);
+    console.log('remove speaker', id)
+    // Ask for confirmation
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this speaker!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        form.submit();
+      } 
+    });
+    
+  }
+  </script>
+@endpush
