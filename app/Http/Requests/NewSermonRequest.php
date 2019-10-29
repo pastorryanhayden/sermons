@@ -28,10 +28,10 @@ class NewSermonRequest extends FormRequest
             'date' => 'required|date',
             'service' => 'required|string',
             'featured' => 'nullable| boolean',
-            'series_id' => 'required | integer',
-            'speaker_id' => 'required | integer',
+            'series_id' => 'require_without:newSpeakerName | integer',
+            'speaker_id' => 'require_without:newSeriesName | integer',
             'newSpeakerName' => 'nullable | string',
-            'newSeriesName' => 'nullable | string', 
+            'newSeriesName' => 'nullable | string',
             'description' => 'nullable | string'
         ];
     }
