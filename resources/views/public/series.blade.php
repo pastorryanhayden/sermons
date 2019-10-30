@@ -1,6 +1,6 @@
 @extends('layouts.public')
 @section('content')
-<main>
+<main class="p-4">
 @foreach($currentSeries as $series)
 <div class="series flex w-full mb-6">
 	<img class="h-24 w-24 object-cover mr-6" src="{{$series->photo ? $series->photo : '/images/series.svg'}}" alt="{{ $series->title }}">

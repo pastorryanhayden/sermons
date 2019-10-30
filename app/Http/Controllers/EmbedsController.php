@@ -26,7 +26,8 @@ class EmbedsController extends Controller
          $user = Auth::user();
         $church = $user->church;
         $main = env('APP_URL');
-         $code = "<iframe src='{$main}/sermon/{$church->id }/latest' frameborder='0' style='width: 100%; min-height: 230px;'></iframe>";
-        return view('embeds.widgets', compact('user', 'church', 'code'));
+        $latestEmbed = "<iframe src='{$main}/sermon/{$church->id }/latest' frameborder='0' style='width: 100%; min-height: 230px;'></iframe>";
+        $seriesEmbed = "<iframe src='{$main}/sermon/{$church->id}/currentseries' frameborder='0' style='width: 100%; min-height: 340px;'></iframe>"; 
+        return view('embeds.widgets', compact('user', 'church', 'latestEmbed', 'seriesEmbed'));
     }
 }
