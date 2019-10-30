@@ -13,7 +13,7 @@
 	<div class="flex">
 		<a class="text-gray-600 underline mx-4" href="/churches/{{ $sermon->church->id }}/normal/">{{ __("View All Sermons") }}</a>
 		<p class="mx-4">|</p>
-		<a class="text-gray-600 underline mx-4" href="{{ env('APP_URL') }}/churches/{{$sermon->church->id}}/normal/sermons/{{$sermon->id}}">{{ __("More Details") }}</a>
+		<a class="text-gray-600 underline mx-4" href="{{ env('APP_URL') }}/churches/{{$sermon->church->id}}/normal/sermons/{{$sermon->id}}" taget="_blank">{{ __("More Details") }}</a>
 	</div>
 	
 </main>
