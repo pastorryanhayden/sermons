@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/prayer/1', 'HomeController@index')->name('home');
     Route::resource('speakers', 'SpeakersController');
     Route::resource('series', 'SeriesController');
+    Route::get('/styles', 'ChurchStylesController@edit');
+    Route::post('/styles', 'ChurchStylesController@store');
     Route::get('/settings', 'SettingsController@church');
     Route::put('/settings', 'SettingsController@churchchange');
     Route::get('/settings/homepage', 'SettingsController@homepage');

@@ -2,7 +2,7 @@
 	<section class="main flex mb-4 lg:mb-0 lg:mr-6 w-full lg:w-auto flex-grow items-center">
 		{{-- <img src="{{$singlesermon->series->photo ? $singlesermon->series->photo : '/images/series.svg'}}" alt="" class="h-10 rounded-full w-10 mr-4"> --}}
 		<div class="title flex flex-col justify-center lg:w-64">
-			<a href="/churches/{{$church->id}}/{{ $pageType }}/sermons/{{$singlesermon->id}}" class="mb-1 hover:text-blue-700 hover:underline"><h3 class=" ">{{$singlesermon->title}}</h3></a>
+			<a href="/churches/{{$church->id}}/{{ $pageType }}/sermons/{{$singlesermon->id}}" class="mb-1 hover:text-blue-700 user-text-color hover:underline"><h3 class=" ">{{$singlesermon->title}}</h3></a>
 			@foreach($singlesermon->chapter()->get() as $text)
 			<p class="text-xs text-gray-500">{{$text->book->name}} {{$text->number}}:{{$text->pivot->verseStart}}{{$text->pivot->verseStart != $text->pivot->verseEnd && $text->pivot->verseEnd !== null ? '-' . $text->pivot->verseEnd : '' }}</p>
 			@endforeach

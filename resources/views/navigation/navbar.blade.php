@@ -1,4 +1,4 @@
-<nav class="bg-gray-100  border-b-2 py-2 text-gray-800 fixed top-0 left-0 right-0 w-full z-30">
+<nav class="bg-gray-100  border-b-2 py-2 text-gray-800 fixed top-0 left-0 right-0 w-full z-50">
     <div class="px-1">
         <div class="flex items-center justify-center">
             <a href="/sermons" class="inline-flex items-center">@component('svg.sermons') text-blue-500 h-12 -ml-4 -mr-2 @endcomponent

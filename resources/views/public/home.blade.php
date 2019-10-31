@@ -11,7 +11,7 @@
     <section class="sermons md:w-1/2 lg:w-2/3 p-4">
         @if($recents->count() > 0)
         <div class="recent-sermons mb-6">
-            <h2 class="text-2xl font-bold mb-6">{{ __("Recent Sermons") }} <a href="#" class="text-sm font-normal underline">{{ __("View All Sermons") }}</a></h2>
+            <h2 class="text-2xl font-bold mb-6 user-text-color">{{ __("Recent Sermons") }} <a href="{{env('APP_URL')}}//churches/{{$church->id}}/{{$pageType}}/sermons" class="text-sm font-normal underline text-gray-500">{{ __("View All Sermons") }}</a></h2>
             @foreach($recents as $singlesermon)
             @include('public.inc.singlesermon',  ['hideseries' => false])
             @endforeach
@@ -19,7 +19,7 @@
         @endif
         @if($featureds->count() > 0)
         <div class="recent-sermons">
-            <h2 class="text-2xl font-bold mb-6">{{ __("Featured Sermons") }} <a href="#" class="text-sm font-normal underline">{{ __("View All Sermons") }}</a></h2>
+            <h2 class="text-2xl font-bold mb-6 user-text-color">{{ __("Featured Sermons") }} <a href="{{env('APP_URL')}}//churches/{{$church->id}}/{{$pageType}}/sermons" class="text-sm font-normal underline text-gray-500">{{ __("View All Sermons") }}</a></h2>
             @foreach($featureds as $singlesermon)
             @include('public.inc.singlesermon',  ['hideseries' => false])
             @endforeach
@@ -27,7 +27,7 @@
         @endif
     </section>
     <section class="series w-full md:w-1/2 lg:w-1/3 p-4">
-        <h2 class="text-2xl font-bold mb-6">{{ __("Current Series") }} <a href="#" class="text-sm font-normal underline">{{ __("View All Series") }}</a></h2>
+        <h2 class="text-2xl font-bold mb-6 user-text-color">{{ __("Current Series") }} <a href="{{env('APP_URL')}}//churches/{{$church->id}}/{{$pageType}}/series" class="text-sm font-normal underline text-gray-500">{{ __("View All Series") }}</a></h2>
         @foreach($currentSeries as $series)
         @include('public.inc.singleseries')
         @endforeach

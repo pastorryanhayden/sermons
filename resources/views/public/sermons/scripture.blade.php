@@ -1,7 +1,7 @@
 @extends('layouts.public')
 @section('content')
 @include('public.inc.nav')
-<section class="header  bg-gray-200">
+<section class="header  user-accent-color">
 	<div class="p-12 text-center">
 	<h1 class="font-bold text-4xl">{{ __("Sermons") }}</h1>
 	</div>

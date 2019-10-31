@@ -1,5 +1,5 @@
 @if($pageType == 'embed')
-<nav class="bg-gray-200 w-full p-4 ">
+<nav class="user-accent-color w-full p-4 ">
 	<div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center">
 		<ul class="flex text-lg items-center">
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}">{{ __("Featured") }}</a></li>
@@ -16,9 +16,9 @@
 	</div>
 </nav>
 @else
-<nav class="bg-gray-200 w-full p-4 ">
+<nav class="user-accent-color w-full p-4 ">
 	<div class="max-w-5xl mx-auto flex flex-wrap justify-between items-center">
-		<a href="{{ $church->url }}" class="text-lg font-bold">{{ $church->name }}</a>
+		<a href="{{ $church->url }}" class="text-lg font-bold mb-4 md:mb-0">{{ $church->name }}</a>
 		<ul class="flex text-lg items-center">
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}">{{ __("Featured") }}</a></li>
 			<li class="mr-6 cursor-pointer"><a href="/churches/{{ $church->id }}/{{ $pageType }}/sermons">{{ __("Sermons") }}</a></li>

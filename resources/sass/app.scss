@@ -48,6 +48,10 @@
  .sidebar {
      min-height: calc(100vh - 84px);
  }
+ .screen-box {
+   min-height: calc(100vh - 64px);
+   height: calc(100vh - 64px);
+ }
 
 .sermonmanu {
 	p, h1, h2, h3, h4, h5, ul, ol, blockquote, img {

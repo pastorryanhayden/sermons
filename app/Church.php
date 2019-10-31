@@ -40,6 +40,10 @@ class Church extends Model
     {
         return $this->hasOne(Setting::class);
     }
+    public function styles()
+    {
+        return $this->hasOne(ChurchStyles::class);
+    }
     public function currentSeries()
     {
         $recent =  date("Y-m-d", strtotime(" -2 months"));
