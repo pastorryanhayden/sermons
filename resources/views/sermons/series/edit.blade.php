@@ -1,7 +1,8 @@
 @extends('layouts.series')
 @section('sermonsContent')
-<form  action="/series" method="POST" class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
+<form  action="/series/{{$series->id}}" method="POST" class="w-full max-w-xl mx-auto mt-24 text-gray-800 px-4 lg:px-0 ">
 @csrf
+@method('PUT')
 @component('navigation.formheader')
     @slot('title')
     {{ __("Add A Series") }}
