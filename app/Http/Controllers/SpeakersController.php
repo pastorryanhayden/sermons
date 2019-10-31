@@ -125,6 +125,12 @@ class SpeakersController extends Controller
      */
     public function destroy($id)
     {
+        $speaker = Speaker::find($id);
+        $sermons = $speaker->sermons()->get();
+        foreach($sermons as $sermon)
+        {
+            $sermon->delete();
+        }
         Speaker::destroy($id);
         return redirect('/speakers');
     }

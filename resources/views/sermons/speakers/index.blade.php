@@ -51,7 +51,7 @@
     // Ask for confirmation
     swal({
       title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this speaker!",
+      text: "Once deleted, you will not be able to recover this speaker!  Also, all of his sermons will be deleted.",
       icon: "warning",
       buttons: true,
       dangerMode: true,
