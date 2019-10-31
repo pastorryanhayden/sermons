@@ -98,7 +98,17 @@ class SeriesController extends Controller
      */
     public function destroy($id)
     {
-          Series::destroy($id);
+        $user = Auth::user();
+        $church = $user->church;
+        Series::destroy($id);
+        // Create a "No Series" Series if none exists
+        $noSeries = $church->series()->firstOrCreate(['title' => 'No Series']);
+        $lostSermons = $church->sermons()->where('series_id', $id)->get();
+        foreach($lostSermons as $sermon)
+        {
+            $sermon->series_id = $noSeries->id;
+            $sermon->save();
+        }
         return redirect('/series');
     }
 }
