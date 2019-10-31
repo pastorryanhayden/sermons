@@ -65,10 +65,10 @@
 
     </section>
     <section class="preview  hidden lg:block w-full flex-grow bg-gray-200">
-        <iframe src='http://newsermons.test/churches/1/normal' frameborder='0' style='width: 100%; height: 100%; min-height: 80vh;'></iframe>
+        <iframe src='{{env('APP_URL')}}/churches/{{$church->id}}/normal' frameborder='0' style='width: 100%; height: 100%; min-height: 80vh;'></iframe>
     </section>
     <section class="mobilepreview block lg:hidden w-full h-screen bg-gray-200 absolute top-0 z-20">
-        <iframe src='http://newsermons.test/churches/1/normal' frameborder='0' style='width: 100%; height: 100%; min-height: 80vh;'></iframe>
+        <iframe src='{{env('APP_URL')}}/churches/{{$church->id}}/normal' frameborder='0' style='width: 100%; height: 100%; min-height: 80vh;'></iframe>
     </section>
     <nav class="mobile-switcher flex lg:hidden w-full pt-6 pb-16  justify-center items-center bg-gray-100 border-t absolute bottom-0 z-30">
         {{-- Make these a radio button and use JS to toggle a hidden state on the mobilepreview --}}
