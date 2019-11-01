@@ -60,7 +60,7 @@
                     <a class="inline-block text-black no-underline hover:text-gray-800 hover:text-underline py-2 px-4" href="/login">Log In</a>
                 </li>
             </ul>
-            <a id="navAction" href="/terms" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75">Sign Up</a>
+            <a id="navAction" href="/register-church" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-4 lg:mt-0 py-4 px-8 shadow opacity-75">Sign Up</a>
         </div>
     </div>
     
@@ -82,7 +82,7 @@
         
             
 
-            <a href="/terms" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Sign Up</a>
+            <a href="/register-church" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Sign Up</a>
             
         </div>
         <!--Right Col-->

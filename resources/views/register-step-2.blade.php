@@ -12,55 +12,11 @@
 
                     <form class="w-full" method="POST" action="{{ route('register') }}">
                         @csrf
-                        <div class="max-w-lg flex flex-col items-center mx-auto mb-12 border rounded p-6">
-                        <h2 class="text-lg font-bold mb-6 text-center w-full">{{ __('Tell Us About Yourself') }}</h2>
-                            <div class="flex flex-wrap mb-6">
-                                <label class="block w-full">
-                                    <span class="text-gray-700">{{ __('Name') }}:</span>
-                                    <input class="form-input mt-1 block w-64" placeholder="Jane Doe" id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-                                </label>
-                            </div>
-                              @if ($errors->has('name'))
-                                    @component('includes.note', ['color' => 'red'])
-                                    <p>
-                                        {{ $errors->first('name') }}
-                                    </p>
-                                    @endcomponent
-                              @endif
-
-                            <div class="flex flex-wrap mb-6">
-                            <label class="block w-full">
-                                    <span class="text-gray-700">  {{ __('E-Mail Address') }}:</span>
-                                    <input class="form-input mt-1 block w-64" placeholder="Jane Doe" id="email" type="text" name="email" value="{{ old('email') }}" required>
-                            </label>
-                            </div>
-                              @if ($errors->has('email'))
-                                    @component('includes.note', ['color' => 'red'])
-                                    <p>
-                                        {{ $errors->first('email') }}
-                                    </p>
-                                    @endcomponent
-                              @endif
-
-                         
-                                <label class="block w-64 mb-6 mx-auto " >
-                                        <span class="text-gray-700"> {{ __('Password') }}:</span>
-                                        <input class="form-input mt-1 block w-64" id="password" type="password"  name="password" value="{{ old('password') }}" required>
-                                </label>
-                                <label class="block w-64 mx-auto">
-                                        <span class="text-gray-700"> {{ __('Confirm Password') }}:</span>
-                                        <input class="form-input mt-1 block w-64" id="password-confirm" type="password"  name="password_confirmation"  required>
-                                </label>
-                              
-
-                              @if ($errors->has('password'))
-                                    @component('includes.note', ['color' => 'red'])
-                                    <p>
-                                        {{ $errors->first('password') }}
-                                    </p>
-                                    @endcomponent
-                              @endif
-                        </div>
+                     
+                        <input type="hidden" name="name" value="{{ Session::get('user')->name }}">
+                        <input type="hidden" name="email" value="{{ Session::get('user')->email }}">
+                        <input type="hidden" name="password" value="{{ Session::get('user')->password }}">
+                        <input type="hidden" name="password_confirmation" value="{{ Session::get('user')->password }}">
                         <div class="max-w-lg mb-12 flex flex-col items-center mx-auto mb-12 border rounded p-6">
                             <h2 class="text-lg font-bold mb-6">{{ __('Tell Us About Your Church') }}</h2>
                             <div class="flex flex-wrap mb-6">

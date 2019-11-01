@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('/register-church', 'RegisterChurchController@step1');
+Route::post('/register-church', 'RegisterChurchController@step1validate');
+Route::get('/register-church/2', 'RegisterChurchController@step2');
 Route::get('/terms', 'RegisterChurchController@terms');
 Route::post('/terms', 'RegisterChurchController@register');
 Route::get('/podcastfeed/{church}', 'PodcastController@show');

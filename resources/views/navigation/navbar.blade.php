@@ -7,9 +7,7 @@
             <div data-title="Login/Account Settings" class="flex justify-end flex-grow flex-1 text-right items-center relative">
                 @guest
                 <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="{{ route('login') }}">{{ __('Login') }}</a>
-                @if (Route::has('register'))
-                <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="/terms">{{ __('Register') }}</a>
-                @endif
+                <a class="no-underline hover:underline text-gray-800 text-sm p-3" href="/register-church">{{ __('Register') }}</a>
                 @else
                 <a href="https://www.patreon.com/user?u=26067398" target="_blank" class="py-2 px-4 rounded-full bg-green-500 text-white mr-6 text-center">{{ __('Support') }} <span class="hidden md:inline">ChurchTools.co</span></a>
                 <button onmouseover="showMenu()" onclick="showMenu()" class="flex justify-end items-end"><span class="rounded-full border bg-gray-100 text-gray-800 h-8 w-8 inline-flex items-center justify-center text-center p-4 hover:bg-gray-300">{{ $user->initials() }}</span>@component('svg.chevron-down') h-3 mb-1 text-gray-400 @endcomponent </button>
