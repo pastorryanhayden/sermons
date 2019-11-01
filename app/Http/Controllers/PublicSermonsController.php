@@ -96,7 +96,8 @@ class PublicSermonsController extends Controller
         })->latest('date')->paginate(10);
         $books = Book::whereHas('sermons', function (Builder $query) use ($church) {
             $query->where('church_id', '=', $church->id);
-        })->get();
+        })->orderBy('id', 'asc')->get();
+        
         $chapters = [];
         $selectedbook = $request->book;
         $selectedchapter = $request->chapter;
