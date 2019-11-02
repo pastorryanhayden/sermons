@@ -29,12 +29,12 @@
     <div>
     
     <form  action="/sermons/{{$sermon->id}}/text" method="POST">
-        <div class="flex flex-wrap border px-4 pt-4">
+        <div class="flex flex-wrap border px-4 pt-4 mb-6">
         @csrf
     <label class="block mb-4 mr-2">
         <span class="text-gray-700">{{ __("Book") }}</span>
         {{-- <select class="form-select mt-1 block w-40" wire:model="text['selected_book']" wire:mouseup="setChapters"> --}}
-        <select id="book"   class="form-select mt-1 block w-40" name="book" onblur="updateBook()">
+        <select id="book"   class="form-select mt-1 block w-40" name="book" onchange="updateBook()" onfocus="this.selectedIndex = -1;">
             @foreach($books as $book)
             @if($selected_book)
             <option value="{{$book->id}}" {{$selected_book->id == $book->id ? 'selected' : ''}}>{{$book->name}}</option>
@@ -47,7 +47,7 @@
     @if($chapters)
     <label class="block mb-4 mr-2 ">
         <span class="text-gray-700">{{ __("Chapter") }}</span>
-        <select class="form-select mt-1 block w-20"  name="selected_chapter" id="selected_chapter" onblur="updateChapter()">
+        <select class="form-select mt-1 block w-20"  name="selected_chapter" id="selected_chapter" onchange="updateChapter()" onfocus="this.selectedIndex = -1;">
             @foreach($chapters as $chapter)
             @if($selected_chapter)
             <option value="{{$chapter->id}}" {{$selected_chapter->id == $chapter->id ? 'selected' : ''}}>{{$chapter->number}}</option>
@@ -61,7 +61,7 @@
     @if($verses)
     <label class="block mb-4 mr-2 ">
         <span class="text-gray-700">{{ __("Start") }}</span>
-        <select class="form-select mt-1 block w-20"  name="start_verse" onblur="updateStartVerse()" id="start">
+        <select class="form-select mt-1 block w-20"  name="start_verse" onchange="updateStartVerse()" onfocus="this.selectedIndex = -1;" id="start">
             @foreach($verses as $verse)
             @if($selected_start_verse)
             <option {{$selected_start_verse == $verse ? 'selected' : ''}}>{{$verse}}</option>
@@ -75,7 +75,7 @@
     @if($selected_start_verse && $endverses)
     <label class="block mb-4 mr-2 ">
         <span class="text-gray-700">{{ __("End") }}</span>
-        <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onblur="updateEndVerse()">
+        <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onchange="updateEndVerse()" onfocus="this.selectedIndex = -1;" >
             @foreach($endverses as $verse)
             <option>{{$verse}}</option>
             @endforeach
@@ -84,7 +84,7 @@
     @endif
     </div>
     @if($selected_start_verse && $endverses && $chapters )
-    <button class="mt-6  rounded text-center items-center uppercase tracking-wide font-bold bg-green-500 py-2 px-4 hover:bg-green-700 text-white">{{ __("Add Text") }}</button>
+    <button class="my-6  rounded text-center items-center uppercase tracking-wide font-bold bg-green-500 py-2 px-4 hover:bg-green-700 text-white">{{ __("Add Text") }}</button>
     @endif
    
     </form>
