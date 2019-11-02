@@ -53,17 +53,9 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:userbase.users,email'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'church_name' => ['required', 'string', 'max:255'],
-            'church_url' => ['required', 'string', 'min:8'],
-            'church_phone' => ['required', 'string', 'min:8'],
-            'church_email' => ['required', 'string', 'min:8', 'max:255', 'email'],
-            'address1' => ['required', 'string', 'min:8', 'max:255'],
-            'address2' => ['nullable', 'string', 'min:8', 'max:255'],
-            'state' => ['required', 'string', 'min:2', 'max:3'],
-            'city' => ['required', 'string', 'min:2', 'max:255'],
-            'zip' => ['required', 'string', 'min:2', 'max:12'],
+            'terms' => ['accepted']
         ]);
     }
 
@@ -75,17 +67,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Check to see if this user already exists in the system and redirect with a warning if they do
+       
+        //     $existingUser = User::where('email', $data['email'])->first();
+        // dd($existingUser);
+        // if($existingUser){
+        //     return view('auth.register')->with('status', 'This user already exists in our system.  Try logging in or using a different email.');
+        // }
+    
+
         $church = Church::create([
-            'name' => $data['church_name'],
-            'url' => $data['church_url'],
-            'address1' => $data['address1'],
-            'address2' => $data['address2'],
-            'city' => $data['city'],
-            'state' => $data['state'],
-            'zip' => $data['zip'],
-            'phone' => $data['church_phone'],
-            'email' => $data['church_email'],
+            'name' => "Generic Church",
+            'url' => "https://genericchurch.org",
+            'address1' => "123 Church Street",
+            'city' => "City",
+            'state' => "ST",
+            'zip' => "12345",
+            'phone' => "(111) 111 - 1111",
+            'email' => "info@genericchurch.org",
         ]);
+        
+        
 
         $user = User::create([
             'name' => $data['name'],

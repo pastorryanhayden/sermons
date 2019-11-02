@@ -51,4 +51,15 @@ class Church extends Model
             $query->where('date', '>', $recent);
         })->limit(3)->get();
     }
+    public function finishedSetup()
+    {
+        // If the church name and url has been changed and a speaker has been added, return true
+        if($this->name != 'Generic Church' && $this->url != 'https://genericchurch.org' && $this->speakers()->count() > 0)
+            {
+                return true;
+            }
+        else {
+            return false;
+        }
+    }
 }
