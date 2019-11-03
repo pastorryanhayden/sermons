@@ -75,9 +75,13 @@
     @if($selected_start_verse && $endverses)
     <label class="block mb-4 mr-2 ">
         <span class="text-gray-700">{{ __("End") }}</span>
-        <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onchange="updateEndVerse()" onfocus="this.selectedIndex = -1;" >
+        <select class="form-select mt-1 block w-20"  name="endverse" id="endverse" onchange="updateEndVerse()"  > 
             @foreach($endverses as $verse)
+            @if($selected_end_verse)
+            <option {{$selected_end_verse == $verse ? 'selected' : ''}}>{{$verse}}</option>
+            @else
             <option>{{$verse}}</option>
+            @endif
             @endforeach
         </select>
     </label>
@@ -89,7 +93,7 @@
    
     </form>
     @if($texts->count() > 0)
-    <a href="/sermons/{{$sermon->id}}/media" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Continue to Media") }}</a>
+    <a href="/sermons/{{$sermon->id}}/media" class="block text-center py-3 bg-blue-500 text-white w-full uppercase tracking-wide text-lg font-bold rounded hover:bg-blue-700">{{ __("Save And Continue") }}</a>
     @endif
 </div>
 <script>

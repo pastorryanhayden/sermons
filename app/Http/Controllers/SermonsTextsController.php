@@ -29,14 +29,20 @@ class SermonsTextsController extends Controller
     
         $selected_start_verse = $request->input('start') ? $request->input('start') : null;
         $endverses = [];
+        $selected_end_verse = null;
         if ($selected_start_verse) {
             for ($x = $selected_start_verse; $x <= $selected_chapter->verses; $x++) {
                  $endverses[] = $x;
             }
+            $selected_end_verse = $selected_start_verse;
+        }
+        if($request->input('end'))
+        {
+            $selected_end_verse = $request->input('end');
         }
         
 
-        return view('sermons.texts', compact('sermon', 'chapters', 'texts', 'user', 'books', 'selected_book', 'verses', 'selected_start_verse', 'selected_chapter', 'endverses'));
+        return view('sermons.texts', compact('sermon', 'chapters', 'texts', 'user', 'books', 'selected_book', 'verses', 'selected_start_verse', 'selected_end_verse', 'selected_chapter', 'endverses'));
     }
     /*
         $id is for the sermon.  Other data:
