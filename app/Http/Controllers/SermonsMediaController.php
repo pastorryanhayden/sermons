@@ -41,11 +41,11 @@ class SermonsMediaController extends Controller
         //     $disk->setVisibility($sermon->mp3, 'public');
         //     // UploadSermonJob::dispatch($sermon, $request->mp3, $name);
         // }
-        if ($request->video_url) {
+      
             $sermon->update([
                 'video_url' => $request->video_url,
             ]);
-        }
+        
       
         
         // Redirect to the next section
