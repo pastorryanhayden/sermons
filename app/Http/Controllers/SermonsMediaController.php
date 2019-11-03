@@ -27,9 +27,7 @@ class SermonsMediaController extends Controller
              $validatedData = $request->validate([
                 'video_url' => 'nullable| url',
              ]);
-        } else {
-            return back()->with('error', 'You must either include an MP3 or a Vimeo or Youtube URL.');
-        }
+        } 
         $name = $sermon->date . '-' . $sermon->title;
         $name = $this->slugify($name) . '.mp3';
 
