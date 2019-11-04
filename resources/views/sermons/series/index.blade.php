@@ -12,7 +12,7 @@
     <li class="bg-white flex md:h-32 w-full rounded shadow mb-6 flex-wrap md:flex-no-wrap">
         <img src="{{$series->photo ? $series->photo : '/images/series.svg'}}" alt="" class="w-full h-48 md:h-32 md:w-64 rounded-tl rounded-bl object-cover">
         <div class="text p-4 flex-grow flex flex-col justify-center">
-                  <p class="mb-2"> <span class="font-bold text-lg">{{$series->title}}</span> </p>
+                  <a class="mb-2" href="/series/{{$series->id}}/edit" > <span class="font-bold text-lg">{{$series->title}}</span> </a>
                   @if($series->description)
                   <p class="text-sm leading-loose mb-2">
                       {{Str::limit($series->description, 50)}}

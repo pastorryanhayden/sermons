@@ -37,16 +37,18 @@
 @endif
 
 <label class="block mb-6">
-<a href="#" onclick="ShowUploadcare()">
-  {{ __("Upload A Series Image") }}
-</a>
-<input
-  type="hidden"
-  role="uploadcare-uploader"
-  data-image-shrink="1920x1080"
-  data-crop="16:9"
-  name="photo" />
-</label>
+	      	<span class="text-gray-700">{{ __("Series Photo") }}</span>
+			<a href="#" onclick="ShowUploadcare()" class="flex items-center justify-center border w-48 mt-1 mb-6 p-8 bg-gray-200 text-gray-700 border-gray-500 rounded">
+			 @component('svg.photo') h-8 @endcomponent
+			</a>
+			<input
+			  type="hidden"
+			  role="uploadcare-uploader"
+			  data-image-shrink="1920x1080"
+        data-crop="16:9"
+			  name="photo" 
+			  />
+			</label>
  @if($errors->has('photo'))
     @component('includes.note', ['color' => 'red'])
     <span>{{ $errors->first('photo') }}</span>

@@ -111,4 +111,9 @@ class SeriesController extends Controller
         }
         return redirect('/series');
     }
+    public function removeImage(Series $series, Request $request)
+    {
+        $series->update(['photo' => null]);
+        return redirect()->back();
+    }
 }

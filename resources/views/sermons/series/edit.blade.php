@@ -37,23 +37,33 @@
     @endcomponent
 @endif
 
-<label class="block mb-6">
-<a href="#" onclick="ShowUploadcare()">
-  {{ __("Upload A Series Image") }}
-</a>
-<input
-  type="hidden"
-  role="uploadcare-uploader"
-  data-image-shrink="1920x1080"
-  data-crop="16:9"
-  name="photo" 
-   value="{{ $series->photo }}"/>
-</label>
- @if($errors->has('photo'))
-    @component('includes.note', ['color' => 'red'])
-    <span>{{ $errors->first('photo') }}</span>
-    @endcomponent
-@endif
+@if($series->photo)
+		 <label class="block mb-6">
+		  <span class="text-gray-700">{{ __("Series Photo") }}</span>
+		  <img src="{{ $series->photo }}" alt="" class="object-cover h-32 w-64 mb-4">
+		  <button form="removeImage" type="submit" class="flex items-center bg-red-100 text-red-700 border py-2 px-4 rounded hover:bg-red-200 border-red-700">@component('svg.trash') h-4   mr-2 @endcomponent Remove Image </button>
+		</label>
+		@else
+	      <label class="block mb-6">
+	      	<span class="text-gray-700">{{ __("Series Photo") }}</span>
+			<a href="#" onclick="ShowUploadcare()" class="flex items-center justify-center border w-48 mt-1 mb-6 p-8 bg-gray-200 text-gray-700 border-gray-500 rounded">
+			 @component('svg.photo') h-8 @endcomponent
+			</a>
+			<input
+			  type="hidden"
+			  role="uploadcare-uploader"
+			  data-image-shrink="1920x1080"
+        data-crop="16:9"
+			  name="photo" 
+			  />
+			</label>
+			@endif
+			 @if($errors->has('photo'))
+			    @component('includes.note', ['color' => 'red'])
+			    <span>{{ $errors->first('photo') }}</span>
+			    @endcomponent
+			@endif
+
 <label class="block mb-6">
   <span class="text-gray-700 inline-flex items-end">{{ __("Body") }} <img src="/images/markdown.png" class="h-6 ml-2 opacity-50" alt="" title="Use Markdown here if you know what it is and we'll render it for you."></span>
   <textarea class="form-textarea mt-1 block w-full" rows="3" placeholder="Enter a some longer text." name="body"> {{ $series->body }}</textarea>
@@ -77,6 +87,10 @@ function ShowUploadcare(){
 </script>
 
 
+</form>
+<form id="removeImage" action="/series/{{$series->id}}/removeimage" method="POST">
+	@csrf 
+	@method('DELETE')
 </form>
 @endsection
 @push('scripts')

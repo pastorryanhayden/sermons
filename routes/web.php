@@ -53,6 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('speakers', 'SpeakersController');
     Route::delete('/speaker/{speaker}/removeimage', 'SpeakersController@removeImage');
     Route::resource('series', 'SeriesController');
+    Route::delete('/series/{series}/removeimage', 'SeriesController@removeImage');
     Route::get('/styles', 'ChurchStylesController@edit');
     Route::post('/styles', 'ChurchStylesController@store');
     Route::get('/settings', 'SettingsController@church');
