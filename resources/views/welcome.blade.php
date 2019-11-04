@@ -310,7 +310,7 @@
 
     <h3 class="my-4 text-3xl leading-tight">Start your free sermon library today</h3>    
 
-    <a href="/terms" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Sign Up</a>
+    <a href="/register" class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Sign Up</a>
         
 </section>
 
