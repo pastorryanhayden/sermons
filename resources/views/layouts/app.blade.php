@@ -13,8 +13,7 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" data-turbolinks-track="true">
      <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" data-turbolinks-track="true"></script>
-    @stack('scripts')
-
+   
 </head>
 
 <body class="bg-gray-100 h-screen antialiased leading-none">
@@ -23,7 +22,7 @@
         @yield('content')
     </div>
 
-   
+    @stack('scripts')
 </body>
 
 </html>

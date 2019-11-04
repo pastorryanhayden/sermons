@@ -27,12 +27,3 @@
         </div>
     </div>
 </nav>
-<script>
-     const usermenu = document.querySelector('#usermenu');
-     hideMenu = () => {
-        usermenu.classList.add('hidden');
-    }
-     showMenu = () => {       
-        usermenu.classList.remove('hidden');
-    }
-</script>
