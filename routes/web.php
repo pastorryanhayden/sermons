@@ -35,6 +35,9 @@ Route::get('/sermon/{church}/latest', 'PublicSermonsController@latest');
 Route::get('/sermon/{church}/currentseries', 'PublicSermonsController@currentSeries');
 Route::get('/churches/{church}/{type}/series', 'PublicSeriesController@index');
 Route::get('/churches/{church}/{type}/series/{series}', 'PublicSeriesController@show');
+Route::get('/acceptUserInvite/{token}', 'InviteController@showInvitedUserForm')->name('accept');
+Route::post('/acceptUserInvite/{token}', 'InviteController@acceptInvitedUser')->name('register-invite');
+
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/home', 'SermonsController@index')->name('home');
@@ -59,9 +62,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/settings/user', 'SettingsController@userchange');
     Route::get('/settings/podcast', 'SettingsController@podcast');
     Route::put('/settings/podcast', 'SettingsController@podcastchange');
+    Route::get('/settings/users', 'ChurchUsersController@index');
+    Route::post('/settings/users', 'ChurchUsersController@sendInvite');
     Route::get('/embeds', 'EmbedsController@index');
     Route::get('/embeds/widgets', 'EmbedsController@widgets');
     Route::get('/embeds/full', 'EmbedsController@full');
     Route::delete('/settings/podcast/removeimage', 'SettingsController@removePodcastImage');
     Route::delete('/settings/homepage/removeimage', 'SettingsController@removeHomePageImage');
+    Route::put('/manageuserpermissions/{user}', 'ChurchUsersController@updatePermissions')->name('update-permissions');
+    Route::delete('/deleteuser/{user}', 'ChurchUsersController@destroy')->name('delete-user');
 });
