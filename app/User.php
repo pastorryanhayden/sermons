@@ -49,4 +49,12 @@ class User extends Authenticatable
         $lastInitial = $usernamearray[1] ? substr($usernamearray[1], 0, 1) : '';
         return "{$firstInitial}{$lastInitial}";
     }
+    public function isAdmin()
+    {
+       return $this->church->admin_id == $this->id ? true : false ;
+    }
+    public function permissions()
+    {
+        return $this->hasOne(UserPermission::class);
+    }
 }

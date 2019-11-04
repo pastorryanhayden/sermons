@@ -59,6 +59,7 @@ class SettingsController extends Controller
         $church = $user->church;
         return view('settings.user', compact('church', 'user'));
     }
+   
     public function userchange(Request $request)
     {
         $user = Auth::user();
@@ -120,4 +121,5 @@ class SettingsController extends Controller
         $church->settings->save();
         return redirect('/settings/homepage');
     }
+    
 }
