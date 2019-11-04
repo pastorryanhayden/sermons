@@ -134,4 +134,9 @@ class SpeakersController extends Controller
         Speaker::destroy($id);
         return redirect('/speakers');
     }
+    public function removeImage(Speaker $speaker, Request $request)
+    {
+        $speaker->update(['thumbnail' => null]);
+        return redirect()->back();
+    }
 }

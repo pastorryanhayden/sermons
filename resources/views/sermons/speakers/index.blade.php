@@ -12,7 +12,7 @@
     <li class="bg-white flex md:h-32 w-full rounded shadow mb-6 flex-wrap">
         <img src="{{$speaker->thumbnail ? $speaker->thumbnail : '/images/speaker.svg'}}" alt="" class="w-full h-48 md:h-32 md:w-32 rounded-tl rounded-bl object-cover">
         <div class="text p-4 flex-grow flex flex-col justify-center">
-                  <p class="mb-2"> <span class="font-bold text-lg">{{$speaker->name}}</span> | {{$speaker->position}}</p>
+                  <a class="mb-2" href="/speakers/{{$speaker->id}}/edit"> <span class="font-bold text-lg">{{$speaker->name}}</span> | {{$speaker->position}}</a>
                   @if($speaker->bio)
                   <p class="text-sm leading-loose mb-2">
                       {{Str::limit($speaker->bio, 60)}}

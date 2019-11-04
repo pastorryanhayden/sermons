@@ -55,16 +55,17 @@
 @endif
 
 <label class="block mb-6">
-<a href="#" onclick="ShowUploadcare()">
-	{{ __("Upload A Thumbnail") }}
-</a>
-<input
-  type="hidden"
-  role="uploadcare-uploader"
-  data-image-shrink="1024x1024"
-  data-crop="4:4"
-  name="thumbnail" />
-</label>
+	      	<span class="text-gray-700">{{ __("Speaker Photo") }}</span>
+			<a href="#" onclick="ShowUploadcare()" class="flex items-center justify-center border w-48 mt-1 mb-6 p-8 bg-gray-200 text-gray-700 border-gray-500 rounded">
+			 @component('svg.photo') h-8 @endcomponent
+			</a>
+			<input
+			  type="hidden"
+			  role="uploadcare-uploader"
+			  data-crop="4:4"
+			  name="thumbnail" 
+			  />
+			</label>
  @if($errors->has('thumbnail'))
     @component('includes.note', ['color' => 'red'])
     <span>{{ $errors->first('thumbnail') }}</span>

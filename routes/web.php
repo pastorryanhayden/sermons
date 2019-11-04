@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/sermons/{id}/content', 'SermonsContentController@store');
     Route::get('/prayer/1', 'HomeController@index')->name('home');
     Route::resource('speakers', 'SpeakersController');
+    Route::delete('/speaker/{speaker}/removeimage', 'SpeakersController@removeImage');
     Route::resource('series', 'SeriesController');
     Route::get('/styles', 'ChurchStylesController@edit');
     Route::post('/styles', 'ChurchStylesController@store');

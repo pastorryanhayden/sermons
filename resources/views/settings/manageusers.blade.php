@@ -10,11 +10,13 @@
 </aside>
 <main class="flex-grow md:px-8">
 	 @include('settings.inc.adduserform')
+	 @if($churchusers->count() > 0)
 	<section class="manageusers max-w-lg mx-auto">
 	<h2 class="font-bold text-xl mb-4 ">Manage Users</h2>
 	@component('includes.note', ['color' => 'blue'])
 	<p>Click the checkbox to grant or deny permission to manage sermons.  Click the trash can to remove the user.</p>
 	@endcomponent
+
 	@foreach($churchusers as $cuser)
 	@include('settings.inc.usermanage')
 	@endforeach 
@@ -44,6 +46,7 @@
 	}
 	</script>
 	</section>
+	@endif
 </main>
 </div>	
 </div>
