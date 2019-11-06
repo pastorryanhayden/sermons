@@ -45,8 +45,14 @@ class User extends Authenticatable
     {
         $username = $this->name;
         $usernamearray = explode(" ", $username);
+        $arraySize = sizeof($usernamearray);
         $firstInitial = substr($usernamearray[0], 0, 1);
-        $lastInitial = $usernamearray[1] ? substr($usernamearray[1], 0, 1) : '';
+        $lastInitial = null;
+        if($arraySize > 1) 
+        {
+            $lastInitial = $usernamearray[1] ? substr($usernamearray[1], 0, 1) : '';
+        }
+       
         return "{$firstInitial}{$lastInitial}";
     }
     public function isAdmin()
