@@ -212,38 +212,50 @@ class PublicSermonsController extends Controller
 
     public function latest(Request $request, Church $church)
     {
-
         $referer = $request->headers->get('referer');
-        $sermon = $church->sermons()->where(function ($query) {
-            $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
-        })->latest('date')->first();
-         $video_id = null;
-        $video_type = null;
-        if ($sermon->video_url) {
-            if (Str::contains($sermon->video_url, 'youtube')) {
-            // Get the youtube id for the embed
-                parse_str(parse_url($sermon->video_url, PHP_URL_QUERY), $my_array_of_vars);
-                $video_type = 'youtube';
-                $video_id = $my_array_of_vars['v'];
-                // dd($video_id);
-            } elseif (Str::contains($sermon->video_url, 'vimeo')) {
-                $path = parse_url($sermon->video_url, PHP_URL_PATH);
-                $path = Str::replaceFirst('/', '', $path);
-                $video_type = 'vimeo';
-                $video_id = $path;
+        if($church->sermons()->count() > 0)
+        {
+            $sermon = $church->sermons()->where(function ($query) {
+                $query->where('mp3', '!=', null)->orWhere('video_url', '!=', null);
+            })->latest('date')->first();
+             $video_id = null;
+            $video_type = null;
+            if ($sermon->video_url) {
+                if (Str::contains($sermon->video_url, 'youtube')) {
+                // Get the youtube id for the embed
+                    parse_str(parse_url($sermon->video_url, PHP_URL_QUERY), $my_array_of_vars);
+                    $video_type = 'youtube';
+                    $video_id = $my_array_of_vars['v'];
+                    // dd($video_id);
+                } elseif (Str::contains($sermon->video_url, 'vimeo')) {
+                    $path = parse_url($sermon->video_url, PHP_URL_PATH);
+                    $path = Str::replaceFirst('/', '', $path);
+                    $video_type = 'vimeo';
+                    $video_id = $path;
+                }
             }
+            if ($sermon->mp3 && !Str::contains($sermon->mp3, 'http')) {
+                $disk = Storage::disk('wasabi');
+                $sermon->mp3 = $disk->url($sermon->mp3);
+            }
+            $series = $sermon->series()->first();
+         
+            return response()->view('public.latest', compact('sermon'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
         }
-        if ($sermon->mp3 && !Str::contains($sermon->mp3, 'http')) {
-            $disk = Storage::disk('wasabi');
-            $sermon->mp3 = $disk->url($sermon->mp3);
+        else {
+            return "Finish setup and add sermons to see this.";
         }
-        $series = $sermon->series()->first();
      
-        return response()->view('public.latest', compact('sermon'))->header('X-FRAME-OPTIONS', "allow-from {$referer}");
     }
     public function currentSeries(Request $request, Church $church)
     {
-        $currentSeries = $church->currentSeries();
-         return response()->view('public.series', compact('church', 'currentSeries'));
+        if($church->sermons()->count() > 0){
+            $currentSeries = $church->currentSeries();
+            return response()->view('public.series', compact('church', 'currentSeries'));
+        }
+        else {
+            return "Finish setup and add sermons to see this.";
+        }
+       
     }
 }

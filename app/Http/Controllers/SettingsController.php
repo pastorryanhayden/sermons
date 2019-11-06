@@ -22,7 +22,7 @@ class SettingsController extends Controller
         $validatedData = $request->validate([
             'name' => 'required | min:6',
             'url' => 'required | url',
-            'phone' => 'nullable | min:10',
+            'phone' => 'required | min:10',
             'email' => 'required ',
             'address1' => 'required',
             'address2' => 'nullable',

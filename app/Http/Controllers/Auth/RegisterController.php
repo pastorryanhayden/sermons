@@ -111,6 +111,13 @@ class RegisterController extends Controller
             'podcast_title' => "{$church->name} Preaching Podcast",
             'podcast_description' => "Bible Sermons from {$church->name} in {$church->city}, {$church->state}."
         ]);
+        $church->styles()->create([
+            'font_link' => '<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700&display=swap" rel="stylesheet">',
+            'font_name' => 'font-family: "Montserrat", sans-serif;',
+            'text_color' => '#2d3748',
+            'accent_color' => '#e2e8f0',
+            'rounding_style' => 'Small Rounding'
+        ]);
          Mail::to($user->email)->send(new ChurchSignUp());
         return $user;
     }
