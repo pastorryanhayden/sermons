@@ -24,6 +24,7 @@
                     <select class="form-select mt-1 block w-64" name="service">
                         <option disabled>{{ __('Choose A Service') }}</option>
                         <option value="Sunday Morning">{{ __('Sunday Morning') }}</option>
+                         <option value="Sunday School">{{ __('Sunday School') }}</option>
                         <option value="Sunday Evening">{{ __('Sunday Evening') }}</option>
                         <option value="Midweek">{{ __('Midweek') }}</option>
                         <option value="Other">{{ __('Other') }}</option>
