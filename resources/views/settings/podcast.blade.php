@@ -2,7 +2,7 @@
 @section('sermonsContent')
 <div class="w-full max-w-4xl mx-auto mt-24 text-gray-800">
 <div class="flex justify-between  items-baseline p-6 md:p-0 md:mb-12">
- <h1 class="text-3xl font-bold text-blue-500 flex-grow">{{  __('Settings') }}</h1>
+ <h1 class="text-3xl font-bold text-teal-500 flex-grow">{{  __('Settings') }}</h1>
 </div>
 <div class="content flex p-6 flex-wrap md:flex-no-wrap md:p-0">
 <aside class="w-full pb-8 border-b mb-8  md:border-b-0 md:w-auto md:flex-shrink-0 md:border-r md:pr-8">
@@ -58,6 +58,12 @@
 			  role="uploadcare-uploader"
 			  name="photo_url"
 			  />
+			  {{-- <input
+			  type="hidden"
+			  role="uploadcare-uploader"
+			  data-crop="4:4"
+			  name="photo_url"
+			  /> --}}
 			</label>
 			@endif
 			 @if($errors->has('photo_url'))
@@ -66,7 +72,7 @@
 			    @endcomponent
 			@endif
 
-		<button type="submit" class="w-full mb-6 text-white bg-green-500 py-2 text-center rounded text-lg uppercase tracking-wide hover:bg-green-400">Save Changes</button>
+		<button type="submit" class="w-full mb-6 text-white bg-teal-500 py-2 text-center rounded text-lg uppercase tracking-wide hover:bg-green-400">Save Changes</button>
 	 </form>
 </main>
 </div>
@@ -98,14 +104,14 @@ function ShowUploadcare(){
 		]
 	});
 }
-  // uploadcare.registerTab('preview', uploadcareTabEffects);
+// uploadcare.registerTab('preview', uploadcareTabEffects);
 
 </script>
 @endsection
 @push('scripts')
 <script>
   UPLOADCARE_PUBLIC_KEY = '3ad137f1c1f1e91d2ce9';
-  // UPLOADCARE_EFFECTS = 'crop';
+  // UPLOADCARE_EFFECTS = 'crop'; // disable crop
   UPLOADCARE_IMAGES_ONLY = true;
   UPLOADCARE_PREVIEW_STEP = true;
   UPLOADCARE_LOCALE_TRANSLATIONS = {
@@ -126,6 +132,7 @@ function ShowUploadcare(){
 		}
 	}
 }
+
 </script>
 <style>
 	.uploadcare--widget__button_type_open {
